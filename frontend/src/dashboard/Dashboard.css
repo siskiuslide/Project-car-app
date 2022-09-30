@@ -1,0 +1,74 @@
+.DashboardGrid {
+  display: Grid;
+  grid-template-columns: 2fr 2fr 3fr;
+  grid-template-rows: 1fr 1fr;
+  justify-content: space-evenly;
+}
+.DashboardGrid > * {
+  border-radius: 5px;
+  padding-inline: 1em;
+  margin-inline: 2em;
+  width: auto;
+  height: 45vh;
+  text-decoration: none;
+  background: rgba(58, 57, 57, 0.34);
+}
+
+.DashboardGrid > *:hover {
+  background: rgba(58, 57, 57, 0.726);
+}
+
+.DashboardGrid > *:hover .chevron {
+  opacity: 1;
+}
+
+.GridItem {
+  padding-top: 3em;
+  padding-bottom: 0em;
+  margin-bottom: 0em;
+  height: 45vh;
+}
+.GridItem:hover .VehicleTypeList {
+  opacity: 1;
+  margin-top: -0.5em;
+}
+.GridItem:hover .GridItemText {
+  margin-top: -0.5em;
+}
+
+.GridItemText {
+  font-size: 1.5em;
+  text-align: center;
+  transition: all 100ms 50ms;
+}
+.EnlargedFigure {
+  text-align: center;
+  padding: 0%;
+  margin-bottom: 0.25em;
+  font-size: 3em;
+}
+
+.chevron {
+  font-size: 3em !important;
+  color: white;
+  opacity: 0;
+  transition: opacity 175ms 50ms;
+  margin: 0;
+}
+
+.VehicleTypeList {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 15vh;
+  margin: 0;
+  opacity: 0;
+  transition: all 100ms 50ms;
+}
+
+.VehicleTypeFlex {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  height: 5vh;
+}

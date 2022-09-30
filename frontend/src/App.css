@@ -1,0 +1,28 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@300&display=swap");
+@import url("https://fonts.googleapis.com/icon?family=Material+Icons");
+@import url("http://fonts.cdnfonts.com/css/uk-number-plate");
+
+:root {
+  background: #1b1b1b;
+}
+
+.Header {
+  font-size: 4em;
+  font-weight: bold;
+  font-family: "Montserrat";
+  color: white;
+  letter-spacing: -2px;
+}
+
+p {
+  color: white;
+  text-decoration: none;
+}
+
+a {
+  text-decoration: none;
+}
+
+.material-icons {
+  text-transform: none !important;
+}

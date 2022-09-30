@@ -1,0 +1,15 @@
+.VehicleTypeList {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 15vh;
+  margin: 0;
+  opacity: 0;
+}
+
+.VehicleTypeFlex {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  height: 5vh;
+}

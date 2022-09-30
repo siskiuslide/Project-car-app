@@ -1,0 +1,27 @@
+.JournalEntries {
+  display: flex;
+  flex-direction: column;
+}
+
+.JournalEntries > * {
+  padding: 0.2em;
+}
+
+.EntryContainer {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: auto;
+}
+.Entry {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  transition: transform 50ms;
+}
+.Entry:hover {
+  transform: scale(1.02);
+}
+.Entry > p {
+  padding-inline: 0.5em;
+}

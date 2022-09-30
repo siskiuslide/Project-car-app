@@ -1,0 +1,83 @@
+.VehicleCard {
+  background: rgb(60, 60, 100);
+  border-radius: 5px;
+  margin-block: 3vh;
+  margin-inline: 5vw;
+  display: flex;
+  flex-direction: column;
+  background: rgb(27, 65, 80);
+  transition: transform 100ms 50ms;
+  height: auto;
+}
+
+.VehicleCard:hover {
+  transform: scale(1.02);
+}
+.VehicleCard:hover .InfoPanel {
+  opacity: 1;
+}
+
+.VehicleCard:hover .MainInfo {
+  margin-top: 2vh;
+  margin-bottom: 0;
+}
+.MainInfo {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  margin-top: 8vh;
+  margin-bottom: -10vh;
+  transition: all 100ms 50ms;
+}
+.MainInfo > * {
+  margin-inline: 1vw;
+  margin-block: 1vh;
+  text-transform: capitalize;
+}
+
+.InfoPanel {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  background: rgb(20, 48, 59);
+  width: 100%;
+  bottom: 0%;
+  opacity: 0;
+  transition: opacity 100ms 50ms;
+}
+.InfoPanel > * {
+  margin-left: 0.5em;
+}
+.InfoSection {
+  margin-inline: 1em;
+}
+.InfoSection > * {
+  display: inline;
+  padding-inline: 0.2em;
+}
+.Manufacturer {
+  font-size: 1.75em;
+}
+.Model {
+  margin-block: 0;
+  margin-right: 2em;
+  font-size: 1.25em;
+}
+.Reg {
+  margin-block: 0;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  background: yellow;
+  color: black;
+  padding-inline: 0.3em;
+  padding-block: 0.1em;
+  font-family: "UKNumberPlate";
+  font-size: 1.25em;
+  border-radius: 2px;
+}
+.variant {
+  width: 15%;
+  margin-right: auto;
+}

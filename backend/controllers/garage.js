@@ -10,6 +10,7 @@ exports.getVehicles = catchAsync(async function (req, res, next) {
 exports.addVehicle = catchAsync(async function (req, res, next) {
   console.log(req.body);
   const vehicle = await Vehicle.create({
+    type: req.body.type,
     manufacturer: req.body.manufacturer,
     model: req.body.model,
     variant: req.body.variant,

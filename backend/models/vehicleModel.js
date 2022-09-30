@@ -2,6 +2,7 @@ const mongoose = require("mongoose");
 
 const schema = new mongoose.Schema(
   {
+    type: { type: String, enum: ["car", "motorcycle", "van"], required: true },
     manufacturer: { type: String, required: true },
     model: { type: String, required: true },
     variant: { type: String, required: true },

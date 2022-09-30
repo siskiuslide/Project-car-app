@@ -7,10 +7,15 @@ const schema = new mongoose.Schema(
     variant: { type: String, required: true },
     year: { type: Number, required: true },
     cc: { type: Number, required: true },
-    purpose: { type: String, required: true },
+    purpose: {
+      type: String,
+      required: true,
+      enum: ["daily", "weekend", "summer", "track", "show", "project", "drift", "resale"],
+    },
+    boughtFor: { type: Number },
   },
   { timestamps: true }
 );
-const Vehicle = new mongoose.Model("vehicle", schema);
+const Vehicle = new mongoose.model("vehicle", schema);
 
 module.exports = Vehicle;

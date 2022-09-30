@@ -8,6 +8,7 @@ const schema = new mongoose.Schema(
     variant: { type: String, required: true },
     year: { type: Number, required: true },
     cc: { type: Number, required: true },
+    reg: { type: String, required: true },
     purpose: {
       type: String,
       required: true,

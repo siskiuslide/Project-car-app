@@ -16,6 +16,7 @@ exports.addVehicle = catchAsync(async function (req, res, next) {
     variant: req.body.variant,
     year: req.body.year,
     cc: req.body.cc,
+    reg: req.body.reg,
     purpose: req.body.purpose,
     boughtFor: req.body.boughtFor,
   });

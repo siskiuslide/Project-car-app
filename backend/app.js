@@ -14,10 +14,12 @@ app.use(morgan("dev"));
 const DB = process.env.DATABASE;
 
 mongoose.connect(DB).then((con) => {
-  console.log("connected to mongodb");
+  console.log("Connected to MongoDB");
 });
 const garageRoute = require("./routes/garage");
+const expenseRoute = require("./routes/expenses");
 
 app.use("/garage", garageRoute);
+app.use("/expenses", expenseRoute);
 
 module.exports = app;

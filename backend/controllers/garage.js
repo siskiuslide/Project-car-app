@@ -23,6 +23,8 @@ exports.addVehicle = catchAsync(async function (req, res, next) {
 });
 
 exports.deleteVehicle = catchAsync(async function (req, res, next) {
-  const deleted = await Vehicle.deleteOne({ id: req.body.id });
+  const deleted = await Vehicle.deleteOne({ id: req.body.id }); //delete from vehicle database
+  //we should then delete/archive associated expenses and to-do items
+
   return res.status(200).json({ status: "success", data: deleted });
 });

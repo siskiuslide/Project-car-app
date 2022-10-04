@@ -15,6 +15,8 @@ const schema = new mongoose.Schema(
       enum: ["daily", "weekend", "summer", "track", "show", "project", "drift", "resale"],
     },
     boughtFor: { type: Number },
+    sold: { type: Boolean, default: false },
+    soldFor: { type: Number },
   },
   { timestamps: true }
 );

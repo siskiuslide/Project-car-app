@@ -3,7 +3,6 @@ const Vehicle = require("../models/vehicleModel");
 
 exports.getVehicles = catchAsync(async function (req, res, next) {
   const vehicles = await Vehicle.find({});
-  console.log(vehicles);
   return res.status(200).json({ status: "success", data: vehicles });
 });
 
@@ -21,4 +20,9 @@ exports.addVehicle = catchAsync(async function (req, res, next) {
     boughtFor: req.body.boughtFor,
   });
   return res.status(200).json({ status: "success", data: vehicle });
+});
+
+exports.deleteVehicle = catchAsync(async function (req, res, next) {
+  const deleted = await Vehicle.deleteOne({ id: req.body.id });
+  return res.status(200).json({ status: "success", data: deleted });
 });

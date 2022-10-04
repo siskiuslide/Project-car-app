@@ -1,5 +1,6 @@
 const catchAsync = require("../helpers/catchAsync");
 const Vehicle = require("../models/vehicleModel");
+const Expense = require("../models/expenseModel");
 
 exports.getVehicles = catchAsync(async function (req, res, next) {
   const vehicles = await Vehicle.find({});
@@ -18,7 +19,15 @@ exports.addVehicle = catchAsync(async function (req, res, next) {
     reg: req.body.reg,
     purpose: req.body.purpose,
     boughtFor: req.body.boughtFor,
+    dateBought: req.body.date,
   });
+  console.log(vehicle);
+  const expense = await Expense.create({
+    vehicleId: vehicle.id,
+    date: req.body.date,
+    category: "purchase",
+    value: req.body.boughtFor,
+  }).then(console.log("expense created"));
   return res.status(200).json({ status: "success", data: vehicle });
 });
 

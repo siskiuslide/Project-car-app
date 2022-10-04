@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 
 const schema = new mongoose.Schema({
   vehicleId: { type: String },
-  date: { type: Date },
+  date: { type: String },
   category: {
     type: String,
     required: true,

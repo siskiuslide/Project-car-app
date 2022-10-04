@@ -5,15 +5,14 @@ const VehicleCard = (props) => {
   return (
     <div className="VehicleCard">
       <div className="MainInfo">
-        <p className="Manufacturer">{props.vehicle.manufacturer}</p>
-        <div
-          style={{
-            display: "flex",
-            flexDirection: "row",
-            justifyContent: "space-between",
-            alignItems: "center",
-          }}
-        >
+        <div style={{ marginBlock: 0, height: "10%" }} className="InfoRow">
+          <p className="Manufacturer">{props.vehicle.manufacturer}</p>
+          <p className="material-icons value" style={{ marginLeft: "auto", paddingRight: "2%" }}>
+            sell
+          </p>
+          <p className="value">£6457.34</p>
+        </div>
+        <div className="InfoRow">
           <p className="Model">{props.vehicle.model}</p>
           <p className="variant">{props.vehicle.variant ?? ""}</p>
           <p className="Reg">{props.vehicle.reg.slice(0, 4) + " " + props.vehicle.reg.slice(4)}</p>

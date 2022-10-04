@@ -8,8 +8,23 @@
   background: rgb(27, 65, 80);
   transition: transform 100ms 50ms;
   height: auto;
+  min-height: 25vh;
 }
-
+.link {
+  margin: 0;
+}
+.AddVehicle {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.AddVehicle > * {
+  margin: auto;
+}
+.AddVehiclePlus {
+  font-size: 5em;
+}
 .VehicleCard:hover {
   transform: scale(1.02);
 }
@@ -42,7 +57,6 @@
   flex-direction: row;
   align-items: center;
   background: rgb(20, 48, 59);
-  width: 100%;
   bottom: 0%;
   opacity: 0;
   transition: opacity 100ms 50ms;
@@ -78,6 +92,6 @@
   border-radius: 2px;
 }
 .variant {
-  width: 15%;
+  width: 10%;
   margin-right: auto;
 }

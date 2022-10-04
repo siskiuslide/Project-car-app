@@ -26,3 +26,6 @@ a {
 .material-icons {
   text-transform: none !important;
 }
+label {
+  color: white;
+}

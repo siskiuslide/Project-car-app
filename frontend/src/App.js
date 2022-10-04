@@ -5,11 +5,11 @@ import Expenses from "./expenses/Expenses";
 import Journal from "./journal/Journal";
 import React, { useEffect, useState } from "react";
 
-import { Route } from "react-router-dom";
-import { Switch } from "react-router-dom";
+import { Route, Switch, Redirect } from "react-router-dom";
 import Navbar from "./Components/Navbar";
 
 import "./App.css";
+import AddVehicleForm from "./garage/AddVehicleForm";
 
 function App() {
   const [garage, setGarage] = useState([]);
@@ -29,15 +29,22 @@ function App() {
     <div className="Background">
       <Navbar></Navbar>
       <Switch>
+        <Route path="/" exact>
+          <Redirect to="/dashboard"></Redirect>
+        </Route>
         <Route path="/dashboard">
           <Dashboard garage={garage} loading={isLoading} />
         </Route>
         <Route path="/garage" exact>
           <Garage garage={garage} loading={isLoading} />
         </Route>
-        <Route path="/garage/:vehicleId">
+        <Route path="/garage/add-vehicle" exact>
+          <AddVehicleForm></AddVehicleForm>
+        </Route>
+        <Route path="/garage/:vehicleId" exact>
           <CarDetail></CarDetail>
         </Route>
+
         <Route path="/expenses">
           <Expenses />
         </Route>

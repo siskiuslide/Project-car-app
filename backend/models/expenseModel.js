@@ -9,6 +9,7 @@ const schema = new mongoose.Schema({
     enum: ["purchase", "insurance", "tax", "fuel", "servicing", "parts", "cleaning", "modification", "accessories"],
   },
   value: { type: Number, required: true },
+  description: { type: String },
 });
 
 const Expense = new mongoose.model("Expense", schema);

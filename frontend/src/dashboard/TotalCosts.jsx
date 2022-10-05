@@ -10,7 +10,27 @@ const TotalCosts = (props) => {
   const purchases = props.expenses.map((i) => {
     return i.category === "purchase" && i.value;
   });
-  console.log(purchases);
+
+  const runningCosts = props.expenses
+    .filter(
+      (i) => i.category === "fuel" || i.category === "servicing" || i.category === "tax" || i.category === "insurance"
+    )
+    .map((i) => {
+      return i.value;
+    });
+
+  const misc = props.expenses
+    .filter((i) => {
+      return (
+        i.category === "parts" ||
+        i.category === "cleaning" ||
+        i.category === "accessories" ||
+        i.category === "modification"
+      );
+    })
+    .map((i) => i.value);
+
+  console.log(misc);
   return (
     <Link className="TotalCosts GridItem" to={props.link}>
       <p className="GridItemText">Total Costs:</p>
@@ -37,11 +57,22 @@ const TotalCosts = (props) => {
         </div>
         <div className="moreInfoFlex">
           <p>Running Costs:</p>
-          <p>£0</p>
+          <p>
+            £
+            {runningCosts.reduce((current, next) => {
+              console.log(current);
+              return (current += next);
+            }, 0)}
+          </p>
         </div>
         <div className="moreInfoFlex">
           <p>Misc:</p>
-          <p>£0</p>
+          <p>
+            £
+            {misc.reduce((current, next) => {
+              return (current += next);
+            }, 0)}
+          </p>
         </div>
       </div>
     </Link>

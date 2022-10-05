@@ -34,10 +34,8 @@ function App() {
       .catch((err) => console.log(err));
   }, []);
 
-  useEffect(() => {});
-
   return (
-    <div className="Background">
+    <div>
       <Navbar></Navbar>
       <Switch>
         <Route path="/" exact>
@@ -47,7 +45,7 @@ function App() {
           <Dashboard garage={garage} loading={isLoading} expenses={expenses} />
         </Route>
         <Route path="/garage" exact>
-          <Garage garage={garage} loading={isLoading} />
+          <Garage garage={garage} loading={isLoading} expenses={expenses} />
         </Route>
         <Route path="/garage/add-vehicle" exact>
           <AddVehicleForm></AddVehicleForm>

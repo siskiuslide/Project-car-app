@@ -30,7 +30,6 @@ const TotalCosts = (props) => {
     })
     .map((i) => i.value);
 
-  console.log(misc);
   return (
     <Link className="TotalCosts GridItem" to={props.link}>
       <p className="GridItemText">Total Costs:</p>
@@ -60,7 +59,6 @@ const TotalCosts = (props) => {
           <p>
             £
             {runningCosts.reduce((current, next) => {
-              console.log(current);
               return (current += next);
             }, 0)}
           </p>

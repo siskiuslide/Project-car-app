@@ -1,0 +1,9 @@
+@import "./../App.css";
+
+.button {
+  background: var(--blue);
+}
+
+button:hover {
+  background: var(--blueHover);
+}

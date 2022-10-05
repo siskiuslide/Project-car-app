@@ -4,6 +4,8 @@
 
 :root {
   background: #1b1b1b;
+  --blue: rgb(51, 153, 194);
+  --blueHover: rgb(46, 140, 177);
 }
 
 .Header {

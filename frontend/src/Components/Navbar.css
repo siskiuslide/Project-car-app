@@ -31,5 +31,5 @@ nav > ul > li:hover {
   background: #2f2f2f91;
 }
 .activeNav {
-  color: rgb(51, 153, 194);
+  color: var(--blue);
 }

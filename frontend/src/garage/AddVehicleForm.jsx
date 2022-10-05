@@ -1,5 +1,6 @@
 import React from "react";
 import "./AddVehicleForm.css";
+import "../GeneralCSS/forms.css";
 
 const AddVehicleForm = () => {
   const manufacturers = [

@@ -55,7 +55,7 @@ function App() {
         </Route>
 
         <Route path="/expenses">
-          <Expenses />
+          <Expenses garage={garage} />
         </Route>
         <Route path="/journal">
           <Journal></Journal>

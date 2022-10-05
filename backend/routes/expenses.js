@@ -3,6 +3,6 @@ const expenseController = require("../controllers/expenses");
 
 const router = express.Router();
 
-router.route("/").get().post(expenseController.addExpense);
+router.route("/").get(expenseController.getAllExpenses).post(expenseController.addExpense);
 
 module.exports = router;

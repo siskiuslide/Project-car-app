@@ -22,12 +22,12 @@ const Count = (props) => {
       >
         {props.isLoading ? "..." : props.garage.length}
       </p>
-      <div className="VehicleTypeList">
-        <div className="VehicleTypeFlex">
+      <div className="moreInfoList">
+        <div className="moreInfoFlex">
           <p>Cars:</p>
           <p>{props.isLoading ? "..." : props.garage.length}</p>
         </div>
-        <div className="VehicleTypeFlex">
+        <div className="moreInfoFlex">
           <p>Bikes:</p>
           <p>0</p>
         </div>

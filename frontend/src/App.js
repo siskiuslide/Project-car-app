@@ -13,6 +13,7 @@ import AddVehicleForm from "./garage/AddVehicleForm";
 
 function App() {
   const [garage, setGarage] = useState([]);
+  const [expenses, setExpenses] = useState([]);
   const [isLoading, setLoading] = useState([false]);
 
   useEffect(() => {
@@ -23,8 +24,18 @@ function App() {
         return data;
       })
       .catch((err) => console.log(err));
-    setLoading(false);
+
+    const expenses = fetch("http://localhost:4000/expenses")
+      .then((res) => res.json())
+      .then((data) => {
+        setExpenses(data.data);
+        return data;
+      })
+      .catch((err) => console.log(err));
   }, []);
+
+  useEffect(() => {});
+
   return (
     <div className="Background">
       <Navbar></Navbar>
@@ -33,7 +44,7 @@ function App() {
           <Redirect to="/dashboard"></Redirect>
         </Route>
         <Route path="/dashboard">
-          <Dashboard garage={garage} loading={isLoading} />
+          <Dashboard garage={garage} loading={isLoading} expenses={expenses} />
         </Route>
         <Route path="/garage" exact>
           <Garage garage={garage} loading={isLoading} />

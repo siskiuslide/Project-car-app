@@ -11,7 +11,7 @@ const Dashboard = (props) => {
       {/* <header className="Header">Dashboard</header> */}
       <div className="DashboardGrid">
         <Count link="/garage" garage={props.garage}></Count>
-        <TotalCosts link="/expenses"></TotalCosts>
+        <TotalCosts link="/expenses" expenses={props.expenses}></TotalCosts>
         <JournalEntries link="/journal"> </JournalEntries>
       </div>
     </>

@@ -1,13 +1,10 @@
 import React from "react";
 import "./Expenses.css";
 import "../App.css";
+import { useState } from "react";
 
 const Expenses = (props) => {
-  return (
-    <div>
-      <header className="Header">Expenses</header>
-    </div>
-  );
+  return <div></div>;
 };
 
 export default Expenses;

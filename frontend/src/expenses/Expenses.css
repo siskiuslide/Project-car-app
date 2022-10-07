@@ -1,3 +1,14 @@
 option {
   text-transform: capitalize;
 }
+
+.expenseContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 60vw;
+  margin-inline: auto;
+}
+.expenseContainer > Button {
+  margin-inline: auto;
+}

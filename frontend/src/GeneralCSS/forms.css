@@ -20,6 +20,11 @@
 select {
   margin-inline: 1em;
 }
+
+.buttonArea > button {
+  margin-inline: 1em;
+}
+
 form {
   display: flex;
   flex-direction: column;

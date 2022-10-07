@@ -6,4 +6,5 @@
 
 button:hover {
   background: var(--blueHover);
+  cursor: pointer;
 }

@@ -7,6 +7,7 @@
   --blue: rgb(51, 153, 194);
   --blueHover: rgb(46, 140, 177);
   --darkBackground: rgba(58, 57, 57, 0.34);
+  --darkBackgroundHover: rgba(58, 57, 57, 0.34);
 }
 
 .Header {

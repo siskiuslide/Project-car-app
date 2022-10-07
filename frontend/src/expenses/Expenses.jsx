@@ -15,11 +15,21 @@ const Expenses = (props) => {
   return (
     <div className="expenseContainer">
       {showForm === false ? (
-        <Button value="Add Expense" onClick={addExpenseHandler}></Button>
+        <div style={{ display: "flex", width: "100%", justifyContent: "space-between", alignItems: "center" }}>
+          <p style={{ fontSize: "2em" }}>Expense List: </p>
+          <Button style={{ marginLeft: "auto" }} value="Add Expense" onClick={addExpenseHandler}></Button>
+        </div>
       ) : (
         <NewExpenseForm garage={props.garage} showForm={showForm} setShowForm={setShowForm}></NewExpenseForm>
       )}
       <div className="ExpenseList">
+        <div className="expenseListItem">
+          <p style={{ width: "10%" }}>Date</p>
+          <p style={{ width: "10%" }}>Category</p>
+          <p style={{ width: "35%" }}>Description</p>
+          <p style={{ width: "10%", marginLeft: "auto", marginRight: "1em" }}>Value</p>
+          <p style={{ width: "8%", marginLeft: "auto", marginRight: "1em" }}>Options</p>
+        </div>
         {props.expenses.map((e) => {
           return (
             <div key={e._id} className="expenseListItem">
@@ -29,6 +39,11 @@ const Expenses = (props) => {
               <p style={{ width: "10%", marginLeft: "auto", marginRight: "1em", fontSize: "1.25em" }}>
                 £ {e.value.toFixed(2)}
               </p>
+              <div className="expenseOptions" style={{ marginLeft: "auto", width: "8%" }}>
+                <p className="material-icons">edit</p>
+                <p className="material-icons"></p>
+                <p className="material-icons">close</p>
+              </div>
             </div>
           );
         })}

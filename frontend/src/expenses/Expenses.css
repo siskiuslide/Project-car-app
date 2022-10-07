@@ -17,6 +17,7 @@ option {
   background: var(--darkBackground);
   display: flex;
   flex-direction: column;
+  margin-top: 1.5em;
 }
 .expenseListItem {
   display: flex;
@@ -25,4 +26,11 @@ option {
 .expenseListItem > * {
   margin-inline: 0.75em;
   text-transform: capitalize;
+}
+.expenseListItem:hover {
+  background: var(--darkBackgroundHover);
+}
+
+.expenseOptions > * {
+  cursor: pointer;
 }

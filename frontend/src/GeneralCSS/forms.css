@@ -2,12 +2,8 @@
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
-  width: 40vw;
-  max-width: 40%;
-  margin-inline: auto;
+  /* margin-inline: auto; */
   background: rgba(58, 57, 57, 0.34);
-  border-radius: 5px;
-  max-width: 500px;
 }
 .formRowFlex {
   display: flex;

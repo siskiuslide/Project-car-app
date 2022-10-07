@@ -1,5 +1,6 @@
 import React from "react";
 import Button from "../Components/Button";
+import "../GeneralCSS/forms.css";
 
 const NewExpenseForm = (props) => {
   const formSubmitHandler = (e) => {

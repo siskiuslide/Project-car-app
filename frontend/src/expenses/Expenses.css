@@ -12,3 +12,17 @@ option {
 .expenseContainer > Button {
   margin-inline: auto;
 }
+
+.ExpenseList {
+  background: var(--darkBackground);
+  display: flex;
+  flex-direction: column;
+}
+.expenseListItem {
+  display: flex;
+  flex-direction: row;
+}
+.expenseListItem > * {
+  margin-inline: 0.75em;
+  text-transform: capitalize;
+}

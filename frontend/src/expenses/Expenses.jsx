@@ -10,7 +10,6 @@ const Expenses = (props) => {
   const [showForm, setShowForm] = useState(false);
   const addExpenseHandler = (e) => {
     setShowForm(true);
-    console.log(setShowForm);
   };
 
   return (
@@ -20,6 +19,20 @@ const Expenses = (props) => {
       ) : (
         <NewExpenseForm garage={props.garage} showForm={showForm} setShowForm={setShowForm}></NewExpenseForm>
       )}
+      <div className="ExpenseList">
+        {props.expenses.map((e) => {
+          return (
+            <div key={e._id} className="expenseListItem">
+              <p style={{ width: "10%" }}>{e.date}</p>
+              <p style={{ width: "10%" }}>{e.category}</p>
+              <p style={{ width: "35%" }}>{e.description}</p>
+              <p style={{ width: "10%", marginLeft: "auto", marginRight: "1em", fontSize: "1.25em" }}>
+                £ {e.value.toFixed(2)}
+              </p>
+            </div>
+          );
+        })}
+      </div>
     </div>
   );
 };

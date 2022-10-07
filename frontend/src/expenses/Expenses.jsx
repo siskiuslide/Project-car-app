@@ -23,12 +23,16 @@ const Expenses = (props) => {
         <NewExpenseForm garage={props.garage} showForm={showForm} setShowForm={setShowForm}></NewExpenseForm>
       )}
       <div className="ExpenseList">
-        <div className="expenseListItem">
+        <div className="expenseListItem headings" style={{ paddingBlock: "1em", borderBottom: " solid white 1px" }}>
           <p style={{ width: "10%" }}>Date</p>
           <p style={{ width: "10%" }}>Category</p>
           <p style={{ width: "35%" }}>Description</p>
           <p style={{ width: "10%", marginLeft: "auto", marginRight: "1em" }}>Value</p>
           <p style={{ width: "8%", marginLeft: "auto", marginRight: "1em" }}>Options</p>
+        </div>
+        <div className="listOptions">
+          <p className="material-icons">calendar_month</p>
+          <p className="material-icons">currency_pound</p>
         </div>
         {props.expenses.map((e) => {
           return (

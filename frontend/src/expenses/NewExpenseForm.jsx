@@ -27,7 +27,7 @@ const NewExpenseForm = (props) => {
     props.setShowForm(false);
   };
 
-  const [vehicle, setVehicle] = useState();
+  const [vehicle, setVehicle] = useState(props.garage[0]._id);
   const [date, setDate] = useState();
   const [category, setCategory] = useState();
   const [desc, setDesc] = useState();
@@ -44,7 +44,7 @@ const NewExpenseForm = (props) => {
           }}
         >
           {props.garage.map((v) => (
-            <option key={v._id} value={v.id}>
+            <option key={v._id} value={v._id}>
               {v.manufacturer + " " + v.model + " - " + v.reg.toUpperCase()}{" "}
             </option>
           ))}

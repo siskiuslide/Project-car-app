@@ -1,21 +1,48 @@
 import React from "react";
+import { useState } from "react";
 import Button from "../Components/Button";
 import "../GeneralCSS/forms.css";
 
 const NewExpenseForm = (props) => {
   const formSubmitHandler = (e) => {
     e.preventDefault();
+    const expense = {
+      vehicleId: vehicle,
+      date: date,
+      category: category,
+      description: desc,
+      value: value,
+    };
+    console.log(expense);
+    const newExpense = fetch("http://localhost:4000/expenses", {
+      method: "post",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(expense),
+    })
+      .then((res) => console.log(res))
+      .catch((err) => console.log(err));
   };
   const formBackHandler = (e) => {
     e.preventDefault();
     props.setShowForm(false);
   };
+
+  const [vehicle, setVehicle] = useState();
+  const [date, setDate] = useState();
+  const [category, setCategory] = useState();
+  const [desc, setDesc] = useState();
+  const [value, setValue] = useState();
   return (
     <div className="formContainer">
       <p style={{ fontSize: "1.5em", textAlign: "center" }}> Create expense</p>
       <form action="http://localhost:4000/expenses" method="post">
         <label htmlFor="car">Select Car: </label>
-        <select id="car">
+        <select
+          id="car"
+          onChange={(e) => {
+            setVehicle(e.target.value);
+          }}
+        >
           {props.garage.map((v) => (
             <option key={v._id} value={v.id}>
               {v.manufacturer + " " + v.model + " - " + v.reg.toUpperCase()}{" "}
@@ -23,13 +50,24 @@ const NewExpenseForm = (props) => {
           ))}
         </select>
         <div className="formRowFlex">
-          <div>
+          <div className="formRowItemNE">
             <label htmlFor="date">Date: </label>
-            <input type="date" id="date"></input>
+            <input
+              type="date"
+              id="date"
+              onChange={(e) => {
+                setDate(e.target.value);
+              }}
+            ></input>
           </div>
-          <div style={{ display: "flex", flexDirection: "row", alignItems: "center" }}>
+          <div className="formRowItemNE">
             <label htmlFor="category">Category: </label>
-            <select id="category" style={{ display: "inline" }}>
+            <select
+              id="category"
+              onChange={(e) => {
+                setCategory(e.target.value);
+              }}
+            >
               <option value="purchase">Purchase</option>
               <option value="insurance">Insurance</option>
               <option value="tax">Tax</option>
@@ -42,14 +80,34 @@ const NewExpenseForm = (props) => {
             </select>
           </div>
         </div>
-        <label htmlFor="description">Description: </label>
-        <input type="text" id="description"></input>
-        {/* <input type="submit"></input> */}
+        <div className="formRowFlex">
+          <div className="formRowItemNE">
+            <label htmlFor="description">Description: </label>
+            <input
+              type="text"
+              id="description"
+              style={{}}
+              onChange={(e) => {
+                setDesc(e.target.value);
+              }}
+            ></input>
+          </div>
+          <div className="formRowItemNE">
+            <label htmlFor="value">Value: </label>
+            <input
+              type="number"
+              style={{ width: "5em" }}
+              onChange={(e) => {
+                setValue(e.target.value);
+              }}
+            ></input>
+          </div>
+        </div>
         <div
           className="buttonarea"
           style={{ display: "flex", flexDirection: "row", justifyContent: "end", marginTop: "2em" }}
         >
-          <Button value="Submit"></Button>
+          <Button value="Submit" onClick={formSubmitHandler}></Button>
           <Button value="Back" back={true} onClick={formBackHandler}></Button>
         </div>
       </form>

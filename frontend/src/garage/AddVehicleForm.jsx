@@ -5,7 +5,7 @@ import "../GeneralCSS/forms.css";
 
 const AddVehicleForm = (props) => {
   const [vehicleType, setVehicleType] = useState("car");
-  const [manufacturer, setManufacturer] = useState("abarth");
+  const [manufacturer, setManufacturer] = useState("Alfa Romeo");
   const [model, setModel] = useState();
   const [variant, setVariant] = useState();
   const [reg, setReg] = useState();
@@ -66,12 +66,15 @@ const AddVehicleForm = (props) => {
         <div className="formRowFlex">
           <div className="formRowItemNV">
             <label>Model: </label>
-            <input
-              type="text"
-              onChange={(e) => {
-                setModel(e.target.value);
-              }}
-            ></input>
+            <select>
+              {props.vehicleData
+                .find((item) => {
+                  return item.brand === manufacturer;
+                })
+                .models.map((item, i) => {
+                  return <option key={i}>{item}</option>;
+                })}
+            </select>
           </div>
           <div className="formRowItemNV">
             <label>Variant: </label>

@@ -1033,6 +1033,10 @@ const vehicleData = [
     brand: "Ariel",
     models: ["Atom", "Nomad"],
   },
+  {
+    brand: "Aston Martin",
+    models: ["A110"],
+  },
 ];
 
 const sorted = vehicleData.sort((a, b) => {

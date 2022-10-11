@@ -5,10 +5,10 @@ const schema = new mongoose.Schema(
     type: { type: String, enum: ["car", "motorcycle", "van"], required: true },
     manufacturer: { type: String, required: true },
     model: { type: String, required: true },
-    variant: { type: String, required: true },
+    variant: { type: String },
     year: { type: Number, required: true },
-    cc: { type: Number, required: true },
-    reg: { type: String, required: true },
+    cc: { type: Number },
+    reg: { type: String, required: true, unique: true },
     purpose: {
       type: String,
       required: true,

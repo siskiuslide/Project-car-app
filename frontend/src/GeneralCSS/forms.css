@@ -2,7 +2,9 @@
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
-  /* margin-inline: auto; */
+  margin-inline: auto;
+  width: 60vw;
+  max-width: 40em;
   background: rgba(58, 57, 57, 0.34);
 }
 .formRowFlex {
@@ -11,7 +13,9 @@
   height: 20%;
   margin-top: 5%;
   justify-content: space-between;
+  align-items: center;
 }
+
 .formRowFlex > * > input,
 select {
   margin-inline: 1em;
@@ -21,6 +25,12 @@ select {
   margin-inline: 1em;
 }
 
+.formRowItemNV {
+  display: flex;
+  flex-direction: row;
+  width: 45%;
+  justify-content: space-between;
+}
 form {
   display: flex;
   flex-direction: column;
@@ -51,7 +61,4 @@ input:active {
   border: solid rgb(51, 153, 194) 2px;
   border-radius: 4px;
   color: black;
-}
-
-label {
 }

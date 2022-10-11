@@ -18,7 +18,10 @@
   align-items: center;
 }
 
-.formRowFlex > * {
+/* .formRowFlex > * {
   width: auto;
   min-width: 10em;
+} */
+.formRowFlex > * > label {
+  width: 10em;
 }

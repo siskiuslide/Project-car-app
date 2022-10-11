@@ -8,7 +8,6 @@ exports.getVehicles = catchAsync(async function (req, res, next) {
 });
 
 exports.addVehicle = catchAsync(async function (req, res, next) {
-  console.log(req.body);
   const vehicle = await Vehicle.create({
     type: req.body.type,
     manufacturer: req.body.manufacturer,
@@ -21,7 +20,6 @@ exports.addVehicle = catchAsync(async function (req, res, next) {
     boughtFor: req.body.boughtFor,
     dateBought: req.body.date,
   });
-  console.log(vehicle);
   const expense = await Expense.create({
     vehicleId: vehicle.id,
     date: req.body.date,

@@ -3,75 +3,7 @@ import Button from "../Components/Button";
 import { Link } from "react-router-dom";
 import "../GeneralCSS/forms.css";
 
-const AddVehicleForm = () => {
-  const manufacturers = [
-    "Abarth",
-    "Alfa Romeo",
-    "Aston Martin",
-    "Audi",
-    "Austin",
-    "Bentley",
-    "BMW",
-    "Bugatti",
-    "Cadillac",
-    "Chevrolet",
-    "Chrysler",
-    "Citroën",
-    "Dacia",
-    "Daewoo",
-    "Daihatsu",
-    "Dodge",
-    "Donkervoort",
-    "DS",
-    "Ferrari",
-    "Fiat",
-    "Fisker",
-    "Ford",
-    "Honda",
-    "Hummer",
-    "Hyundai",
-    "Infiniti",
-    "Iveco",
-    "Jaguar",
-    "Jeep",
-    "Kia",
-    "KTM",
-    "Lada",
-    "Lamborghini",
-    "Lancia",
-    "Land Rover",
-    "Landwind",
-    "Lexus",
-    "Lotus",
-    "Maserati",
-    "Maybach",
-    "Mazda",
-    "McLaren",
-    "Mercedes-Benz",
-    "MG",
-    "Mini",
-    "Mitsubishi",
-    "Morgan",
-    "Nissan",
-    "Opel",
-    "Peugeot",
-    "Porsche",
-    "Renault",
-    "Rolls-Royce",
-    "Rover",
-    "Saab",
-    "Seat",
-    "Skoda",
-    "Smart",
-    "SsangYong",
-    "Subaru",
-    "Suzuki",
-    "Tesla",
-    "Toyota",
-    "Volkswagen",
-    "Vauxhall",
-    "Volvo",
-  ];
+const AddVehicleForm = (props) => {
   const [vehicleType, setVehicleType] = useState("car");
   const [manufacturer, setManufacturer] = useState("abarth");
   const [model, setModel] = useState();
@@ -123,10 +55,10 @@ const AddVehicleForm = () => {
             setManufacturer(e.target.value);
           }}
         >
-          {manufacturers.map((m) => {
+          {props.vehicleData.map((m) => {
             return (
-              <option key={m} dvalue={m}>
-                {m}
+              <option key={m.brand} value={m.brand}>
+                {m.brand}
               </option>
             );
           })}

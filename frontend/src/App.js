@@ -4,14 +4,12 @@ import CarDetail from "./garage/VehicleDetail";
 import Expenses from "./expenses/Expenses";
 import Journal from "./journal/Journal";
 import React, { useEffect, useState } from "react";
-
 import { Route, Switch, Redirect } from "react-router-dom";
 import Navbar from "./Components/Navbar";
-
-import "./App.css";
 import AddVehicleForm from "./garage/AddVehicleForm";
+import vehicleData from "./data";
 
-function App() {
+export function App() {
   const [garage, setGarage] = useState([]);
   const [expenses, setExpenses] = useState([]);
   const [isLoading, setLoading] = useState([false]);
@@ -45,10 +43,14 @@ function App() {
           <Dashboard garage={garage} loading={isLoading} expenses={expenses} />
         </Route>
         <Route path="/garage" exact>
-          <Garage garage={garage} loading={isLoading} expenses={expenses} />
+          <Garage garage={garage} loading={isLoading} expenses={expenses} vehicleData={vehicleData} />
         </Route>
         <Route path="/garage/add-vehicle" exact>
-          <AddVehicleForm></AddVehicleForm>
+          <AddVehicleForm
+            vehicleData={vehicleData.sort((a, b) => {
+              a.brand.localeCompare(b.brand);
+            })}
+          ></AddVehicleForm>
         </Route>
         <Route path="/garage/:vehicleId" exact>
           <CarDetail></CarDetail>

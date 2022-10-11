@@ -68,7 +68,6 @@ const NewExpenseForm = (props) => {
                 setCategory(e.target.value);
               }}
             >
-              <option value="purchase">Purchase</option>
               <option value="insurance">Insurance</option>
               <option value="tax">Tax</option>
               <option value="fuel">Fuel</option>
@@ -77,6 +76,7 @@ const NewExpenseForm = (props) => {
               <option value="cleaning">Cleaning</option>
               <option value="modification">Modification</option>
               <option value="accessories">Accessories</option>
+              <option value="purchase">Purchase</option>
             </select>
           </div>
         </div>

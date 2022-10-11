@@ -20,6 +20,12 @@ const NewExpenseForm = (props) => {
       body: JSON.stringify(expense),
     })
       .then((res) => console.log(res))
+      .then(() => {
+        setDate("mm/dd/yyyy");
+        setCategory("");
+        setDesc("");
+        setValue(0);
+      })
       .catch((err) => console.log(err));
   };
   const formBackHandler = (e) => {
@@ -27,11 +33,13 @@ const NewExpenseForm = (props) => {
     props.setShowForm(false);
   };
 
-  const [vehicle, setVehicle] = useState(props.garage[0]._id);
+  //state to be sent to server as expense
+  const [vehicle, setVehicle] = useState();
   const [date, setDate] = useState();
   const [category, setCategory] = useState();
   const [desc, setDesc] = useState();
-  const [value, setValue] = useState();
+  const [value, setValue] = useState(0);
+
   return (
     <div className="formContainer">
       <p style={{ fontSize: "1.5em", textAlign: "center" }}> Create expense</p>
@@ -42,7 +50,11 @@ const NewExpenseForm = (props) => {
           onChange={(e) => {
             setVehicle(e.target.value);
           }}
+          placeholder={vehicle}
         >
+          <option defaultValue="" hidden="hidden">
+            Choose Here
+          </option>
           {props.garage.map((v) => (
             <option key={v._id} value={v._id}>
               {v.manufacturer + " " + v.model + " - " + v.reg.toUpperCase()}{" "}
@@ -55,6 +67,7 @@ const NewExpenseForm = (props) => {
             <input
               type="date"
               id="date"
+              placeholder={date}
               onChange={(e) => {
                 setDate(e.target.value);
               }}
@@ -68,6 +81,9 @@ const NewExpenseForm = (props) => {
                 setCategory(e.target.value);
               }}
             >
+              <option defaultValue="" hidden="hidden">
+                {category}
+              </option>
               <option value="insurance">Insurance</option>
               <option value="tax">Tax</option>
               <option value="fuel">Fuel</option>
@@ -96,10 +112,11 @@ const NewExpenseForm = (props) => {
             <label htmlFor="value">Value: </label>
             <input
               type="number"
-              style={{ width: "5em" }}
+              style={{ marginInline: "1em" }}
               onChange={(e) => {
                 setValue(e.target.value);
               }}
+              placeholder={value}
             ></input>
           </div>
         </div>

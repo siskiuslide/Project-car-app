@@ -37,6 +37,10 @@ select {
   flex-direction: row;
   justify-content: space-between;
 }
+/* .formRowItemNE > select,
+input {
+  max-width: 11em;
+} */
 form {
   display: flex;
   flex-direction: column;

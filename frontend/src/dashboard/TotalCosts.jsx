@@ -49,27 +49,33 @@ const TotalCosts = (props) => {
           <p>Purchases:</p>
           <p>
             £
-            {purchases.reduce((current, next) => {
-              return (current += next);
-            }, 0)}
+            {purchases
+              .reduce((current, next) => {
+                return (current += next);
+              }, 0)
+              .toFixed(2)}
           </p>
         </div>
         <div className="moreInfoFlex">
           <p>Running Costs:</p>
           <p>
             £
-            {runningCosts.reduce((current, next) => {
-              return (current += next);
-            }, 0)}
+            {runningCosts
+              .reduce((current, next) => {
+                return (current += next);
+              }, 0)
+              .toFixed(2)}
           </p>
         </div>
         <div className="moreInfoFlex">
           <p>Misc:</p>
           <p>
             £
-            {misc.reduce((current, next) => {
-              return (current += next);
-            }, 0)}
+            {misc
+              .reduce((current, next) => {
+                return (current += next);
+              }, 0)
+              .toFixed(2)}
           </p>
         </div>
       </div>

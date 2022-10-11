@@ -42,7 +42,7 @@ const TotalCosts = (props) => {
           textUnderlinePosition: "under",
         }}
       >
-        £{total}
+        £{total.toFixed(2)}
       </p>
       <div className="moreInfoList">
         <div className="moreInfoFlex">

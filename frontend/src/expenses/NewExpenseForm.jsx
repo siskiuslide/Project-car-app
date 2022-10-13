@@ -13,6 +13,7 @@ const NewExpenseForm = (props) => {
       description: desc,
       value: value,
     };
+    props.expenses.push(expense);
     console.log(expense);
     const newExpense = fetch("http://localhost:4000/expenses", {
       method: "post",
@@ -27,6 +28,9 @@ const NewExpenseForm = (props) => {
         setValue(0);
       })
       .catch((err) => console.log(err));
+    setTimeout(() => {
+      props.setShowForm(false);
+    }, 250);
   };
   const formBackHandler = (e) => {
     e.preventDefault();

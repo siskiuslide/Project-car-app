@@ -7,6 +7,7 @@ import Button from "../Components/Button";
 import NewExpenseForm from "./NewExpenseForm";
 
 const Expenses = (props) => {
+  const [expenses, setExpenses] = useState(props.expenses);
   const [showForm, setShowForm] = useState(false);
   const addExpenseHandler = (e) => {
     setShowForm(true);
@@ -20,7 +21,12 @@ const Expenses = (props) => {
           <Button style={{ marginLeft: "auto" }} value="Add Expense" onClick={addExpenseHandler}></Button>
         </div>
       ) : (
-        <NewExpenseForm garage={props.garage} showForm={showForm} setShowForm={setShowForm}></NewExpenseForm>
+        <NewExpenseForm
+          garage={props.garage}
+          showForm={showForm}
+          setShowForm={setShowForm}
+          expenses={props.expenses}
+        ></NewExpenseForm>
       )}
       <div className="ExpenseList">
         <div className="expenseListItem headings" style={{ paddingBlock: "1em", borderBottom: " solid white 1px" }}>
@@ -41,7 +47,7 @@ const Expenses = (props) => {
               <p style={{ width: "10%" }}>{e.category}</p>
               <p style={{ width: "35%" }}>{e.description}</p>
               <p style={{ width: "10%", marginLeft: "auto", marginRight: "1em", fontSize: "1.25em" }}>
-                £ {e.value.toFixed(2)}
+                £ {parseFloat(e.value).toFixed(2)}
               </p>
               <div className="expenseOptions" style={{ marginLeft: "auto", width: "8%" }}>
                 <p className="material-icons">edit</p>

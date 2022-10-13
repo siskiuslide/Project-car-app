@@ -40,6 +40,7 @@ const AddVehicleForm = (props) => {
       .then((res) => console.log(res))
       .catch((err) => console.log(err));
 
+    props.garage.push(newVehicle);
     setRedirect(true);
   };
 

@@ -47,6 +47,7 @@ export function App() {
         </Route>
         <Route path="/garage/add-vehicle" exact>
           <AddVehicleForm
+            garage={garage}
             vehicleData={vehicleData.sort((a, b) => {
               a.brand.localeCompare(b.brand);
             })}

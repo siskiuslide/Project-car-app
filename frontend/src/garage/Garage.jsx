@@ -12,9 +12,6 @@ const Garage = (props) => {
       .map((e) => {
         return e.value;
       });
-    // .reduce((current, next) => {
-    //   return (current += next);
-    // }, 0);
   };
   return (
     <div>

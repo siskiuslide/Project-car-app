@@ -1,6 +1,7 @@
 import React from "react";
 import { useState } from "react";
 import Button from "../Components/Button";
+import Invalid from "../Components/Invalid";
 import "../GeneralCSS/forms.css";
 
 const NewExpenseForm = (props) => {
@@ -137,7 +138,7 @@ const NewExpenseForm = (props) => {
           <Button value="Submit" onClick={formSubmitHandler}></Button>
           <Button value="Back" back={true} onClick={formBackHandler}></Button>
         </div>
-        <p style={{ color: "red" }}>{!formValid && "Form submission invalid, check input fields"}</p>
+        {!formValid && <Invalid />}
       </form>
     </div>
   );

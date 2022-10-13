@@ -4,8 +4,13 @@ import Button from "../Components/Button";
 import "../GeneralCSS/forms.css";
 
 const NewExpenseForm = (props) => {
+  const [formValid, setFormValidity] = useState(true);
+
   const formSubmitHandler = (e) => {
     e.preventDefault();
+    if (!vehicle || !date || !category || !value) {
+      return setFormValidity(false);
+    }
     const expense = {
       vehicleId: vehicle,
       date: date,
@@ -13,6 +18,7 @@ const NewExpenseForm = (props) => {
       description: desc,
       value: value,
     };
+    setFormValidity(true);
     props.expenses.push(expense);
     console.log(expense);
     const newExpense = fetch("http://localhost:4000/expenses", {
@@ -131,6 +137,7 @@ const NewExpenseForm = (props) => {
           <Button value="Submit" onClick={formSubmitHandler}></Button>
           <Button value="Back" back={true} onClick={formBackHandler}></Button>
         </div>
+        <p style={{ color: "red" }}>{!formValid && "Form submission invalid, check input fields"}</p>
       </form>
     </div>
   );

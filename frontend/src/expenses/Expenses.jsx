@@ -5,12 +5,38 @@ import "../GeneralCSS/forms.css";
 import { useState } from "react";
 import Button from "../Components/Button";
 import NewExpenseForm from "./NewExpenseForm";
+import ExpenseListItem from "./ExpenseListItem";
 
 const Expenses = (props) => {
-  const [expenses, setExpenses] = useState(props.expenses);
+  const expenseDeepCopy = JSON.parse(JSON.stringify(props.expenses)); // this is to allow sorting back into original order
+  const [expenses, setExpenses] = useState(expenseDeepCopy);
   const [showForm, setShowForm] = useState(false);
+  const [sortValue, setSortValue] = useState(null);
   const addExpenseHandler = (e) => {
     setShowForm(true);
+  };
+
+  const sortMonthHandler = () => {};
+
+  const sortValueHandler = () => {
+    if (!sortValue) {
+      setSortValue("descending");
+      const descending = expenses.sort((a, b) => {
+        return a.value - b.value;
+      });
+      return setExpenses([...descending]);
+    }
+    if (sortValue === "descending") {
+      setSortValue("ascending");
+      const ascending = expenses.sort((a, b) => {
+        return b.value - a.value;
+      });
+      return setExpenses([...ascending]);
+    }
+    if (sortValue === "ascending") {
+      setSortValue(null);
+      return setExpenses(props.expenses);
+    }
   };
 
   return (
@@ -37,25 +63,15 @@ const Expenses = (props) => {
           <p style={{ width: "8%", marginLeft: "auto", marginRight: "1em" }}>Options</p>
         </div>
         <div className="listOptions">
-          <p className="material-icons">calendar_month</p>
-          <p className="material-icons">currency_pound</p>
+          <p className="material-icons" onClick={sortMonthHandler}>
+            calendar_month
+          </p>
+          <p className="material-icons" onClick={sortValueHandler}>
+            currency_pound
+          </p>
         </div>
-        {props.expenses.map((e) => {
-          return (
-            <div key={e._id} className="expenseListItem">
-              <p style={{ width: "10%" }}>{e.date}</p>
-              <p style={{ width: "10%" }}>{e.category}</p>
-              <p style={{ width: "35%" }}>{e.description}</p>
-              <p style={{ width: "15%", marginLeft: "auto", marginRight: "1em", fontSize: "1.25em" }}>
-                £ {parseFloat(e.value).toFixed(2)}
-              </p>
-              <div className="expenseOptions" style={{ marginLeft: "auto", width: "8%" }}>
-                <p className="material-icons">edit</p>
-                <p className="material-icons"></p>
-                <p className="material-icons">close</p>
-              </div>
-            </div>
-          );
+        {expenses.map((e) => {
+          return <ExpenseListItem e={e} key={e._id}></ExpenseListItem>;
         })}
       </div>
     </div>

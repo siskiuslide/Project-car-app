@@ -33,7 +33,7 @@ const Expenses = (props) => {
           <p style={{ width: "10%" }}>Date</p>
           <p style={{ width: "10%" }}>Category</p>
           <p style={{ width: "35%" }}>Description</p>
-          <p style={{ width: "10%", marginLeft: "auto", marginRight: "1em" }}>Value</p>
+          <p style={{ width: "15%", marginLeft: "auto", marginRight: "1em" }}>Value</p>
           <p style={{ width: "8%", marginLeft: "auto", marginRight: "1em" }}>Options</p>
         </div>
         <div className="listOptions">
@@ -46,7 +46,7 @@ const Expenses = (props) => {
               <p style={{ width: "10%" }}>{e.date}</p>
               <p style={{ width: "10%" }}>{e.category}</p>
               <p style={{ width: "35%" }}>{e.description}</p>
-              <p style={{ width: "10%", marginLeft: "auto", marginRight: "1em", fontSize: "1.25em" }}>
+              <p style={{ width: "15%", marginLeft: "auto", marginRight: "1em", fontSize: "1.25em" }}>
                 £ {parseFloat(e.value).toFixed(2)}
               </p>
               <div className="expenseOptions" style={{ marginLeft: "auto", width: "8%" }}>

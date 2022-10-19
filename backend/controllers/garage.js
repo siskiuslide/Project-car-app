@@ -25,6 +25,7 @@ exports.addVehicle = catchAsync(async function (req, res, next) {
     date: req.body.date,
     category: "purchase",
     value: req.body.boughtFor,
+    description: `${req.body.manufacturer} - ${req.body.reg.toUpperCase()}`,
   }).then(console.log("expense created"));
   return res.status(200).json({ status: "success", data: vehicle });
 });

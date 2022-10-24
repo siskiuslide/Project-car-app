@@ -12,7 +12,9 @@ const Dashboard = (props) => {
       <div className="DashboardGrid">
         <Count link="/garage" garage={props.garage}></Count>
         <TotalCosts link="/expenses" expenses={props.expenses}></TotalCosts>
-        <JournalEntries link="/journal"> </JournalEntries>
+        <JournalEntries link="/journal" todo={props.todo}>
+          {" "}
+        </JournalEntries>
       </div>
     </>
   );

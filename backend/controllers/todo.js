@@ -2,7 +2,8 @@ const catchAsync = require("../helpers/catchAsync");
 const Todo = require("../models/todoModel");
 
 exports.getAllTodos = catchAsync(async function (req, res, next) {
-  return res.status(200).json({ lol: "lol" });
+  const todos = await Todo.find();
+  return res.status(200).json({ todos: todos });
 });
 
 exports.createTodo = catchAsync(async function (req, res, next) {

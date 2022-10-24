@@ -10,15 +10,18 @@ const JournalEntries = (props) => {
       <p className="GridItemText">Recent entries</p>
       <p></p>
       <div className="EntryContainer">
-        <Entry
-          entryId="1"
-          vehicleId="1"
-          date="26/09/2022"
-          category="work"
-          description="check coilovers for adjustability"
-        ></Entry>
-        <Entry></Entry>
-        <Entry></Entry>
+        {props.todo.slice(0, 3).map((el) => {
+          return (
+            <Entry
+              key={el.id}
+              entryId={el.id}
+              vehicleId={el.vehicleId}
+              category={el.category}
+              description={el.description}
+            ></Entry>
+          );
+        })}
+        {/* {console.log(props.todo)} */}
       </div>
     </Link>
   );

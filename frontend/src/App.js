@@ -12,6 +12,7 @@ import vehicleData from "./data";
 export function App() {
   const [garage, setGarage] = useState([]);
   const [expenses, setExpenses] = useState([]);
+  const [todo, setTodo] = useState([]);
   const [isLoading, setLoading] = useState([false]);
 
   useEffect(() => {
@@ -30,6 +31,15 @@ export function App() {
         return data;
       })
       .catch((err) => console.log(err));
+
+    const todos = fetch("http://localhost:4000/todo")
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+        setTodo(data.todos);
+        return data;
+      })
+      .catch((err) => console.log(err));
   }, []);
 
   return (
@@ -40,7 +50,7 @@ export function App() {
           <Redirect to="/dashboard"></Redirect>
         </Route>
         <Route path="/dashboard">
-          <Dashboard garage={garage} loading={isLoading} expenses={expenses} />
+          <Dashboard garage={garage} loading={isLoading} expenses={expenses} todo={todo} />
         </Route>
         <Route path="/garage" exact>
           <Garage garage={garage} loading={isLoading} expenses={expenses} vehicleData={vehicleData} />

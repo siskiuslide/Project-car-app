@@ -14,3 +14,8 @@ exports.createTodo = catchAsync(async function (req, res, next) {
   });
   return res.status(200).json(todo);
 });
+
+exports.deleteTodo = catchAsync(async function (req, res, next) {
+  const deleted = await Todo.deleteOne({ id: req.body.id });
+  return res.status(200).json(deleted);
+});

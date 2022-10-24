@@ -2,16 +2,18 @@ import React from "react";
 import "./Expenses.css";
 import "../App.css";
 import "../GeneralCSS/forms.css";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Button from "../Components/Button";
 import NewExpenseForm from "./NewExpenseForm";
 import ExpenseListItem from "./ExpenseListItem";
 
 const Expenses = (props) => {
-  const expenseDeepCopy = JSON.parse(JSON.stringify(props.expenses)); // this is to allow sorting back into original order
-  const [expenses, setExpenses] = useState(expenseDeepCopy);
+  const [expenses, setExpenses] = useState(props.expenses);
+  const deepClone = structuredClone(props.expenses);
   const [showForm, setShowForm] = useState(false);
   const [sortValue, setSortValue] = useState(null);
+
+  useEffect(() => setExpenses(deepClone), []);
   const addExpenseHandler = (e) => {
     setShowForm(true);
   };
@@ -19,23 +21,21 @@ const Expenses = (props) => {
   const sortMonthHandler = () => {};
 
   const sortValueHandler = () => {
-    if (!sortValue) {
+    if (sortValue === null) {
       setSortValue("descending");
-      const descending = expenses.sort((a, b) => {
+      return expenses.sort((a, b) => {
         return a.value - b.value;
       });
-      return setExpenses([...descending]);
     }
     if (sortValue === "descending") {
       setSortValue("ascending");
-      const ascending = expenses.sort((a, b) => {
+      return expenses.sort((a, b) => {
         return b.value - a.value;
       });
-      return setExpenses([...ascending]);
     }
     if (sortValue === "ascending") {
       setSortValue(null);
-      return setExpenses(props.expenses);
+      return setExpenses(deepClone);
     }
   };
 

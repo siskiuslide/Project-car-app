@@ -5,9 +5,21 @@ import JournalItem from "./JournalItem";
 const Journal = (props) => {
   return (
     <div className="JournalContainer">
-      {props.todo.map((el) => {
-        <JournalItem key={el._id} item={el}></JournalItem>;
-      })}
+      <p>To-do:</p>
+      {props.todo
+        .filter((i) => {
+          return i.completed === false;
+        })
+        .map((i) => {
+          return <JournalItem item={i}></JournalItem>;
+        })}
+
+      <p>Completed:</p>
+      {props.todo
+        .filter((i) => i.completed === true)
+        .map((i) => {
+          return <JournalItem item={i}></JournalItem>;
+        })}
     </div>
   );
 };

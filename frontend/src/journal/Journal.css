@@ -2,6 +2,30 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
-  width: 60vw;
+  width: 80vw;
   margin-inline: auto;
+}
+
+.JournalContainer > p {
+}
+
+.JournalItem {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  background: var(--darkBackground);
+  transition: all 100ms 100ms;
+  margin-block: 0.1em;
+}
+
+.JournalItem:hover {
+  transform: translate(1em);
+  margin-block: 0.25em;
+}
+.JournalItem > p {
+  margin-inline: 0.5em;
+}
+
+.material-icons {
+  font-size: 1.25em;
 }

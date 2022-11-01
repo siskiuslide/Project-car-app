@@ -17,10 +17,6 @@ const Entry = (props) => {
       <p style={{ width: "20%", textAlign: "center" }} className="material-icons">
         {props.completed ? "check_box" : "check_box_outline_blank"}
       </p>
-      <div className="options" style={{ display: "flex", width: "10%" }}>
-        <p className="material-icons">edit</p>
-        <p className="material-icons">delete</p>
-      </div>
     </div>
   );
 };

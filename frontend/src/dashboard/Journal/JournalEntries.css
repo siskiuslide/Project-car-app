@@ -20,7 +20,7 @@
 }
 .Entry > p {
   padding-inline: 0.2em;
-  text-align: center;
+  text-align: left;
 }
 
 .options > * {

@@ -5,8 +5,8 @@ import { Link } from "react-router-dom";
 
 const Count = (props) => {
   return (
-    <Link className="Count GridItem" to={props.link}>
-      <p className="GridItemText">Vehicles in your garage:</p>
+    <Link className="Count GridItem " to={props.link}>
+      <p className="GridItemText hovereffect">Vehicles in your garage:</p>
       <p
         className="EnlargedFigure"
         style={{

@@ -6,12 +6,16 @@ import "../../App.css";
 const Entry = (props) => {
   return (
     <div className="Entry">
-      <p style={{ fontSize: "1em" }} className="material-icons">
-        calendar_month
+      <p style={{ width: "10%" }}>{props.date}</p>
+      <p style={{ width: "15%" }}>{props.category}</p>
+      <p style={{ width: "30%" }}>{props.description}</p>
+      <p style={{ width: "20%" }} className="material-icons">
+        {props.completed ? "check_box" : "check_box_outline_blank"}
       </p>
-      <p>{props.date}</p>
-      <p>{props.category}</p>
-      <p>{props.description}</p>
+      <div className="options" style={{ display: "flex", width: "10%" }}>
+        <p className="material-icons">edit</p>
+        <p className="material-icons">delete</p>
+      </div>
     </div>
   );
 };

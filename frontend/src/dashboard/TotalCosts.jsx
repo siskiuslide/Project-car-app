@@ -31,8 +31,8 @@ const TotalCosts = (props) => {
     .map((i) => i.value);
 
   return (
-    <Link className="TotalCosts GridItem" to={props.link}>
-      <p className="GridItemText">Total Costs:</p>
+    <Link className="TotalCosts GridItem " to={props.link}>
+      <p className="GridItemText ">Total Costs:</p>
       <p
         className="EnlargedFigure"
         style={{

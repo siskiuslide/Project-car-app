@@ -35,7 +35,6 @@ export function App() {
     const todos = fetch("http://localhost:4000/todo")
       .then((res) => res.json())
       .then((data) => {
-        console.log(data);
         setTodo(data.todos);
         return data;
       })
@@ -71,7 +70,7 @@ export function App() {
           <Expenses garage={garage} expenses={expenses} />
         </Route>
         <Route path="/journal">
-          <Journal></Journal>
+          <Journal todo={todo}></Journal>
         </Route>
       </Switch>
     </div>

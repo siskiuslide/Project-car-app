@@ -3,14 +3,10 @@
   flex-direction: column;
 }
 
-.JournalEntries > * {
-  padding: 0.2em;
-}
-
 .EntryContainer {
-  display: grid;
-  grid-template-columns: 1fr;
-  grid-template-rows: auto;
+  display: flex;
+  flex-direction: column;
+  top: -10em;
 }
 .Entry {
   display: flex;
@@ -20,8 +16,13 @@
   transition: transform 50ms;
 }
 .Entry:hover {
-  transform: scale(1.02);
+  transform: scale(1.01);
 }
 .Entry > p {
-  padding-inline: 0.5em;
+  padding-inline: 0.2em;
+  text-align: center;
+}
+
+.options > * {
+  font-size: 1em !important;
 }

@@ -19,11 +19,15 @@
 }
 
 .JournalItem:hover {
-  transform: translate(1em);
+  transform: translate(0.3em);
   margin-block: 0.25em;
 }
 .JournalItem > p {
   margin-inline: 0.5em;
+}
+
+.completedBox:hover {
+  cursor: pointer;
 }
 
 .material-icons {

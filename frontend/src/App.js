@@ -13,32 +13,41 @@ export function App() {
   const [garage, setGarage] = useState([]);
   const [expenses, setExpenses] = useState([]);
   const [todo, setTodo] = useState([]);
-  const [isLoading, setLoading] = useState([false]);
+  const [isLoading, setLoading] = useState(false);
+  const [refresh, setRefresh] = useState(true);
+
+  const setRefreshHandler = function () {
+    setRefresh(true);
+  };
 
   useEffect(() => {
-    const garage = fetch("http://localhost:4000/garage")
-      .then((res) => res.json())
-      .then((data) => {
-        setGarage(data.data);
-        return data;
-      })
-      .catch((err) => console.log(err));
+    if (refresh === true) {
+      const garage = fetch("http://localhost:4000/garage")
+        .then((res) => res.json())
+        .then((data) => {
+          setGarage(data.data);
+          return data;
+        })
+        .catch((err) => console.log(err));
 
-    const expenses = fetch("http://localhost:4000/expenses")
-      .then((res) => res.json())
-      .then((data) => {
-        setExpenses(data.data);
-        return data;
-      })
-      .catch((err) => console.log(err));
+      const expenses = fetch("http://localhost:4000/expenses")
+        .then((res) => res.json())
+        .then((data) => {
+          setExpenses(data.data);
+          return data;
+        })
+        .catch((err) => console.log(err));
 
-    const todos = fetch("http://localhost:4000/todo")
-      .then((res) => res.json())
-      .then((data) => {
-        setTodo(data.todos);
-        return data;
-      })
-      .catch((err) => console.log(err));
+      const todos = fetch("http://localhost:4000/todo")
+        .then((res) => res.json())
+        .then((data) => {
+          setTodo(data.todos);
+          return data;
+        })
+        .catch((err) => console.log(err));
+
+      setRefresh(false);
+    }
   }, []);
 
   return (
@@ -49,10 +58,22 @@ export function App() {
           <Redirect to="/dashboard"></Redirect>
         </Route>
         <Route path="/dashboard">
-          <Dashboard garage={garage} loading={isLoading} expenses={expenses} todo={todo} />
+          <Dashboard
+            garage={garage}
+            loading={isLoading}
+            expenses={expenses}
+            todo={todo}
+            setRefreshHandler={setRefreshHandler}
+          />
         </Route>
         <Route path="/garage" exact>
-          <Garage garage={garage} loading={isLoading} expenses={expenses} vehicleData={vehicleData} />
+          <Garage
+            garage={garage}
+            loading={isLoading}
+            expenses={expenses}
+            vehicleData={vehicleData}
+            setRefreshHandler={setRefreshHandler}
+          />
         </Route>
         <Route path="/garage/add-vehicle" exact>
           <AddVehicleForm
@@ -60,17 +81,18 @@ export function App() {
             vehicleData={vehicleData.sort((a, b) => {
               a.brand.localeCompare(b.brand);
             })}
+            setRefreshHandler={setRefreshHandler}
           ></AddVehicleForm>
         </Route>
         <Route path="/garage/:vehicleId" exact>
-          <CarDetail></CarDetail>
+          <CarDetail setRefreshHandler={setRefreshHandler}></CarDetail>
         </Route>
 
         <Route path="/expenses">
-          <Expenses garage={garage} expenses={expenses} />
+          <Expenses garage={garage} expenses={expenses} setRefreshHandler={setRefreshHandler} />
         </Route>
         <Route path="/journal">
-          <Journal todo={todo}></Journal>
+          <Journal todo={todo} setRefreshHandler={setRefreshHandler}></Journal>
         </Route>
       </Switch>
     </div>

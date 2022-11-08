@@ -11,8 +11,21 @@ const Journal = (props) => {
     const todoCopy = [...todo];
     const targetItem = todoCopy.find((el) => el._id === targetId);
     const index = todoCopy.indexOf(targetItem);
-    targetItem.completed ? (todoCopy[index].completed = false) : (todoCopy[index].completed = true);
+    const newState = targetItem.completed ? false : true;
+    todoCopy[index].completed = newState;
     setTodo(todoCopy);
+    updateCompleteState(targetId, newState);
+  };
+
+  const updateCompleteState = function (id, newState) {
+    const update = fetch("http://localhost:4000/todo", {
+      method: "PUT",
+      body: JSON.stringify({ id: id, completed: newState }),
+      headers: { "Content-Type": "application/json" },
+    })
+      .then((res) => res.json())
+      .then((data) => data)
+      .catch((err) => console.log(err));
   };
 
   return (

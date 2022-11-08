@@ -20,3 +20,8 @@ exports.deleteTodo = catchAsync(async function (req, res, next) {
   const deleted = await Todo.deleteOne({ id: req.body.id });
   return res.status(200).json(deleted);
 });
+
+exports.updateTodo = catchAsync(async function (req, res, next) {
+  const updated = await Todo.updateOne({ id: req.body.id }, { completed: req.body.completed });
+  return res.status(200).json(updated);
+});

@@ -6,21 +6,24 @@ import JournalItem from "./JournalItem";
 const Journal = (props) => {
   const [todo, setTodo] = useState(props.todo);
   const [entriesViewText, setEntriesViewText] = useState("All");
+  const [entriesViewIcon, setEntriesViewIcon] = useState("check_box_outline_blank");
 
   const entriesViewHandler = function (e) {
     const todoClone = structuredClone(props.todo);
 
     if (entriesViewText === "All") {
       setEntriesViewText("Completed");
-
+      setEntriesViewIcon("check_box");
       setTodo(todoClone.filter((i) => i.completed));
     }
     if (entriesViewText === "Completed") {
       setEntriesViewText("Incomplete");
+      setEntriesViewIcon("check_box_outline_blank");
       setTodo(todoClone.filter((i) => i.completed === false));
     }
     if (entriesViewText === "Incomplete") {
       setEntriesViewText("All");
+      setEntriesViewIcon("checklist");
       setTodo(todoClone);
     }
   };
@@ -59,7 +62,7 @@ const Journal = (props) => {
         <div className="options" style={{ width: "10%" }}>
           <p className="material-icons">calendar_month</p>
           <p className="material-icons" onClick={entriesViewHandler}>
-            check_box_outline_blank
+            {entriesViewIcon}
           </p>
         </div>
       </div>

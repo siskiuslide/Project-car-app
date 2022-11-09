@@ -2,26 +2,28 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
-  width: 80vw;
+  width: 60vw;
   margin-inline: auto;
 }
-
+.JournalList {
+  background: var(--darkBackground);
+}
 .JournalContainer > p {
-  font-size: 1.25em;
+  font-size: 2em;
 }
 
 .JournalItem {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  background: var(--darkBackground);
+  /* background: var(--darkBackground); */
   transition: all 100ms 100ms;
   margin-block: 0.1em;
 }
 
-.JournalItem:hover {
-  transform: translate(0.3em);
-  margin-block: 0.25em;
+.JournalItem:not(.headings):hover {
+  margin-block: 0.5em;
+  background: var(--darkBackgroundHover);
 }
 .JournalItem > p {
   margin-inline: 0.5em;
@@ -35,6 +37,11 @@
   font-size: 1.25em;
   cursor: pointer;
 }
+.headings > * {
+  font-size: 1.15em;
+  text-align: left;
+}
+
 .options > * {
   margin-inline: 0.1em;
 }

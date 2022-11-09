@@ -44,7 +44,11 @@ const Expenses = (props) => {
       {showForm === false ? (
         <div style={{ display: "flex", width: "100%", justifyContent: "space-between", alignItems: "center" }}>
           <p style={{ fontSize: "2em" }}>Expense List: </p>
-          <Button style={{ marginLeft: "auto" }} value="Add Expense" onClick={addExpenseHandler}></Button>
+          <Button
+            style={{ marginLeft: "auto", height: "auto" }}
+            value="Add Expense"
+            onClick={addExpenseHandler}
+          ></Button>
         </div>
       ) : (
         <NewExpenseForm

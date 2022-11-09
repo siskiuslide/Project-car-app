@@ -1,5 +1,6 @@
 import React from "react";
 import { useState, useEffect } from "react";
+import Button from "../Components/Button";
 import "./Journal.css";
 import JournalItem from "./JournalItem";
 
@@ -52,28 +53,33 @@ const Journal = (props) => {
 
   return (
     <div className="JournalContainer">
-      <p className="">Entries:</p>
-      <p style={{ fontSize: "0.75em" }}>{entriesViewText}</p>
-      <div class="JournalHeaders JournalItem">
-        <p style={{ width: "10%" }}>Date</p>
-        <p style={{ width: "10%" }}>Category</p>
-        <p style={{ width: "25%" }}>Description</p>
-        <p style={{ width: "15%", textAlign: "center" }}>Completed?</p>
-        <div className="options" style={{ width: "10%" }}>
+      <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+        <p style={{ fontSize: "2em" }}>Entries:</p>
+        <Button value="Add todo"></Button>
+      </div>
+      <div class="JournalList">
+        <div class="headings JournalItem" style={{ paddingBlock: "1em", borderBottom: "white solid 1px" }}>
+          <p style={{ width: "10%" }}>Date</p>
+          <p style={{ width: "10%" }}>Category</p>
+          <p style={{ width: "25%" }}>Description</p>
+          <p style={{ width: "15%", textAlign: "center" }}>Completed?</p>
+          <p style={{ width: "10%" }}>Options</p>
+        </div>
+        <div className="options" style={{ width: "10%", marginLeft: "auto" }}>
           <p className="material-icons">calendar_month</p>
           <p className="material-icons" onClick={entriesViewHandler}>
             {entriesViewIcon}
           </p>
         </div>
-      </div>
 
-      {todo
-        .sort((a, b) => {
-          return Number(a.completed) - Number(b.completed);
-        })
-        .map((i, index) => {
-          return <JournalItem item={i} key={i._id} completeBoolHandler={completeBoolHandler}></JournalItem>;
-        })}
+        {todo
+          .sort((a, b) => {
+            return Number(a.completed) - Number(b.completed);
+          })
+          .map((i, index) => {
+            return <JournalItem item={i} key={i._id} completeBoolHandler={completeBoolHandler}></JournalItem>;
+          })}
+      </div>
     </div>
   );
 };

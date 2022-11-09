@@ -30,10 +30,19 @@ const Journal = (props) => {
 
   return (
     <div className="JournalContainer">
-      <p>To-do:</p>
-      <p className="material-icons" onClick={props.setRefreshHandler()}>
-        refresh
-      </p>
+      <p className="">Entries:</p>
+      {/* <JournalItem></JournalItem> */}
+      <div class="JournalHeaders JournalItem">
+        <p style={{ width: "10%" }}>Date</p>
+        <p style={{ width: "10%" }}>Category</p>
+        <p style={{ width: "25%" }}>Description</p>
+        <p style={{ width: "15%", textAlign: "center" }}>Completed?</p>
+        <div className="options" style={{ width: "10%" }}>
+          <p className="material-icons">calendar_month</p>
+          <p className="material-icons">check_box_outline_blank</p>
+        </div>
+      </div>
+
       {todo
         .sort((a, b) => {
           return Number(a.completed) - Number(b.completed);

@@ -7,7 +7,7 @@
 }
 
 .JournalContainer > p {
-  font-size: 1.5em;
+  font-size: 1.25em;
 }
 
 .JournalItem {
@@ -33,4 +33,5 @@
 
 .material-icons {
   font-size: 1.25em;
+  cursor: pointer;
 }

@@ -5,6 +5,25 @@ import JournalItem from "./JournalItem";
 
 const Journal = (props) => {
   const [todo, setTodo] = useState(props.todo);
+  const [entriesViewText, setEntriesViewText] = useState("All");
+
+  const entriesViewHandler = function (e) {
+    const todoClone = structuredClone(props.todo);
+
+    if (entriesViewText === "All") {
+      setEntriesViewText("Completed");
+
+      setTodo(todoClone.filter((i) => i.completed));
+    }
+    if (entriesViewText === "Completed") {
+      setEntriesViewText("Incomplete");
+      setTodo(todoClone.filter((i) => i.completed === false));
+    }
+    if (entriesViewText === "Incomplete") {
+      setEntriesViewText("All");
+      setTodo(todoClone);
+    }
+  };
 
   const completeBoolHandler = function (e) {
     const targetId = e.target.parentNode.id;
@@ -31,7 +50,7 @@ const Journal = (props) => {
   return (
     <div className="JournalContainer">
       <p className="">Entries:</p>
-      {/* <JournalItem></JournalItem> */}
+      <p style={{ fontSize: "0.75em" }}>{entriesViewText}</p>
       <div class="JournalHeaders JournalItem">
         <p style={{ width: "10%" }}>Date</p>
         <p style={{ width: "10%" }}>Category</p>
@@ -39,7 +58,9 @@ const Journal = (props) => {
         <p style={{ width: "15%", textAlign: "center" }}>Completed?</p>
         <div className="options" style={{ width: "10%" }}>
           <p className="material-icons">calendar_month</p>
-          <p className="material-icons">check_box_outline_blank</p>
+          <p className="material-icons" onClick={entriesViewHandler}>
+            check_box_outline_blank
+          </p>
         </div>
       </div>
 

@@ -7,7 +7,7 @@ import JournalItem from "./JournalItem";
 const Journal = (props) => {
   const [todo, setTodo] = useState(props.todo);
   const [entriesViewText, setEntriesViewText] = useState("All");
-  const [entriesViewIcon, setEntriesViewIcon] = useState("check_box_outline_blank");
+  const [entriesViewIcon, setEntriesViewIcon] = useState("checklist");
   const [dateSort, setDateSort] = useState();
   const [dateSortIcon, setDateSortIcon] = useState();
 
@@ -27,7 +27,11 @@ const Journal = (props) => {
     if (entriesViewText === "Incomplete") {
       setEntriesViewText("All");
       setEntriesViewIcon("checklist");
-      setTodo(todoClone);
+      setTodo(
+        todoClone.sort((a, b) => {
+          return Number(a.completed) - Number(b.completed);
+        })
+      );
     }
   };
 
@@ -121,20 +125,16 @@ const Journal = (props) => {
           </p>
         </div>
 
-        {todo
-          .sort((a, b) => {
-            return Number(a.completed) - Number(b.completed);
-          })
-          .map((i, index) => {
-            return (
-              <JournalItem
-                item={i}
-                key={i._id}
-                completeBoolHandler={completeBoolHandler}
-                deleteEntryHandler={deleteEntryHandler}
-              ></JournalItem>
-            );
-          })}
+        {todo.map((i, index) => {
+          return (
+            <JournalItem
+              item={i}
+              key={i._id}
+              completeBoolHandler={completeBoolHandler}
+              deleteEntryHandler={deleteEntryHandler}
+            ></JournalItem>
+          );
+        })}
       </div>
     </div>
   );

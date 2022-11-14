@@ -8,7 +8,11 @@ const JournalItem = (props) => {
   const [year, setYear] = useState(new Date(props.item.createdAt).getFullYear());
 
   return (
-    <div className="JournalItem" id={props.item._id}>
+    <div
+      className="JournalItem"
+      id={props.item._id}
+      style={props.item.completed ? { opacity: "60%" } : { opacity: "100%" }}
+    >
       <p style={{ width: "10%" }}>{date + "/" + month + "/" + year}</p>
       <p style={{ textTransform: "capitalize", width: "10%" }}>{props.item.category}</p>
       <p style={{ width: "25%" }}>{props.item.description}</p>

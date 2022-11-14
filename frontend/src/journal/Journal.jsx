@@ -8,6 +8,8 @@ const Journal = (props) => {
   const [todo, setTodo] = useState(props.todo);
   const [entriesViewText, setEntriesViewText] = useState("All");
   const [entriesViewIcon, setEntriesViewIcon] = useState("check_box_outline_blank");
+  const [dateSort, setDateSort] = useState();
+  const [dateSortIcon, setDateSortIcon] = useState();
 
   const entriesViewHandler = function (e) {
     const todoClone = structuredClone(props.todo);
@@ -25,6 +27,33 @@ const Journal = (props) => {
     if (entriesViewText === "Incomplete") {
       setEntriesViewText("All");
       setEntriesViewIcon("checklist");
+      setTodo(todoClone);
+    }
+  };
+
+  const dateSortHandler = function (e) {
+    const todoClone = structuredClone(props.todo);
+
+    if (!dateSort) {
+      setDateSort("descending");
+      setDateSortIcon("keyboard_arrow_down");
+
+      todoClone.sort((a, b) => {
+        return new Date(a.createdAt) - new Date(b.createdAt);
+      });
+      setTodo(todoClone);
+    }
+    if (dateSort === "descending") {
+      setDateSort("ascending");
+      setDateSortIcon("keyboard_arrow_up");
+      todoClone.sort((a, b) => {
+        return new Date(b.createdAt) - new Date(a.createdAt);
+      });
+      setTodo(todoClone);
+    }
+    if (dateSort === "ascending") {
+      setDateSort();
+      setDateSortIcon(null);
       setTodo(todoClone);
     }
   };
@@ -79,7 +108,14 @@ const Journal = (props) => {
           <p style={{ width: "10%" }}>Options</p>
         </div>
         <div className="options" style={{ width: "10%", marginLeft: "auto" }}>
-          <p className="material-icons">calendar_month</p>
+          {dateSortIcon ? (
+            <p className="material-icons" onClick={dateSortHandler}>
+              {dateSortIcon}
+            </p>
+          ) : null}
+          <p className="material-icons" onClick={dateSortHandler}>
+            calendar_month
+          </p>
           <p className="material-icons" onClick={entriesViewHandler}>
             {entriesViewIcon}
           </p>

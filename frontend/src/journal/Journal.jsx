@@ -40,6 +40,19 @@ const Journal = (props) => {
     updateCompleteState(targetId, newState);
   };
 
+  const deleteEntryHandler = function (e) {
+    const targetId = e.target.parentNode.parentNode.id;
+    console.log(targetId);
+    const todoClone = structuredClone(todo);
+    const index = todoClone.findIndex((i) => i._id == targetId);
+    todoClone.splice(index, 1);
+    setTodo(todoClone);
+
+    fetch("http://127.0.0.1:4000/todo", { method: "delete", body: JSON.stringify({ id: targetId }) })
+      .then((res) => res)
+      .catch((err) => console.log(err));
+  };
+
   const updateCompleteState = function (id, newState) {
     const update = fetch("http://localhost:4000/todo", {
       method: "PUT",
@@ -57,8 +70,8 @@ const Journal = (props) => {
         <p style={{ fontSize: "2em" }}>Entries:</p>
         <Button value="Add todo"></Button>
       </div>
-      <div class="JournalList">
-        <div class="headings JournalItem" style={{ paddingBlock: "1em", borderBottom: "white solid 1px" }}>
+      <div className="JournalList">
+        <div className="headings JournalItem" style={{ paddingBlock: "1em", borderBottom: "white solid 1px" }}>
           <p style={{ width: "10%" }}>Date</p>
           <p style={{ width: "10%" }}>Category</p>
           <p style={{ width: "25%" }}>Description</p>
@@ -77,7 +90,14 @@ const Journal = (props) => {
             return Number(a.completed) - Number(b.completed);
           })
           .map((i, index) => {
-            return <JournalItem item={i} key={i._id} completeBoolHandler={completeBoolHandler}></JournalItem>;
+            return (
+              <JournalItem
+                item={i}
+                key={i._id}
+                completeBoolHandler={completeBoolHandler}
+                deleteEntryHandler={deleteEntryHandler}
+              ></JournalItem>
+            );
           })}
       </div>
     </div>

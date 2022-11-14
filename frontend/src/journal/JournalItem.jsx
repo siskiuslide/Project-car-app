@@ -21,7 +21,9 @@ const JournalItem = (props) => {
       </p>
       <div className="options" style={{ display: "flex", width: "10%" }}>
         <p className="material-icons">edit</p>
-        <p className="material-icons">delete</p>
+        <p className="material-icons" onClick={props.deleteEntryHandler}>
+          delete
+        </p>
       </div>
     </div>
   );

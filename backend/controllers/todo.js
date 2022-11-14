@@ -22,6 +22,8 @@ exports.deleteTodo = catchAsync(async function (req, res, next) {
 });
 
 exports.updateTodo = catchAsync(async function (req, res, next) {
-  const updated = await Todo.updateOne({ id: req.body.id }, { completed: req.body.completed });
-  return res.status(200).json(updated);
+  console.log(req.body);
+  const updated = await Todo.findOneAndUpdate({ _id: req.body.id }, { completed: req.body.completed });
+  const todos = await Todo.find();
+  return res.status(200).json(todos);
 });

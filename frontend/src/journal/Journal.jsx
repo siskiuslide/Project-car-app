@@ -13,25 +13,25 @@ const Journal = (props) => {
 
   const entriesViewHandler = function (e) {
     const todoClone = structuredClone(props.todo);
-
     if (entriesViewText === "All") {
       setEntriesViewText("Completed");
       setEntriesViewIcon("check_box");
-      setTodo(todoClone.filter((i) => i.completed));
+      const updatedArr = todoClone.filter((i) => i.completed);
+      setTodo(updatedArr);
     }
     if (entriesViewText === "Completed") {
       setEntriesViewText("Incomplete");
       setEntriesViewIcon("check_box_outline_blank");
-      setTodo(todoClone.filter((i) => i.completed === false));
+      const updatedArr = todoClone.filter((i) => i.completed === false);
+      setTodo(updatedArr);
     }
     if (entriesViewText === "Incomplete") {
       setEntriesViewText("All");
       setEntriesViewIcon("checklist");
-      setTodo(
-        todoClone.sort((a, b) => {
-          return Number(a.completed) - Number(b.completed);
-        })
-      );
+      const updatedArr = todoClone.sort((a, b) => {
+        return Number(a.completed) - Number(b.completed);
+      });
+      setTodo(updatedArr);
     }
   };
 
@@ -64,7 +64,7 @@ const Journal = (props) => {
 
   const completeBoolHandler = function (e) {
     const targetId = e.target.parentNode.id;
-    const todoCopy = [...todo];
+    const todoCopy = structuredClone(todo);
     const targetItem = todoCopy.find((el) => el._id === targetId);
     const index = todoCopy.indexOf(targetItem);
     const newState = targetItem.completed ? false : true;

@@ -17,6 +17,7 @@ export function App() {
   const [refresh, setRefresh] = useState(true);
 
   const setRefreshHandler = function () {
+    console.log("refreshing");
     setRefresh(true);
   };
 

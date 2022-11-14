@@ -66,18 +66,21 @@ const Journal = (props) => {
     const targetId = e.target.parentNode.id;
     const todoCopy = structuredClone(todo);
     const targetItem = todoCopy.find((el) => el._id === targetId);
+    console.log(targetItem);
+    console.log(targetId);
     const index = todoCopy.indexOf(targetItem);
     const newState = targetItem.completed ? false : true;
     todoCopy[index].completed = newState;
+    const update = { targetId: targetId, newState: newState };
+    updateCompleteState(update);
     setTodo(todoCopy);
-    updateCompleteState(targetId, newState);
   };
 
   const deleteEntryHandler = function (e) {
     const targetId = e.target.parentNode.parentNode.id;
     console.log(targetId);
     const todoClone = structuredClone(todo);
-    const index = todoClone.findIndex((i) => i._id == targetId);
+    const index = todoClone.findIndex((i) => i._id === targetId);
     todoClone.splice(index, 1);
     setTodo(todoClone);
 
@@ -86,14 +89,14 @@ const Journal = (props) => {
       .catch((err) => console.log(err));
   };
 
-  const updateCompleteState = function (id, newState) {
-    const update = fetch("http://localhost:4000/todo", {
+  const updateCompleteState = function (update) {
+    const req = fetch("http://localhost:4000/todo", {
       method: "PUT",
-      body: JSON.stringify({ id: id, completed: newState }),
+      body: JSON.stringify({ id: update.targetId, completed: update.newState }),
       headers: { "Content-Type": "application/json" },
     })
       .then((res) => res.json())
-      .then((data) => data)
+      .then((data) => setTodo(data))
       .catch((err) => console.log(err));
   };
 

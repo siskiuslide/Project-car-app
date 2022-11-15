@@ -8,21 +8,29 @@ import NewExpenseForm from "./NewExpenseForm";
 import ExpenseListItem from "./ExpenseListItem";
 
 const Expenses = (props) => {
-  const [expenses, setExpenses] = useState(props.expenses);
-  const deepClone = structuredClone(props.expenses);
+  const [expenses, setExpenses] = useState([]);
   const [removed, setRemoved] = useState([]);
   const [showForm, setShowForm] = useState(false);
   const [sortValue, setSortValue] = useState(null);
   const [dateSort, setDateSort] = useState();
   const [dateSortIcon, setDateSortIcon] = useState();
 
-  useEffect(() => setExpenses(deepClone), []);
+  useEffect(() => {
+    const expensesreq = fetch("http://localhost:4000/expenses")
+      .then((res) => res.json())
+      .then((data) => {
+        setExpenses(data.data);
+        return data;
+      })
+      .catch((err) => console.log(err));
+  }, []);
+
   const addExpenseHandler = (e) => {
     setShowForm(true);
   };
 
   const dateSortHandler = function (e) {
-    const expensesClone = structuredClone(props.expenses);
+    const expensesClone = structuredClone(expenses);
 
     if (!dateSort) {
       setDateSort("descending");
@@ -63,30 +71,28 @@ const Expenses = (props) => {
     }
     if (sortValue === "ascending") {
       setSortValue(null);
-      return setExpenses(deepClone);
+      // return setExpenses(deepClone);
+      return setExpenses([]);
     }
   };
 
   const deleteExpenseHandler = function (e) {
+    const expenseClone = structuredClone(expenses);
     const targetId = e.target.parentNode.parentNode.id;
     if (!removed.some((exp) => exp === targetId)) {
-      const updateRemoved = [...removed, targetId];
-      setRemoved(updateRemoved);
-
-      const req = fetch("http://127.0.0.1:4000/expenses", {
-        method: "delete",
-        body: JSON.stringify({ id: targetId }),
-        headers: { "Content-Type": "application/json" },
-      })
-        .then((data) => {
-          removed.forEach((id) => {
-            const index = deepClone.findIndex((ex) => ex._id == id);
-            deepClone.splice(index, 1);
-            setExpenses(deepClone);
-          });
-        })
-        .catch((err) => console.log(err));
+      setRemoved([...removed, targetId]);
     }
+
+    const req = fetch("http://127.0.0.1:4000/expenses", {
+      method: "delete",
+      body: JSON.stringify({ id: targetId }),
+      headers: { "Content-Type": "application/json" },
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        return setExpenses(data.data);
+      })
+      .catch((err) => console.log(err));
   };
 
   return (
@@ -105,7 +111,7 @@ const Expenses = (props) => {
           garage={props.garage}
           showForm={showForm}
           setShowForm={setShowForm}
-          expenses={props.expenses}
+          expenses={expenses}
         ></NewExpenseForm>
       )}
       <div className="ExpenseList">

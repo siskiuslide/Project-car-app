@@ -10,6 +10,7 @@ import ExpenseListItem from "./ExpenseListItem";
 const Expenses = (props) => {
   const [expenses, setExpenses] = useState(props.expenses);
   const deepClone = structuredClone(props.expenses);
+  const [removed, setRemoved] = useState([]);
   const [showForm, setShowForm] = useState(false);
   const [sortValue, setSortValue] = useState(null);
   const [dateSort, setDateSort] = useState();
@@ -66,6 +67,25 @@ const Expenses = (props) => {
     }
   };
 
+  const deleteExpenseHandler = function (e) {
+    console.log("clicked");
+    const targetId = e.target.parentNode.parentNode.id;
+
+    const req = fetch("http://127.0.0.1:4000/expenses", { method: "DELETE", body: JSON.stringify({ id: targetId }) })
+      .then((data) => data)
+      .catch((err) => console.log(err));
+
+    if (!removed.some((exp) => exp === targetId)) {
+      const updateRemoved = [...removed, targetId];
+      setRemoved(updateRemoved);
+    }
+    removed.forEach((id) => {
+      const index = deepClone.findIndex((ex) => ex._id == id);
+      deepClone.splice(index, 1);
+      setExpenses(deepClone);
+    });
+  };
+
   return (
     <div className="expenseContainer">
       {showForm === false ? (
@@ -107,7 +127,7 @@ const Expenses = (props) => {
           </p>
         </div>
         {expenses.map((e) => {
-          return <ExpenseListItem e={e} key={e._id}></ExpenseListItem>;
+          return <ExpenseListItem e={e} key={e._id} deleteExpenseHandler={deleteExpenseHandler}></ExpenseListItem>;
         })}
       </div>
     </div>

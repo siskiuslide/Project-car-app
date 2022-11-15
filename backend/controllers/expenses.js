@@ -17,3 +17,9 @@ exports.addExpense = catchAsync(async function (req, res, next) {
   await Expense.create(expense);
   return res.status(200).json({ status: "success", data: expense });
 });
+
+exports.deleteExpense = catchAsync(async function (req, res, next) {
+  const deleted = await Expense.deleteOne({ _id: req.body.id });
+  console.log(deleted);
+  return res.status(200).json({ status: success, data: deleted });
+});

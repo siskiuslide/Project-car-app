@@ -6,7 +6,7 @@ const ExpenseListItem = (props) => {
     const preformatDate = new Date(expenseDate);
     if (preformatDate != "Invalid Date") {
       const date = preformatDate.getDate();
-      const month = preformatDate.getMonth() += 1;
+      const month = preformatDate.getMonth() + 1;
       const year = preformatDate.getFullYear();
       return `${date}/${month}/${year}`;
     }

@@ -77,7 +77,6 @@ const Expenses = (props) => {
   };
 
   const deleteExpenseHandler = function (e) {
-    const expenseClone = structuredClone(expenses);
     const targetId = e.target.parentNode.parentNode.id;
     if (!removed.some((exp) => exp === targetId)) {
       setRemoved([...removed, targetId]);

@@ -68,22 +68,25 @@ const Expenses = (props) => {
   };
 
   const deleteExpenseHandler = function (e) {
-    console.log("clicked");
     const targetId = e.target.parentNode.parentNode.id;
-
-    const req = fetch("http://127.0.0.1:4000/expenses", { method: "DELETE", body: JSON.stringify({ id: targetId }) })
-      .then((data) => data)
-      .catch((err) => console.log(err));
-
     if (!removed.some((exp) => exp === targetId)) {
       const updateRemoved = [...removed, targetId];
       setRemoved(updateRemoved);
+
+      const req = fetch("http://127.0.0.1:4000/expenses", {
+        method: "delete",
+        body: JSON.stringify({ id: targetId }),
+        headers: { "Content-Type": "application/json" },
+      })
+        .then((data) => {
+          removed.forEach((id) => {
+            const index = deepClone.findIndex((ex) => ex._id == id);
+            deepClone.splice(index, 1);
+            setExpenses(deepClone);
+          });
+        })
+        .catch((err) => console.log(err));
     }
-    removed.forEach((id) => {
-      const index = deepClone.findIndex((ex) => ex._id == id);
-      deepClone.splice(index, 1);
-      setExpenses(deepClone);
-    });
   };
 
   return (

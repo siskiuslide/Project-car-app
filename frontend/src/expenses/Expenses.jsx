@@ -12,13 +12,40 @@ const Expenses = (props) => {
   const deepClone = structuredClone(props.expenses);
   const [showForm, setShowForm] = useState(false);
   const [sortValue, setSortValue] = useState(null);
+  const [dateSort, setDateSort] = useState();
+  const [dateSortIcon, setDateSortIcon] = useState();
 
   useEffect(() => setExpenses(deepClone), []);
   const addExpenseHandler = (e) => {
     setShowForm(true);
   };
 
-  const sortMonthHandler = () => {};
+  const dateSortHandler = function (e) {
+    const expensesClone = structuredClone(props.expenses);
+
+    if (!dateSort) {
+      setDateSort("descending");
+      setDateSortIcon("keyboard_arrow_down");
+
+      expensesClone.sort((a, b) => {
+        return new Date(a.date) - new Date(b.date);
+      });
+      setExpenses(expensesClone);
+    }
+    if (dateSort === "descending") {
+      setDateSort("ascending");
+      setDateSortIcon("keyboard_arrow_up");
+      expensesClone.sort((a, b) => {
+        return new Date(b.date) - new Date(a.date);
+      });
+      setExpenses(expensesClone);
+    }
+    if (dateSort === "ascending") {
+      setDateSort();
+      setDateSortIcon(null);
+      setExpenses(expensesClone);
+    }
+  };
 
   const sortValueHandler = () => {
     if (sortValue === null) {
@@ -67,7 +94,12 @@ const Expenses = (props) => {
           <p style={{ width: "8%", marginLeft: "auto", marginRight: "1em" }}>Options</p>
         </div>
         <div className="listOptions">
-          <p className="material-icons" onClick={sortMonthHandler}>
+          {dateSortIcon ? (
+            <p className="material-icons" onClick={dateSortHandler}>
+              {dateSortIcon}
+            </p>
+          ) : null}
+          <p className="material-icons" onClick={dateSortHandler}>
             calendar_month
           </p>
           <p className="material-icons" onClick={sortValueHandler}>

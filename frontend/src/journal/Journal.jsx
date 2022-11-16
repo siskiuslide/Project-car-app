@@ -5,11 +5,21 @@ import "./Journal.css";
 import JournalItem from "./JournalItem";
 
 const Journal = (props) => {
-  const [todo, setTodo] = useState(props.todo);
+  const [todo, setTodo] = useState([]);
   const [entriesViewText, setEntriesViewText] = useState("All");
   const [entriesViewIcon, setEntriesViewIcon] = useState("checklist");
   const [dateSort, setDateSort] = useState();
   const [dateSortIcon, setDateSortIcon] = useState();
+
+  useEffect(() => {
+    const todoReq = fetch("http://127.0.0.1:4000/todo")
+      .then((res) => res.json())
+      .then((data) => {
+        setTodo(data.todos);
+        return data;
+      })
+      .catch((err) => console.log(err));
+  }, []);
 
   const entriesViewHandler = function (e) {
     const todoClone = structuredClone(props.todo);

@@ -6,18 +6,28 @@ const VehicleCard = (props) => {
   const totalExpenses = props.expenses.reduce((current, next) => {
     return (current += next);
   }, 0);
+  const profit = props.vehicle.soldFor - totalExpenses;
   // console.log(totalExpenses, props.vehicle);
 
   return (
     <Link to={`/garage/${props.vehicle._id}`}>
-      <div className="VehicleCard">
+      <div className="VehicleCard" style={props.vehicle.sold ? { background: "rgb(17,38,49)" } : {}}>
+        {props.vehicle.sold ? (
+          <p className="status" style={{ fontWeight: "bold" }}>
+            SOLD
+          </p>
+        ) : (
+          <p className="status">Owner: {props.vehicle.owner}</p>
+        )}
         <div className="MainInfo">
-          <div style={{ marginBlock: 0, height: "10%" }} className="InfoRow">
+          <div style={{ marginBlock: 0 }} className="InfoRow">
             <p className="Manufacturer">{props.vehicle.manufacturer}</p>
             <p className="material-icons value" style={{ marginLeft: "auto", paddingRight: "2%" }}>
               sell
             </p>
-            <p className="value">£{totalExpenses}</p>
+            <p className="value" style={{ paddingLeft: "0.5rem" }}>
+              {props.vehicle.sold ? `Profit: £${profit}` : `£${totalExpenses}`}
+            </p>
           </div>
           <div className="InfoRow">
             <p className="Model">{props.vehicle.model}</p>

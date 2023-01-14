@@ -7,13 +7,6 @@ import AddVehicleCard from "./AddVehicleCard";
 
 const Garage = (props) => {
   const findExpensesFromList = (id) => {
-    console.log(
-      props.expenses
-        .filter((e) => e.vehicleId == id)
-        .map((e) => {
-          return e.value;
-        })
-    );
     return props.expenses
       .filter((e) => e.vehicleId == id)
       .map((e) => {

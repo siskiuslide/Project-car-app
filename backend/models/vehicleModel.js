@@ -14,6 +14,7 @@ const schema = new mongoose.Schema(
       required: true,
       enum: ["daily", "weekend", "summer", "track", "show", "project", "drift", "resale"],
     },
+    owner: { type: String, required: false },
     boughtFor: { type: Number },
     purchaseDate: { type: Date },
     sold: { type: Boolean, default: false },

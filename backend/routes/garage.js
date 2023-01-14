@@ -9,4 +9,6 @@ router
   .post(garageController.addVehicle)
   .delete(garageController.deleteVehicle);
 
+router.route("/sale").patch(garageController.sellVehicle);
+
 module.exports = router;

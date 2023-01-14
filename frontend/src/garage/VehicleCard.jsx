@@ -6,6 +6,7 @@ const VehicleCard = (props) => {
   const totalExpenses = props.expenses.reduce((current, next) => {
     return (current += next);
   }, 0);
+  // console.log(totalExpenses, props.vehicle);
 
   return (
     <Link to={`/garage/${props.vehicle._id}`}>

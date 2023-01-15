@@ -94,6 +94,15 @@ const Expenses = (props) => {
       .catch((err) => console.log(err));
   };
 
+  const getExpenseVehicle = function (vehicleId) {
+    if (vehicleId === "na") {
+      return "N/A";
+    }
+    const vehicle = props.garage.find((v) => v._id === vehicleId);
+    const reg = vehicle.reg;
+    return reg.toUpperCase();
+  };
+
   return (
     <div className="expenseContainer">
       {showForm === false ? (
@@ -115,7 +124,8 @@ const Expenses = (props) => {
       )}
       <div className="ExpenseList">
         <div className="expenseListItem headings" style={{ paddingBlock: "1em", borderBottom: " solid white 1px" }}>
-          <p style={{ width: "10%" }}>Date</p>
+          <p style={{ width: "13%" }}>Date</p>
+          <p style={{ width: "13%" }}>Vehicle</p>
           <p style={{ width: "10%" }}>Category</p>
           <p style={{ width: "35%" }}>Description</p>
           <p style={{ width: "15%", marginLeft: "auto", marginRight: "1em" }}>Value</p>
@@ -135,7 +145,14 @@ const Expenses = (props) => {
           </p>
         </div>
         {expenses.map((e) => {
-          return <ExpenseListItem e={e} key={e._id} deleteExpenseHandler={deleteExpenseHandler}></ExpenseListItem>;
+          return (
+            <ExpenseListItem
+              e={e}
+              key={e._id}
+              deleteExpenseHandler={deleteExpenseHandler}
+              expenseVehicleFinder={getExpenseVehicle}
+            ></ExpenseListItem>
+          );
         })}
       </div>
     </div>

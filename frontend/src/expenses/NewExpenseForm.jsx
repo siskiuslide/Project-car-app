@@ -66,6 +66,7 @@ const NewExpenseForm = (props) => {
           <option defaultValue="" hidden="hidden">
             Choose Here
           </option>
+          <option value="na">N/A</option>
           {props.garage.map((v) => (
             <option key={v._id} value={v._id}>
               {v.manufacturer + " " + v.model + " - " + v.reg.toUpperCase()}{" "}

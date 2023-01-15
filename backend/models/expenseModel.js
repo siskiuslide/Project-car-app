@@ -20,6 +20,7 @@ const schema = new mongoose.Schema(
         "MOT",
         "storage",
         "garage work",
+        "other",
       ],
     },
     value: { type: Number, required: true },

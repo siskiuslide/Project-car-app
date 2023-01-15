@@ -96,15 +96,18 @@ const NewExpenseForm = (props) => {
               <option defaultValue="" hidden="hidden">
                 {category}
               </option>
+              <option value="purchase">Purchase</option>
               <option value="insurance">Insurance</option>
               <option value="tax">Tax</option>
               <option value="fuel">Fuel</option>
               <option value="servicing">Servicing</option>
               <option value="parts">Parts</option>
+              <option value="MOT">MOT</option>
               <option value="cleaning">Cleaning</option>
               <option value="modification">Modification</option>
               <option value="accessories">Accessories</option>
-              <option value="purchase">Purchase</option>
+              <option value="garage work">Garage Work</option>
+              <option value="other">Other</option>
             </select>
           </div>
         </div>

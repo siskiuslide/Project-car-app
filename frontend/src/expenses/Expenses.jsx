@@ -81,7 +81,6 @@ const Expenses = (props) => {
   const filterExpenseCat = function (filter) {
     const expenseClone = cloneDeep(props.expenses);
     if (filter === "none") {
-      console.log(props.expenses);
       return setExpenses(props.expenses);
     }
     const filteredList = expenseClone.filter((el) => el.category === filter);

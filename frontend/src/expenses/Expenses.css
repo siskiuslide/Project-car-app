@@ -60,3 +60,45 @@ option {
   cursor: pointer;
   font-size: 1.25em !important;
 }
+
+.expense-category {
+  text-decoration: underline;
+  text-decoration-thickness: 2px;
+}
+.category-purchase {
+  text-decoration-color: rgb(8, 183, 8);
+}
+.category-insurance {
+  text-decoration-color: rgb(246, 246, 119);
+}
+.category-tax {
+  text-decoration-color: lightsalmon;
+}
+.category-MOT {
+  text-decoration-color: rgb(242, 83, 83);
+}
+
+.category-servicing {
+  text-decoration-color: pink;
+}
+.category-parts {
+  text-decoration-color: rgb(146, 96, 146);
+}
+.category-cleaning {
+  text-decoration-color: rgb(120, 120, 247);
+}
+.category-fuel {
+  text-decoration-color: rgb(74, 141, 235);
+}
+.category-garage-work {
+  text-decoration-color: lightskyblue;
+}
+.category-accessories {
+  text-decoration-color: rgb(167, 255, 167);
+}
+.category-storage {
+  text-decoration-color: palevioletred;
+}
+.category-other {
+  text-decoration-color: rgb(61, 182, 182);
+}

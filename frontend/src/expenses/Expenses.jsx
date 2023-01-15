@@ -6,6 +6,7 @@ import { useState, useEffect } from "react";
 import Button from "../Components/Button";
 import NewExpenseForm from "./NewExpenseForm";
 import ExpenseListItem from "./ExpenseListItem";
+import cloneDeep from "lodash/cloneDeep";
 
 const Expenses = (props) => {
   const [expenses, setExpenses] = useState([]);
@@ -14,6 +15,7 @@ const Expenses = (props) => {
   const [sortValue, setSortValue] = useState(null);
   const [dateSort, setDateSort] = useState();
   const [dateSortIcon, setDateSortIcon] = useState();
+  const [category, setCategory] = useState("none");
 
   useEffect(() => {
     const expensesreq = fetch("http://localhost:4000/expenses")
@@ -76,6 +78,16 @@ const Expenses = (props) => {
     }
   };
 
+  const filterExpenseCat = function (filter) {
+    const expenseClone = cloneDeep(props.expenses);
+    if (filter === "none") {
+      console.log(props.expenses);
+      return setExpenses(props.expenses);
+    }
+    const filteredList = expenseClone.filter((el) => el.category === filter);
+    return setExpenses(filteredList);
+  };
+
   const deleteExpenseHandler = function (e) {
     const targetId = e.target.parentNode.parentNode.id;
     if (!removed.some((exp) => exp === targetId)) {
@@ -108,6 +120,26 @@ const Expenses = (props) => {
       {showForm === false ? (
         <div style={{ display: "flex", width: "100%", justifyContent: "space-between", alignItems: "center" }}>
           <p style={{ fontSize: "2em" }}>Expense List: </p>
+          <select
+            className="expense-filter-list"
+            onChange={(e) => {
+              setCategory(e.target.value);
+              filterExpenseCat(e.target.value);
+            }}
+          >
+            <option value="none">No Filter</option>
+            <option value="purchase">Purchases</option>
+            <option value="insurance">Insurance</option>
+            <option value="tax">Tax</option>
+            <option value="fuel">Fuel</option>
+            <option value="servicing">Servicing</option>
+            <option value="MOT">MOT</option>
+            <option value="parts">Parts</option>
+            <option value="cleaning">Cleaning</option>
+            <option value="accessories">Accessories</option>
+            <option value="storage">Storage</option>
+            <option value="garage work">Garage work</option>
+          </select>
           <Button
             style={{ marginLeft: "auto", height: "auto" }}
             value="Add Expense"
@@ -124,10 +156,10 @@ const Expenses = (props) => {
       )}
       <div className="ExpenseList">
         <div className="expenseListItem headings" style={{ paddingBlock: "1em", borderBottom: " solid white 1px" }}>
-          <p style={{ width: "13%" }}>Date</p>
-          <p style={{ width: "13%" }}>Vehicle</p>
+          <p style={{ width: "10%" }}>Date</p>
+          <p style={{ width: "10%" }}>Vehicle</p>
           <p style={{ width: "10%" }}>Category</p>
-          <p style={{ width: "35%" }}>Description</p>
+          <p style={{ width: "40%" }}>Description</p>
           <p style={{ width: "15%", marginLeft: "auto", marginRight: "1em" }}>Value</p>
           <p style={{ width: "8%", marginLeft: "auto", marginRight: "1em" }}>Options</p>
         </div>

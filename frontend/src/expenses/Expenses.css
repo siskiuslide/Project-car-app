@@ -12,6 +12,9 @@ option {
 .expenseContainer > Button {
   margin-inline: auto;
 }
+.expense-filter-list {
+  margin-left: auto;
+}
 
 .ExpenseList {
   background: var(--darkBackground);

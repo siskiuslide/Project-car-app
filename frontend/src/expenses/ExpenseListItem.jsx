@@ -14,10 +14,10 @@ const ExpenseListItem = (props) => {
 
   return (
     <div className="expenseListItem" id={props.e._id}>
-      <p style={{ width: "13%" }}>{getExpenseDate(props.e.date)}</p>
-      <p style={{ width: "13%" }}>{props.expenseVehicleFinder(props.e.vehicleId)}</p>
+      <p style={{ width: "10%" }}>{getExpenseDate(props.e.date)}</p>
+      <p style={{ width: "10%" }}>{props.expenseVehicleFinder(props.e.vehicleId)}</p>
       <p style={{ width: "10%" }}>{props.e.category}</p>
-      <p style={{ width: "35%" }}>{props.e.description}</p>
+      <p style={{ width: "40%" }}>{props.e.description}</p>
       <p style={{ width: "15%", marginLeft: "auto", marginRight: "1em", fontSize: "1.25em" }}>
         £ {parseFloat(props.e.value).toFixed(2)}
       </p>

@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 
 const schema = new mongoose.Schema(
   {
-    type: { type: String, enum: ["car", "motorcycle", "van"], required: true },
+    type: { type: String, enum: ["car", "motorcycle", "van"] },
     manufacturer: { type: String, required: true },
     model: { type: String, required: true },
     variant: { type: String },
@@ -14,9 +14,11 @@ const schema = new mongoose.Schema(
       required: true,
       enum: ["daily", "weekend", "summer", "track", "show", "project", "drift", "resale"],
     },
-    owner: { type: String, required: false },
+    owner: { type: String },
     boughtFor: { type: Number },
     purchaseDate: { type: Date },
+    buyMileage: { type: Number },
+    currentMileage: { type: Number },
     sold: { type: Boolean, default: false },
     soldFor: { type: Number },
     soldDate: { type: Date },

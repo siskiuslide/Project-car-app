@@ -26,7 +26,7 @@ const VehicleCard = (props) => {
               sell
             </p>
             <p className="value" style={{ paddingLeft: "0.5rem" }}>
-              {props.vehicle.sold ? `Profit: £${profit}` : `£${totalExpenses}`}
+              {props.vehicle.sold ? `Profit: £${profit.toFixed(2)}` : `£${totalExpenses.toFixed(2)}`}
             </p>
           </div>
           <div className="InfoRow">

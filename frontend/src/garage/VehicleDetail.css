@@ -1,0 +1,46 @@
+.header-flex {
+  display: flex;
+  flex-direction: row;
+  justify-content: left;
+  align-items: center;
+  margin-inline: 3rem;
+}
+
+.vehicle-detail-heading {
+  font-size: 1.75rem;
+  color: white;
+  margin-right: 1rem;
+  text-transform: capitalize;
+}
+
+.vehicle-detail-main {
+  width: 95%;
+  color: white;
+  height: 90%;
+  display: flex;
+  flex-direction: row;
+  margin-inline: auto;
+  background: var(--darkBackground);
+}
+
+.vehicle-view-list {
+  width: 15%;
+}
+.vehicle-view-option {
+  margin-right: 1rem;
+  padding-block: 1rem;
+  padding-left: 1rem;
+  font-size: 1.25rem;
+}
+.vehicle-view-option:hover {
+  color: var(--blueHover);
+  background: var(--darkBackgroundHover);
+  cursor: pointer;
+}
+.vehicle-view-detail {
+  width: 75%;
+}
+.view-heading {
+  font-size: 1.5rem;
+  margin-block: 1rem;
+}

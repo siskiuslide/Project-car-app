@@ -86,7 +86,7 @@ export function App() {
           ></AddVehicleForm>
         </Route>
         <Route path="/garage/:vehicleId" exact>
-          <CarDetail setRefreshHandler={setRefreshHandler}></CarDetail>
+          <CarDetail setRefreshHandler={setRefreshHandler} garage={garage}></CarDetail>
         </Route>
 
         <Route path="/expenses">

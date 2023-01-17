@@ -3,7 +3,7 @@ import "./Button.css";
 const Button = (props) => {
   return (
     <button
-      className="button"
+      className={`button ${props.className}`}
       style={{
         padding: "0.5em",
         backgroundColor: props.back ? "red" : "rgb(51, 153, 194)",

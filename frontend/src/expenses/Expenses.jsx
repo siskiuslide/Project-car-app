@@ -159,15 +159,17 @@ const Expenses = (props) => {
           <p style={{ width: "10%" }}>Vehicle</p>
           <p style={{ width: "10%" }}>Category</p>
           <p style={{ width: "40%" }}>Description</p>
-          <p style={{ width: "15%", marginLeft: "auto", marginRight: "1em", textAlign: "center" }}>Value</p>
+          <p style={{ width: "15%", marginLeft: "auto", marginRight: "1em" }}>Value</p>
           <p style={{ width: "8%", marginLeft: "auto", marginRight: "1em" }}>Options</p>
         </div>
         <div className="pre-expense-list">
           <p className="expenses-sum">
             £
-            {expenses.reduce((current, i) => {
-              return (current += i.value);
-            }, 0)}
+            {expenses
+              .reduce((current, i) => {
+                return (current += i.value);
+              }, 0)
+              .toFixed(2)}
           </p>
           <div className="listOptions">
             {dateSortIcon ? (

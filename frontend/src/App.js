@@ -21,32 +21,41 @@ export function App() {
     setRefresh(true);
   };
 
+  const getGarage = function () {
+    const garage = fetch("http://localhost:4000/garage")
+      .then((res) => res.json())
+      .then((data) => {
+        setGarage(data.data);
+        return data;
+      })
+      .catch((err) => console.log(err));
+  };
+
+  const getExpenses = function () {
+    const expenses = fetch("http://localhost:4000/expenses")
+      .then((res) => res.json())
+      .then((data) => {
+        setExpenses(data.data);
+        return data;
+      })
+      .catch((err) => console.log(err));
+  };
+
+  const getTodos = function () {
+    const todos = fetch("http://localhost:4000/todo")
+      .then((res) => res.json())
+      .then((data) => {
+        setTodo(data.todos);
+        return data;
+      })
+      .catch((err) => console.log(err));
+  };
+
   useEffect(() => {
     if (refresh === true) {
-      const garage = fetch("http://localhost:4000/garage")
-        .then((res) => res.json())
-        .then((data) => {
-          setGarage(data.data);
-          return data;
-        })
-        .catch((err) => console.log(err));
-
-      const expenses = fetch("http://localhost:4000/expenses")
-        .then((res) => res.json())
-        .then((data) => {
-          setExpenses(data.data);
-          return data;
-        })
-        .catch((err) => console.log(err));
-
-      const todos = fetch("http://localhost:4000/todo")
-        .then((res) => res.json())
-        .then((data) => {
-          setTodo(data.todos);
-          return data;
-        })
-        .catch((err) => console.log(err));
-
+      getGarage();
+      getExpenses();
+      getTodos();
       setRefresh(false);
     }
   }, []);

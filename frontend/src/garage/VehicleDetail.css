@@ -1,7 +1,6 @@
 .header-flex {
   display: flex;
   flex-direction: row;
-  justify-content: left;
   align-items: center;
   margin-inline: 3rem;
 }
@@ -11,6 +10,9 @@
   color: white;
   margin-right: 1rem;
   text-transform: capitalize;
+}
+.header-buttons {
+  margin-left: auto;
 }
 
 .vehicle-detail-main {

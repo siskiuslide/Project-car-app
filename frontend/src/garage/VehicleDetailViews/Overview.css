@@ -4,15 +4,28 @@
   content: ":";
 }
 
+.overview {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+}
+.overview-info-section {
+  width: 25%;
+  margin-right: 4%;
+}
+.overview-section-header {
+  font-size: 1.2rem;
+}
+
 .info-item {
   display: flex;
   flex-direction: row;
   margin-block: 0.5rem;
   justify-content: space-between;
-  width: 25%;
 }
 .info-item > .value {
   opacity: 1;
   font-size: 1rem;
   margin-inline: 0.5rem;
+  text-align: center;
 }

@@ -3,8 +3,6 @@
   flex-direction: column;
   justify-content: flex-start;
   margin-inline: auto;
-  width: 60vw;
-  max-width: 40em;
   background: rgba(58, 57, 57, 0.34);
 }
 .formRowFlex {
@@ -20,9 +18,14 @@
 select {
   margin-inline: 1em;
 }
-
-.buttonArea > button {
-  margin-inline: 1em;
+.buttonarea {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  margin-bottom: 1em;
+}
+.buttonarea > button {
+  margin: 1em;
 }
 
 .formRowItemNV {
@@ -49,6 +52,9 @@ form {
 form > * {
   margin-inline: 10%;
   padding-block: 3px;
+}
+label::after {
+  content: ":";
 }
 select {
   color: rgb(117, 117, 117);

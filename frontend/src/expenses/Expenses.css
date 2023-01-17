@@ -46,8 +46,6 @@ option {
 .expenses-sum {
   margin-left: auto;
   width: 15%;
-  text-align: center;
-  margin-right: 1em;
   font-size: 1.25rem;
   text-decoration: underline white 2px;
   text-underline-offset: 8px;

@@ -7,6 +7,11 @@ exports.getVehicles = catchAsync(async function (req, res, next) {
   return res.status(200).json({ status: "success", data: vehicles });
 });
 
+exports.getSingleVehicle = catchAsync(async function (req, res, next) {
+  const vehicle = await Vehicle.find({ id: req.params.id });
+  return res.status(200).json({ status: "success", data: vehicle });
+});
+
 exports.addVehicle = catchAsync(async function (req, res, next) {
   const vehicle = await Vehicle.create({
     type: req.body.type,

@@ -107,6 +107,7 @@ const NewExpenseForm = (props) => {
               <option value="modification">Modification</option>
               <option value="accessories">Accessories</option>
               <option value="garage work">Garage Work</option>
+              <option value="Toll">Toll</option>
               <option value="other">Other</option>
             </select>
           </div>

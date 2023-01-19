@@ -20,6 +20,7 @@ const schema = new mongoose.Schema(
         "MOT",
         "storage",
         "garage work",
+        "toll",
         "other",
       ],
     },

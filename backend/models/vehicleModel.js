@@ -19,6 +19,7 @@ const schema = new mongoose.Schema(
     purchaseDate: { type: Date },
     buyMileage: { type: Number },
     currentMileage: { type: Number },
+    units: { type: String, Enum: ["mi", "km"] },
     sold: { type: Boolean, default: false },
     soldFor: { type: Number },
     soldDate: { type: Date },

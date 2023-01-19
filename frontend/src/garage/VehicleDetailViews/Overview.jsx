@@ -16,7 +16,16 @@ const Overview = function (props) {
     return `${date}/${month}/${year}`;
   };
 
+  const getVehicleAge = function (year) {
+    const current = new Date().getFullYear();
+    const age = parseInt(current - year);
+    return age;
+  };
+
   const getDrivenMileage = function (buyMileage, currentMileage) {
+    if (!currentMileage) {
+      return "unknown";
+    }
     return currentMileage - buyMileage;
   };
 
@@ -29,9 +38,7 @@ const Overview = function (props) {
     if (!sellDate) {
       date1 = Date.now();
     }
-    console.log(date1, date2);
     const difference = parseInt(date1 - date2);
-    console.log(difference);
     const days = difference / (1000 * 60 * 60 * 24);
 
     return days.toFixed(0) + " days";
@@ -89,6 +96,10 @@ const Overview = function (props) {
             <div className="value">{props.vehicle?.year}</div>
           </div>
           <div className="info-item">
+            <div className="field">Age</div>
+            <div className="value">{getVehicleAge(props.vehicle?.year)}</div>
+          </div>
+          <div className="info-item">
             <div className="field">Engine Capacity</div>
             <div className="value">{props.vehicle?.cc}cc</div>
           </div>
@@ -97,16 +108,16 @@ const Overview = function (props) {
           <h2 className="overview-section-header">Usage</h2>
           <div className="info-item">
             <div className="field">Mileage (when bought)</div>
-            <div className="value">{props.vehicle?.buyMileage}</div>
+            <div className="value">{props.vehicle?.buyMileage + props.vehicle.units}</div>
           </div>
           <div className="info-item">
             <div className="field">Mileage (current)</div>
-            <div className="value">{props.vehicle?.mileage}</div>
+            <div className="value">{props.vehicle?.currentMileage + props.vehicle.units}</div>
           </div>
           <div className="info-item">
             <div className="field">Driven</div>
             <div className="value">
-              {props.vehicle.mileage ? getDrivenMileage(props.vehicle?.buyMileage, props.vehicle?.mileage) : "Unknown"}
+              {getDrivenMileage(props.vehicle?.buyMileage, props.vehicle?.currentMileage) + props.vehicle.units}
             </div>
           </div>
           <div className="info-item">

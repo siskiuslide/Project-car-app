@@ -56,6 +56,10 @@ form > * {
 label::after {
   content: ":";
 }
+label.mandatory::after {
+  content: ": *";
+}
+
 select {
   color: rgb(117, 117, 117);
 }

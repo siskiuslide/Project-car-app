@@ -1,8 +1,12 @@
 import React from "react";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import "./Overview.css";
 
 const Overview = function (props) {
+  const [age, setAge] = useState();
+  const [tenure, setTenure] = useState();
+  const [drivenMileage, setDrivenMileage] = useState();
+
   const formatDate = function (timestamp) {
     const preformat = new Date(timestamp);
     const date = preformat.getDate();
@@ -26,7 +30,8 @@ const Overview = function (props) {
     if (!currentMileage) {
       return "unknown";
     }
-    return currentMileage - buyMileage;
+    const drivenMileage = currentMileage - buyMileage;
+    return drivenMileage;
   };
 
   const getTenure = function (sellDate, buyDate) {
@@ -42,6 +47,16 @@ const Overview = function (props) {
     const days = difference / (1000 * 60 * 60 * 24);
 
     return days.toFixed(0) + " days";
+  };
+
+  const getMileagePerYear = function (currentMileage, buyMileage, year) {
+    const age = getVehicleAge(year);
+    if (!currentMileage) {
+      return buyMileage / age;
+    }
+    if (!buyMileage) {
+      return "Unknown";
+    } else return (currentMileage / age).toFixed(2);
   };
 
   return (
@@ -123,6 +138,13 @@ const Overview = function (props) {
           <div className="info-item">
             <div className="field">Tenure</div>
             <div className="value">{getTenure(props.vehicle?.sellDate, props.vehicle?.purchaseDate)}</div>
+          </div>
+          <div className="info-item">
+            <div className="field">Mileage per year</div>
+            <div className="value">
+              {getMileagePerYear(props.vehicle.currentMileage, props.vehicle.buyMileage, props.vehicle.year) +
+                props.vehicle.units}
+            </div>
           </div>
         </div>
       </div>

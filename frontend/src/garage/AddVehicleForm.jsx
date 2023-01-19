@@ -14,9 +14,11 @@ const AddVehicleForm = (props) => {
   const [buyPrice, setBuyPrice] = useState();
   const [purchaseDate, setPurchaseDate] = useState();
   const [purpose, setPurpose] = useState("daily");
+  const [cc, setCC] = useState();
   const [owner, setOwner] = useState("");
   const [buyMileage, setBuyMileage] = useState();
   const [mileage, setMileage] = useState();
+  const [units, setUnits] = useState("mi");
 
   const [formValid, setFormValidity] = useState(false);
   const [redirect, setRedirect] = useState(false);
@@ -59,7 +61,7 @@ const AddVehicleForm = (props) => {
       <div className="formContainer">
         <p style={{ fontSize: "1.5em", textAlign: "center" }}> New Vehicle</p>
         <form className="VehicleForm" action="/garage" method="post">
-          <label>Vehicle Type</label>
+          <label className="mandatory">Vehicle Type</label>
           <select
             onChange={(e) => {
               setVehicleType(e.target.value);
@@ -70,7 +72,7 @@ const AddVehicleForm = (props) => {
             <option value="motorcycle">Motorcycle</option>
             <option value="van">Van</option>
           </select>
-          <label>Manufacturer</label>
+          <label className="mandatory">Manufacturer</label>
           <select
             placeholder="Select"
             onChange={(e) => {
@@ -88,7 +90,7 @@ const AddVehicleForm = (props) => {
           </select>
           <div className="formRowFlex">
             <div className="formRowItemNV">
-              <label>Model </label>
+              <label className="mandatory">Model</label>
               <select
                 onChange={(e) => {
                   setModel(e.target.value);
@@ -116,7 +118,7 @@ const AddVehicleForm = (props) => {
           </div>
           <div className="formRowFlex">
             <div className="formRowItemNV">
-              <label>Reg</label>
+              <label className="mandatory">Reg</label>
               <input
                 type="text"
                 onChange={(e) => {
@@ -125,7 +127,7 @@ const AddVehicleForm = (props) => {
               ></input>
             </div>
             <div className="formRowItemNV">
-              <label>Year</label>
+              <label className="mandatory">Year</label>
               <input
                 type="number"
                 onChange={(e) => {
@@ -153,7 +155,29 @@ const AddVehicleForm = (props) => {
               </select>
             </div>
             <div className="formRowItemNV">
-              <label>Buy Price</label>
+              <label>Engine CC</label>
+              <input
+                type="number"
+                onChange={(e) => {
+                  setCC(e.target.value);
+                }}
+              ></input>
+            </div>
+          </div>
+          <div className="formRowFlex">
+            <div className="formRowItemNV">
+              <label htmlFor="date" className="mandatory">
+                Buy Date
+              </label>
+              <input
+                type="date"
+                id="date"
+                placeholder={purchaseDate}
+                onChange={(e) => setPurchaseDate(e.target.value)}
+              ></input>
+            </div>
+            <div className="formRowItemNV">
+              <label className="mandatory">Buy Price</label>
               <input
                 type="number"
                 onChange={(e) => {
@@ -164,13 +188,21 @@ const AddVehicleForm = (props) => {
           </div>
           <div className="formRowFlex">
             <div className="formRowItemNV">
-              <label htmlFor="date">Buy Date</label>
-              <input
-                type="date"
-                id="date"
-                placeholder={purchaseDate}
-                onChange={(e) => setPurchaseDate(e.target.value)}
-              ></input>
+              <label htmlFor="buyMileage">Mileage (buy)</label>
+              <input type="number" onChange={(e) => setBuyMileage(e.target.value)} />
+            </div>
+            <div className="formRowItemNV">
+              <label htmlFor="currentMileage">Mileage (now)</label>
+              <input type="number" value={mileage} onChange={(e) => setMileage(e.target.value)} />
+            </div>
+          </div>
+          <div className="formRowFlex">
+            <div className="formRowItemNV">
+              <label htmlFor="units">Units</label>
+              <select onChange={(e) => setUnits(e.target.value)}>
+                <option value="mi">Miles</option>
+                <option value="km">KM</option>
+              </select>
             </div>
             <div className="formRowItemNV">
               <label htmlFor="owner">Name on V5</label>
@@ -183,16 +215,6 @@ const AddVehicleForm = (props) => {
                   setOwner(e.target.value);
                 }}
               />
-            </div>
-          </div>
-          <div className="formRowFlex">
-            <div className="formRowItemNV">
-              <label htmlFor="buyMileage">Mileage (buy)</label>
-              <input type="number" onChange={(e) => setBuyMileage(e.target.value)} />
-            </div>
-            <div className="formRowItemNV">
-              <label htmlFor="currentMileage">Mileage (now)</label>
-              <input type="number" value={mileage} onChange={(e) => setMileage(e.target.value)} />
             </div>
           </div>
         </form>

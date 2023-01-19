@@ -7,11 +7,10 @@
 .overview {
   display: flex;
   flex-direction: row;
-  justify-content: flex-start;
+  justify-content: space-between;
 }
 .overview-info-section {
   width: 25%;
-  margin-right: 4%;
   margin-bottom: 1rem;
 }
 .overview-section-header {

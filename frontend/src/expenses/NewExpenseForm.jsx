@@ -75,7 +75,7 @@ const NewExpenseForm = (props) => {
         </select>
         <div className="formRowFlex">
           <div className="formRowItemNE">
-            <label htmlFor="date">Date: </label>
+            <label htmlFor="date">Date</label>
             <input
               type="date"
               id="date"
@@ -86,7 +86,7 @@ const NewExpenseForm = (props) => {
             ></input>
           </div>
           <div className="formRowItemNE">
-            <label htmlFor="category">Category: </label>
+            <label htmlFor="category">Category</label>
             <select
               id="category"
               onChange={(e) => {
@@ -108,13 +108,14 @@ const NewExpenseForm = (props) => {
               <option value="accessories">Accessories</option>
               <option value="garage work">Garage Work</option>
               <option value="Toll">Toll</option>
+              <option value="Admin">Admin</option>
               <option value="other">Other</option>
             </select>
           </div>
         </div>
         <div className="formRowFlex">
           <div className="formRowItemNE">
-            <label htmlFor="description">Description: </label>
+            <label htmlFor="description">Description</label>
             <input
               type="text"
               id="description"
@@ -125,7 +126,7 @@ const NewExpenseForm = (props) => {
             ></input>
           </div>
           <div className="formRowItemNE">
-            <label htmlFor="value">Value: </label>
+            <label htmlFor="value">Value</label>
             <input
               type="number"
               style={{ marginInline: "1em" }}

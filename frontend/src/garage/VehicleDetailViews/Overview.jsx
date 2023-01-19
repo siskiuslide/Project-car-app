@@ -16,6 +16,27 @@ const Overview = function (props) {
     return `${date}/${month}/${year}`;
   };
 
+  const getDrivenMileage = function (buyMileage, currentMileage) {
+    return currentMileage - buyMileage;
+  };
+
+  const getTenure = function (sellDate, buyDate) {
+    if (!buyDate) {
+      return "N/A";
+    }
+    let date1 = new Date(sellDate);
+    let date2 = new Date(buyDate);
+    if (!sellDate) {
+      date1 = Date.now();
+    }
+    console.log(date1, date2);
+    const difference = parseInt(date1 - date2);
+    console.log(difference);
+    const days = difference / (1000 * 60 * 60 * 24);
+
+    return days.toFixed(0) + " days";
+  };
+
   return (
     <>
       <div className="view-heading">Overview</div>
@@ -71,7 +92,27 @@ const Overview = function (props) {
             <div className="field">Engine Capacity</div>
             <div className="value">{props.vehicle?.cc}cc</div>
           </div>
-          <div className="overview-info-section"></div>
+        </div>
+        <div className="overview-info-section">
+          <h2 className="overview-section-header">Usage</h2>
+          <div className="info-item">
+            <div className="field">Mileage (when bought)</div>
+            <div className="value">{props.vehicle?.buyMileage}</div>
+          </div>
+          <div className="info-item">
+            <div className="field">Mileage (current)</div>
+            <div className="value">{props.vehicle?.mileage}</div>
+          </div>
+          <div className="info-item">
+            <div className="field">Driven</div>
+            <div className="value">
+              {props.vehicle.mileage ? getDrivenMileage(props.vehicle?.buyMileage, props.vehicle?.mileage) : "Unknown"}
+            </div>
+          </div>
+          <div className="info-item">
+            <div className="field">Tenure</div>
+            <div className="value">{getTenure(props.vehicle?.sellDate, props.vehicle?.purchaseDate)}</div>
+          </div>
         </div>
       </div>
     </>

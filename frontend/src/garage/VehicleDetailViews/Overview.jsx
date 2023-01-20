@@ -1,13 +1,17 @@
 import React from "react";
 import Button from "../../Components/Button";
+import Modal from "../../Components/Modal";
+
 import { useEffect, useState } from "react";
 import "./Overview.css";
 import "../VehicleDetail.css";
+import SellVehicleModal from "./SellVehicleModal";
 
 const Overview = function (props) {
   const [age, setAge] = useState();
   const [tenure, setTenure] = useState();
   const [drivenMileage, setDrivenMileage] = useState();
+  const [showModal, setShowModal] = useState(false);
 
   const formatDate = function (timestamp) {
     const preformat = new Date(timestamp);
@@ -52,6 +56,10 @@ const Overview = function (props) {
   };
 
   const getMileagePerYear = function (currentMileage, buyMileage, year) {
+    if (!currentMileage || !buyMileage) {
+      return "N/A";
+    }
+
     const age = getVehicleAge(year);
     if (!currentMileage) {
       return buyMileage / age;
@@ -69,8 +77,24 @@ const Overview = function (props) {
     return perWeek;
   };
 
+  const sellVehicleHandler = function () {
+    // return showModal ? setShowModal(false) : setShowModal(true);
+  };
+
+  const sellModal = function () {
+    setShowModal(true);
+  };
+  const closeSellModal = function () {
+    setShowModal(false);
+  };
+
   return (
     <>
+      {showModal && (
+        <Modal show={showModal} onClose={closeSellModal} heading="Sell Vehicle">
+          <SellVehicleModal></SellVehicleModal>
+        </Modal>
+      )}
       <div className="view-heading">Overview</div>
       <div className="view-flex-horiz overview">
         <div className="detail-info-section">
@@ -83,23 +107,23 @@ const Overview = function (props) {
             </div>
           </div>
           <div className="info-item">
-            <div className="field">Purchase Date</div>
-            <div className="value">{formatDate(props.vehicle?.purchaseDate) ?? "Unknown"}</div>
-          </div>
-          <div className="info-item">
             <div className="field">Purchase Price</div>
             <div className="value">£{props.vehicle?.boughtFor}</div>
+          </div>
+          <div className="info-item">
+            <div className="field">Purchase Date</div>
+            <div className="value">{formatDate(props.vehicle?.purchaseDate) ?? "Unknown"}</div>
           </div>
 
           {props.vehicle.sold === true ? (
             <>
               <div className="info-item">
                 <div className="field">Sold Date</div>
-                <div className="value">£{formatDate(props.vehicle?.soldDate)}</div>
+                <div className="value">{formatDate(props.vehicle?.soldDate)}</div>
               </div>
               <div className="info-item">
                 <div className="field">Sold Price</div>
-                <div className="value">£{props.vehicle?.soldPrice}</div>
+                <div className="value">£{props.vehicle?.soldFor}</div>
               </div>
             </>
           ) : (
@@ -107,7 +131,11 @@ const Overview = function (props) {
           )}
 
           <div className="view-button-flex">
-            <Button value="Sell" back={true} color="green"></Button>
+            {!props.vehicle.sold ? (
+              <Button value="Sell" back={true} color="green" onClick={sellModal}></Button>
+            ) : (
+              <Button value="Re-claim"></Button>
+            )}
             <Button value="Update"></Button>
             <Button value="Archive"></Button>
           </div>
@@ -156,14 +184,14 @@ const Overview = function (props) {
           <div className="info-item">
             <div className="field">Tenure</div>
             <div className="value">
-              {getTenure(props.vehicle?.sellDate, props.vehicle?.purchaseDate).toFixed(0)} days
+              {getTenure(props.vehicle?.soldDate, props.vehicle?.purchaseDate).toFixed(0)} days
             </div>
           </div>
           <div className="info-item">
             <div className="field">Mileage per year</div>
             <div className="value">
               {getMileagePerYear(props.vehicle.currentMileage, props.vehicle.buyMileage, props.vehicle.year) +
-                props.vehicle.units}
+                props.vehicle?.units}
             </div>
           </div>
           <div className="info-item">

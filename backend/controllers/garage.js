@@ -43,6 +43,11 @@ exports.sellVehicle = catchAsync(async function (req, res, next) {
   return res.status(200).json({ status: "Success", data: sold });
 });
 
+exports.reclaimVehicle = catchAsync(async function (req, res, next) {
+  const reclaimed = await Vehicle.findOneAndUpdate({ _id: req.body.vehicleId }, { ...req.body });
+  return res.status(200).json({ status: "success", data: reclaimed });
+});
+
 exports.deleteVehicle = catchAsync(async function (req, res, next) {
   const deleted = await Vehicle.deleteOne({ id: req.body.id }); //delete from vehicle database
   //we should then delete/archive associated expenses and to-do items

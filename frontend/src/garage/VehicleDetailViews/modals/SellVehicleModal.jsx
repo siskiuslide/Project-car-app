@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import Button from "../../Components/Button";
+import Button from "../../../Components/Button";
 import "./SellVehicleModal.css";
-import "../../Components/Modal.css";
+import "../../../Components/Modal.css";
 
 const SellVehicleModal = function (props) {
   const [soldDate, setSoldDate] = useState();
@@ -15,6 +15,7 @@ const SellVehicleModal = function (props) {
 
   return (
     <>
+      <h2 className="modal-heading">{props.heading}</h2>
       <p className="modal-description">
         Marking your vehicle as sold will not delete the vehicle. The vehicle can be found by searching through your
         garage for sold vehicles.

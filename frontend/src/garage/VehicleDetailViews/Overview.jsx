@@ -5,7 +5,8 @@ import Modal from "../../Components/Modal";
 import { useEffect, useState } from "react";
 import "./Overview.css";
 import "../VehicleDetail.css";
-import SellVehicleModal from "./SellVehicleModal";
+import SellVehicleModal from "./modals/SellVehicleModal";
+import ReclaimVehicleModal from "./modals/ReclaimVehicleModal";
 
 const Overview = function (props) {
   const [age, setAge] = useState();
@@ -87,25 +88,46 @@ const Overview = function (props) {
     })
       .then((res) => res.json())
       .then((data) => {
-        console.log(data);
         return setShowModal(false);
       })
       .catch((err) => console.log(err));
     // return showModal ? setShowModal(false) : setShowModal(true);
   };
 
-  const sellModal = function () {
+  const reclaimVehicleHandler = function (buyBack, buyBackDate, buyBackPrice, buyBackMileage) {
+    let body;
+    if (buyBack === false) {
+      body = { vehicleId: props.vehicle._id, sold: false, soldDate: null, soldFor: null };
+    }
+    const req = fetch("http://127.0.0.1:4000/garage/reclaim", {
+      method: "put",
+      headers: { "content-type": "application/json" },
+      body: JSON.stringify(body),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        return setShowModal(false);
+      })
+      .catch((err) => console.log(err));
+  };
+
+  const showModalHandler = function () {
     setShowModal(true);
   };
-  const closeSellModal = function () {
+  const closeModalHandler = function () {
     setShowModal(false);
   };
 
   return (
     <>
       {showModal && (
-        <Modal show={showModal} onClose={closeSellModal} heading="Sell Vehicle">
-          <SellVehicleModal sellVehicle={sellVehicleHandler}></SellVehicleModal>
+        <Modal show={showModal} onClose={closeModalHandler}>
+          {props.vehicle.sold === false && (
+            <SellVehicleModal sellVehicle={sellVehicleHandler} heading="Sell Vehicle"></SellVehicleModal>
+          )}
+          {props.vehicle.sold === true && (
+            <ReclaimVehicleModal reclaimVehicle={reclaimVehicleHandler} heading="Reclaim Vehicle"></ReclaimVehicleModal>
+          )}
         </Modal>
       )}
       <div className="view-heading">Overview</div>
@@ -145,9 +167,9 @@ const Overview = function (props) {
 
           <div className="view-button-flex">
             {!props.vehicle.sold ? (
-              <Button value="Sell" back={true} color="green" onClick={sellModal}></Button>
+              <Button value="Sell" back={true} color="green" onClick={showModalHandler}></Button>
             ) : (
-              <Button value="Re-claim"></Button>
+              <Button value="Re-claim" onClick={showModalHandler}></Button>
             )}
             <Button value="Update"></Button>
             <Button value="Archive"></Button>

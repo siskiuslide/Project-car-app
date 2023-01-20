@@ -10,8 +10,9 @@ const Modal = function (props) {
       <div className="modal-window">
         <h2 className="modal-heading">{props.heading}</h2>
         {props?.children}
-        <Button color="green" value="Sell"></Button>
-        <Button color="red" value="Back" onClick={props.onClose}></Button>
+        <div className="close-modal-button material-icons" color="red" value="Back" onClick={props.onClose}>
+          close
+        </div>
       </div>
     </div>
   );

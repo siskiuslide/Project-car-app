@@ -77,7 +77,20 @@ const Overview = function (props) {
     return perWeek;
   };
 
-  const sellVehicleHandler = function () {
+  const sellVehicleHandler = function (soldDate, soldFor, mileage) {
+    const saleData = { vehicleId: props.vehicle._id, sold: true, soldDate, soldFor, mileage };
+    console.log(saleData);
+    const req = fetch("http://127.0.0.1:4000/garage/sale", {
+      method: "put",
+      headers: { "content-type": "application/json" },
+      body: JSON.stringify(saleData),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+        return setShowModal(false);
+      })
+      .catch((err) => console.log(err));
     // return showModal ? setShowModal(false) : setShowModal(true);
   };
 
@@ -92,7 +105,7 @@ const Overview = function (props) {
     <>
       {showModal && (
         <Modal show={showModal} onClose={closeSellModal} heading="Sell Vehicle">
-          <SellVehicleModal></SellVehicleModal>
+          <SellVehicleModal sellVehicle={sellVehicleHandler}></SellVehicleModal>
         </Modal>
       )}
       <div className="view-heading">Overview</div>

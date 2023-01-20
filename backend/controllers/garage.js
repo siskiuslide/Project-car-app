@@ -38,7 +38,7 @@ exports.addVehicle = catchAsync(async function (req, res, next) {
 exports.sellVehicle = catchAsync(async function (req, res, next) {
   const sold = await Vehicle.findOneAndUpdate(
     { _id: req.body.vehicleId },
-    { sold: req.body.sold, soldFor: req.body.soldFor }
+    { sold: req.body.sold, soldFor: req.body.soldFor, soldDate: req.body.soldDate, currentMileage: req.body?.mileage }
   ).then(console.log("Vehicle sale history updated"));
   return res.status(200).json({ status: "Success", data: sold });
 });

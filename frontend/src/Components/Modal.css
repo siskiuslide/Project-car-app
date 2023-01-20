@@ -29,3 +29,10 @@
 .modal-description {
   margin-inline: 1rem;
 }
+
+.close-modal-button {
+  position: fixed;
+  font-size: 1.5rem !important;
+  top: 20px;
+  right: 10px;
+}

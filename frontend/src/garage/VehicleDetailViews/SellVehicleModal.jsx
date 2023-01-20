@@ -1,11 +1,18 @@
 import React, { useState } from "react";
+import Button from "../../Components/Button";
 import "./SellVehicleModal.css";
 import "../../Components/Modal.css";
 
-const SellVehicleModal = function () {
+const SellVehicleModal = function (props) {
   const [soldDate, setSoldDate] = useState();
   const [soldFor, setSoldFor] = useState();
-  const [Mileage, setMileage] = useState();
+  const [mileage, setMileage] = useState();
+
+  const sellVehicleHandler = function () {
+    console.log("Selling Vehicle");
+    return props.sellVehicle(soldDate, soldFor, mileage);
+  };
+
   return (
     <>
       <p className="modal-description">
@@ -26,12 +33,15 @@ const SellVehicleModal = function () {
         <label>Mileage when sold</label>
         <input
           type="number"
-          value={setMileage}
+          value={mileage}
           onChange={(e) => {
             setMileage(e.target.value);
           }}
         ></input>
       </form>
+      <div className="buttonarea">
+        <Button color="green" value="Sell" onClick={sellVehicleHandler}></Button>
+      </div>
     </>
   );
 };

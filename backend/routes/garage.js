@@ -11,6 +11,6 @@ router
 
 router.route("/:id").get(garageController.getSingleVehicle);
 
-router.route("/sale").patch(garageController.sellVehicle);
+router.route("/sale").put(garageController.sellVehicle);
 
 module.exports = router;

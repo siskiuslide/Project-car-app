@@ -1,7 +1,7 @@
 import React from "react";
 import Button from "../../Components/Button";
 import Modal from "../../Components/Modal";
-
+import { useHistory } from "react-router-dom";
 import { useEffect, useState } from "react";
 import "./Overview.css";
 import "../VehicleDetail.css";
@@ -13,6 +13,8 @@ const Overview = function (props) {
   const [tenure, setTenure] = useState();
   const [drivenMileage, setDrivenMileage] = useState();
   const [showModal, setShowModal] = useState(false);
+
+  const history = useHistory();
 
   const formatDate = function (timestamp) {
     const preformat = new Date(timestamp);
@@ -88,6 +90,8 @@ const Overview = function (props) {
     })
       .then((res) => res.json())
       .then((data) => {
+        history.push("/");
+        window.location.reload(false);
         return setShowModal(false);
       })
       .catch((err) => console.log(err));
@@ -106,6 +110,9 @@ const Overview = function (props) {
     })
       .then((res) => res.json())
       .then((data) => {
+        history.push("/");
+        window.location.reload(false);
+
         return setShowModal(false);
       })
       .catch((err) => console.log(err));

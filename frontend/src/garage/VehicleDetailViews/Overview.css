@@ -4,23 +4,11 @@
   content: ":";
 }
 
-.overview {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-}
-.overview-info-section {
-  width: 25%;
-  margin-bottom: 1rem;
-}
-.overview-section-header {
-  font-size: 1.2rem;
-}
-
 .info-item {
   display: flex;
   flex-direction: row;
-  margin-block: 0.5rem;
+  margin-block: 1.2rem;
+  font-size: 1.1rem;
   justify-content: space-between;
 }
 .info-item > .value {
@@ -28,4 +16,11 @@
   font-size: 1rem;
   margin-inline: 0.5rem;
   text-align: center;
+}
+
+.view-button-flex {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-evenly;
 }

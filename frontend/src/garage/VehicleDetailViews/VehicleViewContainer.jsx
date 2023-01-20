@@ -1,5 +1,6 @@
 import React from "react";
 import Overview from "./Overview";
+import Manage from "./Manage";
 
 const VehicleViewContainer = function (props) {
   switch (props.view) {
@@ -7,7 +8,7 @@ const VehicleViewContainer = function (props) {
       return <Overview vehicle={props.vehicle} />;
 
     case "manage":
-      return <>manage</>;
+      return <Manage vehicle={props.vehicle} />;
 
     case "expenses":
       return <>expenses</>;

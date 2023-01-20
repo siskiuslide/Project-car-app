@@ -46,3 +46,19 @@
   font-size: 1.5rem;
   margin-block: 1rem;
 }
+
+/* below styles are generic view classes*/
+
+.view-flex-horiz {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.detail-info-section {
+  width: 25%;
+  margin-bottom: 1rem;
+}
+.detail-section-header {
+  font-size: 1.3rem;
+}

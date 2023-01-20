@@ -142,7 +142,7 @@ const NewExpenseForm = (props) => {
           style={{ display: "flex", flexDirection: "row", justifyContent: "end", marginTop: "2em" }}
         >
           <Button value="Submit" onClick={formSubmitHandler}></Button>
-          <Button value="Back" back={true} onClick={formBackHandler}></Button>
+          <Button value="Back" color="red" onClick={formBackHandler}></Button>
         </div>
         {!formValid && <Invalid />}
       </form>

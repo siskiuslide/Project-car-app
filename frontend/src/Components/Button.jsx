@@ -6,7 +6,7 @@ const Button = (props) => {
       className={`button ${props.className}`}
       style={{
         padding: "0.5em",
-        backgroundColor: props.back ? "red" : "rgb(51, 153, 194)",
+        backgroundColor: props?.color ?? "rgb(51, 153, 194)",
         color: "white",
         fontWeight: "bold",
         width: "6em",

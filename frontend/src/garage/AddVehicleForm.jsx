@@ -221,7 +221,7 @@ const AddVehicleForm = (props) => {
         <div className="buttonarea">
           <Button value="Submit" style={{ justifySelf: "right" }} onClick={formSubmitHandler}></Button>
           <Link to="/garage">
-            <Button value="Back" back={true}></Button>
+            <Button value="Back" color="red"></Button>
           </Link>
         </div>
       </div>

@@ -1,6 +1,8 @@
 import React from "react";
+import Button from "../../Components/Button";
 import { useEffect, useState } from "react";
 import "./Overview.css";
+import "../VehicleDetail.css";
 
 const Overview = function (props) {
   const [age, setAge] = useState();
@@ -46,7 +48,7 @@ const Overview = function (props) {
     const difference = parseInt(date1 - date2);
     const days = difference / (1000 * 60 * 60 * 24);
 
-    return days.toFixed(0) + " days";
+    return days;
   };
 
   const getMileagePerYear = function (currentMileage, buyMileage, year) {
@@ -56,19 +58,29 @@ const Overview = function (props) {
     }
     if (!buyMileage) {
       return "Unknown";
-    } else return (currentMileage / age).toFixed(2);
+    } else return (currentMileage / age).toFixed(0);
+  };
+
+  const getEstimatedUsage = function (buyMileage, currentMileage, sellDate, buyDate) {
+    const drivenMileage = getDrivenMileage(buyMileage, currentMileage);
+    const days = getTenure(sellDate, buyDate);
+    const weeks = days / 7;
+    const perWeek = drivenMileage / weeks;
+    return perWeek;
   };
 
   return (
     <>
       <div className="view-heading">Overview</div>
-      <div className="overview">
-        <div className="overview-info-section">
-          <h2 className="overview-section-header">Ownership</h2>
+      <div className="view-flex-horiz overview">
+        <div className="detail-info-section">
+          <h2 className="detail-section-header">Ownership</h2>
 
           <div className="info-item">
             <div className="field">Owner</div>
-            <div className="value">{props.vehicle?.owner ?? "Unknown"}</div>
+            <div className="value" style={{ textTransform: "capitalize" }}>
+              {props.vehicle?.owner ?? "Unknown"}
+            </div>
           </div>
           <div className="info-item">
             <div className="field">Purchase Date</div>
@@ -93,11 +105,17 @@ const Overview = function (props) {
           ) : (
             ""
           )}
+
+          <div className="view-button-flex">
+            <Button value="Sell" back={true} color="green"></Button>
+            <Button value="Update"></Button>
+            <Button value="Archive"></Button>
+          </div>
         </div>
-        <div className="overview-info-section">
-          <h2 className="overview-section-header">Vehicle Details</h2>
+        <div className="detail-info-section">
+          <h2 className="detail-section-header">Vehicle Details</h2>
           <div className="info-item">
-            <div className="field">Type</div>
+            <div className="field">Vehicle Type</div>
             <div className="value" style={{ textTransform: "capitalize" }}>
               {props.vehicle?.type ?? "Unknown"}
             </div>
@@ -119,8 +137,8 @@ const Overview = function (props) {
             <div className="value">{props.vehicle?.cc}cc</div>
           </div>
         </div>
-        <div className="overview-info-section">
-          <h2 className="overview-section-header">Usage</h2>
+        <div className="detail-info-section">
+          <h2 className="detail-section-header">Usage</h2>
           <div className="info-item">
             <div className="field">Mileage (when bought)</div>
             <div className="value">{props.vehicle?.buyMileage + props.vehicle.units}</div>
@@ -130,20 +148,33 @@ const Overview = function (props) {
             <div className="value">{props.vehicle?.currentMileage + props.vehicle.units}</div>
           </div>
           <div className="info-item">
-            <div className="field">Driven</div>
+            <div className="field">Driven by you</div>
             <div className="value">
               {getDrivenMileage(props.vehicle?.buyMileage, props.vehicle?.currentMileage) + props.vehicle.units}
             </div>
           </div>
           <div className="info-item">
             <div className="field">Tenure</div>
-            <div className="value">{getTenure(props.vehicle?.sellDate, props.vehicle?.purchaseDate)}</div>
+            <div className="value">
+              {getTenure(props.vehicle?.sellDate, props.vehicle?.purchaseDate).toFixed(0)} days
+            </div>
           </div>
           <div className="info-item">
             <div className="field">Mileage per year</div>
             <div className="value">
               {getMileagePerYear(props.vehicle.currentMileage, props.vehicle.buyMileage, props.vehicle.year) +
                 props.vehicle.units}
+            </div>
+          </div>
+          <div className="info-item">
+            <div className="field">Estimated Usage/Week</div>
+            <div className="value">
+              {getEstimatedUsage(
+                props.vehicle.buyMileage,
+                props.vehicle.currentMileage,
+                props.vehicle?.sellDate,
+                props.vehicle?.purchaseDate
+              ).toFixed(0) + props.vehicle.units}
             </div>
           </div>
         </div>

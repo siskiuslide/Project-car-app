@@ -12,10 +12,14 @@ const ExpenseListItem = (props) => {
     }
   };
 
+  const findVehicle = function () {
+    return props.expenseVehicleFinder(props.e.vehicleId);
+  };
+
   return (
     <div className="expenseListItem" id={props.e._id}>
       <p style={{ width: "10%" }}>{getExpenseDate(props.e.date)}</p>
-      <p style={{ width: "10%" }}>{props.expenseVehicleFinder(props.e.vehicleId)}</p>
+      <p style={{ width: "10%" }}>{findVehicle}</p>
       <p style={{ width: "10%" }} className={`expense-category category-${props.e.category} `}>
         {" "}
         {props.e.category}

@@ -21,7 +21,6 @@ const NewExpenseForm = (props) => {
     };
     setFormValidity(true);
     props.expenses.push(expense);
-    console.log(expense);
     const newExpense = fetch("http://localhost:4000/expenses", {
       method: "post",
       headers: { "Content-Type": "application/json" },
@@ -107,7 +106,7 @@ const NewExpenseForm = (props) => {
               <option value="modification">Modification</option>
               <option value="accessories">Accessories</option>
               <option value="garage work">Garage Work</option>
-              <option value="Toll">Toll</option>
+              <option value="toll">Toll</option>
               <option value="Admin">Admin</option>
               <option value="other">Other</option>
             </select>

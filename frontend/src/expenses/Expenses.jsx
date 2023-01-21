@@ -114,6 +114,15 @@ const Expenses = (props) => {
     return reg.toUpperCase();
   };
 
+  const getExpenseTotal = function () {
+    const total = expenses.reduce((current, next) => {
+      return (current += Number(next.value));
+    }, 0);
+    console.log(total);
+
+    return total.toFixed(2);
+  };
+
   return (
     <div className="expenseContainer">
       {showForm === false ? (
@@ -163,14 +172,7 @@ const Expenses = (props) => {
           <p style={{ width: "8%", marginLeft: "auto", marginRight: "1em" }}>Options</p>
         </div>
         <div className="pre-expense-list">
-          <p className="expenses-sum">
-            £
-            {expenses
-              .reduce((current, i) => {
-                return (current += i.value);
-              }, 0)
-              .toFixed(2)}
-          </p>
+          <p className="expenses-sum">£{getExpenseTotal()}</p>
           <div className="listOptions">
             {dateSortIcon ? (
               <p className="material-icons" onClick={dateSortHandler}>

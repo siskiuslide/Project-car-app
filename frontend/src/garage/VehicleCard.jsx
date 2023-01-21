@@ -7,7 +7,6 @@ const VehicleCard = (props) => {
     return (current += next);
   }, 0);
   const profit = props.vehicle.soldFor - totalExpenses;
-  // console.log(totalExpenses, props.vehicle);
 
   return (
     <Link to={`/garage/${props.vehicle._id}`}>

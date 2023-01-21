@@ -9,11 +9,6 @@ import SellVehicleModal from "./modals/SellVehicleModal";
 import ReclaimVehicleModal from "./modals/ReclaimVehicleModal";
 
 const Overview = function (props) {
-  const [age, setAge] = useState();
-  const [tenure, setTenure] = useState();
-  const [drivenMileage, setDrivenMileage] = useState();
-  const [showModal, setShowModal] = useState(false);
-
   const history = useHistory();
 
   const formatDate = function (timestamp) {
@@ -27,6 +22,23 @@ const Overview = function (props) {
     // }
 
     return `${date}/${month}/${year}`;
+  };
+
+  const getGrossProfit = function (sellPrice, buyPrice) {
+    return (sellPrice - buyPrice).toFixed(2);
+  };
+  const getTotalExpenses = function () {
+    const vehicleExpenses = props.expenses
+      .filter((e) => e.category !== "purchase")
+      .reduce((current, i) => {
+        return (current += i.value);
+      }, 0);
+    return vehicleExpenses;
+  };
+
+  const getNetProfit = function (sellPrice, buyPrice, expenses) {
+    const netProfit = sellPrice - (buyPrice + expenses);
+    return netProfit.toFixed(2);
   };
 
   const getVehicleAge = function (year) {
@@ -80,6 +92,12 @@ const Overview = function (props) {
     return perWeek;
   };
 
+  const getCostPerDay = function (buyPrice, sellDate, buyDate) {
+    const days = getTenure(sellDate, buyDate);
+    const totalCost = buyPrice + expenses;
+    return (totalCost / days).toFixed(2);
+  };
+
   const sellVehicleHandler = function (soldDate, soldFor, mileage) {
     const saleData = {
       vehicleId: props.vehicle._id,
@@ -131,6 +149,8 @@ const Overview = function (props) {
     setShowModal(false);
   };
 
+  const [expenses, setExpenses] = useState(getTotalExpenses());
+  const [showModal, setShowModal] = useState(false);
   return (
     <>
       {showModal && (
@@ -156,7 +176,7 @@ const Overview = function (props) {
           </div>
           <div className="info-item">
             <div className="field">Purchase Price</div>
-            <div className="value">£{props.vehicle?.boughtFor}</div>
+            <div className="value">£{props.vehicle?.boughtFor.toFixed(2)}</div>
           </div>
           <div className="info-item">
             <div className="field">Purchase Date</div>
@@ -166,12 +186,24 @@ const Overview = function (props) {
           {props.vehicle.sold === true ? (
             <>
               <div className="info-item">
+                <div className="field">Sold Price</div>
+                <div className="value">£{props.vehicle?.soldFor.toFixed(2)}</div>
+              </div>
+              <div className="info-item">
                 <div className="field">Sold Date</div>
                 <div className="value">{formatDate(props.vehicle?.soldDate)}</div>
               </div>
               <div className="info-item">
-                <div className="field">Sold Price</div>
-                <div className="value">£{props.vehicle?.soldFor}</div>
+                <div className="field">Gross Profit</div>
+                <div className="value">£{getGrossProfit(props.vehicle.soldFor, props.vehicle.boughtFor)}</div>
+              </div>
+              <div className="info-item">
+                <div className="field">Expenses</div>
+                <div className="value">£{expenses.toFixed(2)}</div>
+              </div>
+              <div className="info-item">
+                <div className="field">Net Profit</div>
+                <div className="value">£{getNetProfit(props.vehicle.soldFor, props.vehicle.boughtFor, expenses)}</div>
               </div>
             </>
           ) : (
@@ -253,6 +285,10 @@ ${props.vehicle?.units ?? "mi"}
                 props.vehicle?.purchaseDate
               ).toFixed(0) + props.vehicle.units}
             </div>
+          </div>
+          <div className="info-item">
+            <div className="field">Cost Per Day</div>
+            <div className="value"></div>
           </div>
         </div>
       </div>

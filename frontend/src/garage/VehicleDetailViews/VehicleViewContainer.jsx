@@ -5,7 +5,7 @@ import Manage from "./Manage";
 const VehicleViewContainer = function (props) {
   switch (props.view) {
     case "overview":
-      return <Overview vehicle={props.vehicle} />;
+      return <Overview vehicle={props.vehicle} expenses={props.expenses} />;
 
     case "manage":
       return <Manage vehicle={props.vehicle} />;

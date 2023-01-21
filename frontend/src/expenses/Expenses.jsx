@@ -118,7 +118,6 @@ const Expenses = (props) => {
     const total = expenses.reduce((current, next) => {
       return (current += Number(next.value));
     }, 0);
-    console.log(total);
 
     return total.toFixed(2);
   };

@@ -19,6 +19,10 @@ const CarDetail = (props) => {
     return setVehicle(target);
   };
 
+  const findVehicleExpenses = function (vehicleId) {
+    const expenses = props.expenses.filter((e) => e.vehicleId === vehicleId);
+    return expenses;
+  };
   const findNeighbouringVehicles = function (vehicleId) {
     const index = garage.findIndex((v) => v._id === vehicleId);
     const garageArrSize = garage.length - 1;
@@ -111,7 +115,11 @@ const CarDetail = (props) => {
           </div>
         </div>
         <div className="vehicle-view-detail">
-          <VehicleViewContainer view={view} vehicle={vehicle}></VehicleViewContainer>
+          <VehicleViewContainer
+            view={view}
+            vehicle={vehicle}
+            expenses={findVehicleExpenses(params.vehicleId)}
+          ></VehicleViewContainer>
         </div>
       </div>
     </>

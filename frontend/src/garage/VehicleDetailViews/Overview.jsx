@@ -55,7 +55,7 @@ const Overview = function (props) {
     const difference = parseInt(date1 - date2);
     const days = difference / (1000 * 60 * 60 * 24);
 
-    return days;
+    return days.toFixed(0);
   };
 
   const getMileagePerYear = function (currentMileage, buyMileage, year) {
@@ -81,8 +81,14 @@ const Overview = function (props) {
   };
 
   const sellVehicleHandler = function (soldDate, soldFor, mileage) {
-    const saleData = { vehicleId: props.vehicle._id, sold: true, soldDate, soldFor, mileage };
-    console.log(saleData);
+    const saleData = {
+      vehicleId: props.vehicle._id,
+      sold: true,
+      soldDate,
+      soldFor,
+      mileage,
+      purchaseDate: props.vehicle.purchaseDate,
+    };
     const req = fetch("http://127.0.0.1:4000/garage/sale", {
       method: "put",
       headers: { "content-type": "application/json" },
@@ -211,7 +217,7 @@ const Overview = function (props) {
           <h2 className="detail-section-header">Usage</h2>
           <div className="info-item">
             <div className="field">Mileage (when bought)</div>
-            <div className="value">{props.vehicle?.buyMileage + props.vehicle.units}</div>
+            <div className="value">{`${props.vehicle?.buyMileage} ${props.vehicle.units}`}</div>
           </div>
           <div className="info-item">
             <div className="field">Mileage (current)</div>
@@ -220,14 +226,15 @@ const Overview = function (props) {
           <div className="info-item">
             <div className="field">Driven by you</div>
             <div className="value">
-              {getDrivenMileage(props.vehicle?.buyMileage, props.vehicle?.currentMileage) + props.vehicle.units}
+              {`
+${props.vehicle?.drivenMileage ?? getDrivenMileage(props.vehicle.buyMileage, props.vehicle.currentMileage)}
+${props.vehicle?.units ?? "mi"}
+`}
             </div>
           </div>
           <div className="info-item">
             <div className="field">Tenure</div>
-            <div className="value">
-              {getTenure(props.vehicle?.soldDate, props.vehicle?.purchaseDate).toFixed(0)} days
-            </div>
+            <div className="value">{getTenure(props.vehicle?.soldDate, props.vehicle.purchaseDate)} days</div>
           </div>
           <div className="info-item">
             <div className="field">Mileage per year</div>

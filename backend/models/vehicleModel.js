@@ -16,16 +16,38 @@ const schema = new mongoose.Schema(
     },
     owner: { type: String },
     boughtFor: { type: Number },
-    purchaseDate: { type: Date },
+    purchaseDate: { type: Date, required: true },
     buyMileage: { type: Number },
     currentMileage: { type: Number },
+    drivenMileage: { type: Number },
+    estimatedMileage: { type: Number },
     units: { type: String, Enum: ["mi", "km"] },
     sold: { type: Boolean, default: false },
     soldFor: { type: Number },
     soldDate: { type: Date },
+    tenure: { type: Number },
   },
   { timestamps: true }
 );
+
+schema.pre("save", function (next) {
+  if (this.currentMileage) {
+    this.drivenMileage = this.currentMileage - this.buyMileage;
+  }
+  const startDate = new Date(this.purchaseDate);
+  const tenureDate = this.soldDate ?? Date.now;
+  this.tenure = parseInt(Date.now() - startDate) / (1000 * 60 * 60 * 24);
+
+  next();
+});
+
+schema.pre("findOneAndUpdate", function (next) {
+  if (this._update.currentMileage) {
+    console.log("-------------------------------------");
+    this.drivenMileage = this.currentMileage - this.buyMileage;
+  }
+  next();
+});
 const Vehicle = new mongoose.model("vehicle", schema);
 
 module.exports = Vehicle;

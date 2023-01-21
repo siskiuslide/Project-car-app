@@ -7,6 +7,7 @@ router
   .route("/")
   .get(garageController.getVehicles)
   .post(garageController.addVehicle)
+  .put(garageController.updateVehicle)
   .delete(garageController.deleteVehicle);
 
 router.route("/:id").get(garageController.getSingleVehicle);

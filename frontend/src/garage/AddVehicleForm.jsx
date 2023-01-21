@@ -42,6 +42,8 @@ const AddVehicleForm = (props) => {
       owner: owner,
       buyMileage: buyMileage,
       currentMileage: mileage,
+      units: units,
+      cc: cc,
     };
     const addVehicle = fetch("http://127.0.0.1:4000/garage", {
       method: "POST",
@@ -189,7 +191,7 @@ const AddVehicleForm = (props) => {
           <div className="formRowFlex">
             <div className="formRowItemNV">
               <label htmlFor="buyMileage">Mileage (buy)</label>
-              <input type="number" onChange={(e) => setBuyMileage(e.target.value)} />
+              <input type="number" value={buyMileage} onChange={(e) => setBuyMileage(e.target.value)} />
             </div>
             <div className="formRowItemNV">
               <label htmlFor="currentMileage">Mileage (now)</label>
@@ -199,7 +201,7 @@ const AddVehicleForm = (props) => {
           <div className="formRowFlex">
             <div className="formRowItemNV">
               <label htmlFor="units">Units</label>
-              <select onChange={(e) => setUnits(e.target.value)}>
+              <select value={units} onChange={(e) => setUnits(e.target.value)}>
                 <option value="mi">Miles</option>
                 <option value="km">KM</option>
               </select>

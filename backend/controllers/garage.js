@@ -14,16 +14,7 @@ exports.getSingleVehicle = catchAsync(async function (req, res, next) {
 
 exports.addVehicle = catchAsync(async function (req, res, next) {
   const vehicle = await Vehicle.create({
-    type: req.body.type,
-    manufacturer: req.body.manufacturer,
-    model: req.body.model,
-    variant: req.body.variant,
-    year: req.body.year,
-    cc: req.body.cc,
-    reg: req.body.reg,
-    purpose: req.body.purpose,
-    boughtFor: req.body.boughtFor,
-    dateBought: req.body.date,
+    ...req.body,
   });
   const expense = await Expense.create({
     vehicleId: vehicle.id,
@@ -44,8 +35,14 @@ exports.sellVehicle = catchAsync(async function (req, res, next) {
 });
 
 exports.reclaimVehicle = catchAsync(async function (req, res, next) {
-  const reclaimed = await Vehicle.findOneAndUpdate({ _id: req.body.vehicleId }, { ...req.body });
+  const reclaimed = await Vehicle.findOneAndUpdate({ id: req.body.vehicleId }, { ...req.body });
   return res.status(200).json({ status: "success", data: reclaimed });
+});
+
+exports.updateVehicle = catchAsync(async function (req, res, next) {
+  // const updated = await Vehicle.findOneAndUpdate({ _id: req.body.vehicleId }, { ...req.body });
+  const updated = await Vehicle.findOneAndUpdate({ _id: req.body.vehicleId }, { ...req.body });
+  return res.status(200).json({ status: "success", data: updated });
 });
 
 exports.deleteVehicle = catchAsync(async function (req, res, next) {

@@ -19,3 +19,8 @@ exports.deleteExpense = catchAsync(async function (req, res, next) {
   const expenses = await Expense.find();
   return res.status(200).json({ status: "success", data: expenses });
 });
+
+exports.creditExpense = catchAsync(async function (req, res, next) {
+  const credit = await Expense.findOneAndUpdate({ _id: req.params.id }, { ...req.body });
+  return res.status(200).json({ status: "success", data: credit });
+});

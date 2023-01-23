@@ -9,4 +9,6 @@ router
   .post(expenseController.addExpense)
   .delete(expenseController.deleteExpense);
 
+router.route("/:id/credit").put(expenseController.creditExpense);
+
 module.exports = router;

@@ -1,0 +1,24 @@
+.credit-form {
+  display: flex;
+  margin-left: 6rem;
+}
+.credit-form > label {
+  font-size: 1.1rem;
+  margin-top: 0.5rem;
+}
+
+.expense-id {
+  font-size: 0.8 5rem;
+  color: grey;
+  margin-left: 1rem;
+}
+.expense-id::before {
+  content: "#";
+}
+.expense-description {
+  margin-left: 1rem;
+}
+select {
+  width: 52%;
+  padding: 4px;
+}

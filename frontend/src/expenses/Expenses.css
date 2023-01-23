@@ -115,3 +115,7 @@ option {
 .category-other {
   text-decoration-color: rgb(61, 182, 182);
 }
+
+.vehicle-select {
+  text-transform: capitalize;
+}

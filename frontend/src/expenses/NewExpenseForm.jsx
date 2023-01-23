@@ -19,6 +19,10 @@ const NewExpenseForm = (props) => {
       description: desc,
       value: value,
     };
+    if (category === "fuel") {
+      expense.pencePerLitre = ppl;
+      expense.tripSinceLastFill = trip;
+    }
     setFormValidity(true);
     props.expenses.push(expense);
     const newExpense = fetch("http://localhost:4000/expenses", {
@@ -49,25 +53,28 @@ const NewExpenseForm = (props) => {
   const [category, setCategory] = useState();
   const [desc, setDesc] = useState();
   const [value, setValue] = useState(0);
+  const [ppl, setPpl] = useState(0);
+  const [trip, setTrip] = useState();
 
   return (
     <div className="formContainer">
       <p style={{ fontSize: "1.5em", textAlign: "center" }}> Create expense</p>
       <form action="http://localhost:4000/expenses" method="post">
-        <label htmlFor="car">Select Car: </label>
+        <label htmlFor="car">Select Car</label>
         <select
           id="car"
           onChange={(e) => {
             setVehicle(e.target.value);
           }}
           placeholder={vehicle}
+          style={{ textTransform: "capitalize" }}
         >
           <option defaultValue="" hidden="hidden">
             Choose Here
           </option>
           <option value="na">N/A</option>
           {props.garage.map((v) => (
-            <option key={v._id} value={v._id}>
+            <option style={{ textTransform: "capitalize" }} className="vehicle-select" key={v._id} value={v._id}>
               {v.manufacturer + " " + v.model + " - " + v.reg.toUpperCase()}{" "}
             </option>
           ))}
@@ -136,6 +143,24 @@ const NewExpenseForm = (props) => {
             ></input>
           </div>
         </div>
+        {category == "fuel" && (
+          <div className="formRowFlex">
+            <div className="formRowItemNE">
+              <label htmlFor="ppl">Pence per Litre</label>
+              <input
+                type="number"
+                onChange={(e) => {
+                  setPpl(e.target.value);
+                }}
+                value={ppl}
+              />
+            </div>
+            <div className="formRowItemNE">
+              <label htmlFor="trip">Trip distance</label>
+              <input type="number" value={trip} onChange={(e) => setTrip(e.target.value)} />
+            </div>
+          </div>
+        )}
         <div
           className="buttonarea"
           style={{ display: "flex", flexDirection: "row", justifyContent: "end", marginTop: "2em" }}

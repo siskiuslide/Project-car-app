@@ -27,6 +27,8 @@ const schema = new mongoose.Schema(
     },
     value: { type: Number, required: true },
     description: { type: String },
+    pencePerLitre: { type: Number },
+    tripSinceLastFill: { type: Number },
   },
   { timestamps: true }
 );

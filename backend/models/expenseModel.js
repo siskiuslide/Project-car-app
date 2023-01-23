@@ -29,9 +29,17 @@ const schema = new mongoose.Schema(
     description: { type: String },
     pencePerLitre: { type: Number },
     tripSinceLastFill: { type: Number },
+    litres: { type: Number },
   },
   { timestamps: true }
 );
+
+schema.pre("save", function (next) {
+  if (this.category === "fuel") {
+    this.litres = (this.value * 100) / this.pencePerLitre;
+  }
+  next();
+});
 
 const Expense = new mongoose.model("Expense", schema);
 module.exports = Expense;

@@ -92,10 +92,38 @@ const Overview = function (props) {
     return perWeek;
   };
 
-  const getCostPerDay = function (buyPrice, sellDate, buyDate) {
+  const getEstimatedMPG = function () {
+    const clone = structuredClone(props.expenses);
+    const filtered = clone.filter((i) => i.category === "fuel" && i.tripSinceLastFill);
+    if (filtered.length < 1) {
+      return;
+    }
+
+    const value = filtered.reduce((current, i) => {
+      return (current += i.value);
+    }, 0);
+    const totalMileage = filtered.reduce((current, i) => {
+      return (current += i.tripSinceLastFill);
+    }, 0);
+
+    const fuelQuantity = filtered.reduce((current, i) => {
+      return current + i.litres;
+    }, 0);
+
+    const gallons = fuelQuantity / 4.546;
+    const mpg = (totalMileage / gallons).toFixed(2);
+
+    return mpg;
+  };
+
+  const getCostPerDay = function (buyPrice, sellPrice, sellDate, buyDate) {
+    let totalExpenditure = buyPrice + expenses;
+    if (sellPrice) {
+      totalExpenditure = buyPrice + expenses - sellPrice;
+      console.log(totalExpenditure);
+    }
     const days = getTenure(sellDate, buyDate);
-    const totalCost = buyPrice + expenses;
-    return (totalCost / days).toFixed(2);
+    return (totalExpenditure / days).toFixed(2);
   };
 
   const sellVehicleHandler = function (soldDate, soldFor, mileage) {
@@ -182,6 +210,14 @@ const Overview = function (props) {
             <div className="field">Purchase Date</div>
             <div className="value">{formatDate(props.vehicle?.purchaseDate) ?? "Unknown"}</div>
           </div>
+          <div className="info-item">
+            <div className="field">Expenses</div>
+            <div className="value">£{expenses.toFixed(2)}</div>
+          </div>
+          <div className="info-item">
+            <div className="field">Total Cost</div>
+            <div className="value">£{props.vehicle?.boughtFor + expenses}</div>
+          </div>
 
           {props.vehicle.sold === true ? (
             <>
@@ -197,10 +233,7 @@ const Overview = function (props) {
                 <div className="field">Gross Profit</div>
                 <div className="value">£{getGrossProfit(props.vehicle.soldFor, props.vehicle.boughtFor)}</div>
               </div>
-              <div className="info-item">
-                <div className="field">Expenses</div>
-                <div className="value">£{expenses.toFixed(2)}</div>
-              </div>
+
               <div className="info-item">
                 <div className="field">Net Profit</div>
                 <div className="value">£{getNetProfit(props.vehicle.soldFor, props.vehicle.boughtFor, expenses)}</div>
@@ -244,6 +277,10 @@ const Overview = function (props) {
             <div className="field">Engine Capacity</div>
             <div className="value">{props.vehicle?.cc}cc</div>
           </div>
+          <div className="info-item">
+            <div className="field">Estimated MPG</div>
+            <div className="value">{getEstimatedMPG()}</div>
+          </div>
         </div>
         <div className="detail-info-section">
           <h2 className="detail-section-header">Usage</h2>
@@ -253,7 +290,7 @@ const Overview = function (props) {
           </div>
           <div className="info-item">
             <div className="field">Mileage (current)</div>
-            <div className="value">{props.vehicle?.currentMileage + props.vehicle.units}</div>
+            <div className="value">{`${props.vehicle?.currentMileage}  ${props.vehicle.units}`}</div>
           </div>
           <div className="info-item">
             <div className="field">Driven by you</div>
@@ -272,6 +309,7 @@ ${props.vehicle?.units ?? "mi"}
             <div className="field">Mileage per year</div>
             <div className="value">
               {getMileagePerYear(props.vehicle.currentMileage, props.vehicle.buyMileage, props.vehicle.year) +
+                " " +
                 props.vehicle?.units}
             </div>
           </div>
@@ -283,12 +321,22 @@ ${props.vehicle?.units ?? "mi"}
                 props.vehicle.currentMileage,
                 props.vehicle?.sellDate,
                 props.vehicle?.purchaseDate
-              ).toFixed(0) + props.vehicle.units}
+              ).toFixed(0) +
+                " " +
+                props.vehicle.units}
             </div>
           </div>
           <div className="info-item">
             <div className="field">Cost Per Day</div>
-            <div className="value"></div>
+            <div className="value">
+              £
+              {getCostPerDay(
+                props.vehicle.boughtFor,
+                props.vehicle.soldFor,
+                props.vehicle.sellDate,
+                props.vehicle.purchaseDate
+              )}
+            </div>
           </div>
         </div>
       </div>

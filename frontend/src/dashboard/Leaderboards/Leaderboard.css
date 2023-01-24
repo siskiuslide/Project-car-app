@@ -14,3 +14,15 @@
 .leaderboard-heading {
   color: white;
 }
+.leaderboard-row {
+  background: var(--darkBackgroundHover);
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin: 0.2rem;
+  font-size: 0.75rem;
+  width: auto;
+}
+.leaderboard-row > * {
+  padding-inline: 0.1rem;
+}

@@ -4,6 +4,7 @@ import "../App.css";
 import Count from "./VehicleCount";
 import TotalCosts from "./TotalCosts";
 import JournalEntries from "./Journal/JournalEntries";
+import Leaderboard from "./Leaderboards/Leaderboard";
 
 const Dashboard = (props) => {
   return (
@@ -15,6 +16,7 @@ const Dashboard = (props) => {
         <JournalEntries link="/journal" todo={props.todo}>
           {" "}
         </JournalEntries>
+        <Leaderboard garage={props.garage} expenses={props.expenses} />
       </div>
     </>
   );

@@ -1,0 +1,16 @@
+.Leaderboard {
+  grid-column-start: span 3;
+  height: 50vh;
+  margin-top: -2rem;
+}
+.leaderboard-flex {
+  display: flex;
+  flex-direction: row;
+}
+.leaderboard-section {
+  width: 20%;
+}
+
+.leaderboard-heading {
+  color: white;
+}

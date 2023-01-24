@@ -4,11 +4,11 @@
 }
 .credit-form > label {
   font-size: 1.1rem;
-  margin-top: 0.5rem;
+  margin-top: 0.25rem;
 }
 
 .expense-id {
-  font-size: 0.8 5rem;
+  font-size: 0.8rem;
   color: grey;
   margin-left: 1rem;
 }
@@ -17,8 +17,11 @@
 }
 .expense-description {
   margin-left: 1rem;
+  background: rgb(41, 40, 40);
+  padding: 0.3rem;
+  margin-inline: 1rem;
 }
-select {
+credit-form > select {
   width: 52%;
   padding: 4px;
 }

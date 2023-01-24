@@ -18,7 +18,11 @@ const CreditExpenseModal = function (props) {
       method: "put",
     })
       .then((res) => res.json())
-      .then((data) => console.log(data))
+      .then((data) => {
+        window.history.push("/");
+        window.location.reload(false);
+        console.log(data);
+      })
       .catch((err) => console.log(err));
     return submit;
   };
@@ -35,7 +39,7 @@ const CreditExpenseModal = function (props) {
       <p className="modal-description">
         Crediting an expense will deduct the credited value from the expense, leaving a gross value.
       </p>
-      <p className="modal-description">Ideal for resale of parts, refunded items, claiming expenses back etc.</p>
+      <p className="modal-description">e.g resale value of spare parts</p>
       <form className="credit-form">
         <label>Credit Date</label>
         <input type="date" onChange={(e) => setCreditDate(e.target.value)}></input>
@@ -52,7 +56,12 @@ const CreditExpenseModal = function (props) {
         </select>
       </form>
       <div className="buttonarea">
-        <Button value="Credit" onClick={submitCreditRequest}></Button>
+        <Button
+          value="Credit"
+          onClick={() => {
+            submitCreditRequest();
+          }}
+        ></Button>
       </div>
     </>
   );

@@ -2,44 +2,60 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import "./Leaderboard.css";
 import "../Dashboard.css";
-import LeaderboardItem from "./LeaderboardItem";
-import Tenure from "./Tenure";
-import OverallCost from "./OverallCost";
+
 import { getTenure } from "../../Functions";
+import VehicleLeaderboardList from "./vehicle-leaderboards/VehicleLeaderboardList";
+import ExpenseLeaderboardList from "./expense-leaderboards/ExpenseLeaderboardList";
 
 const Leaderboard = function (props) {
-  const getTenureList = function () {
-    const tenureList = [];
-    props.garage.forEach((v) => {
-      const tenure = getTenure(v);
-      const tenureVehicle = {
-        manufacturer: v.manufacturer,
-        model: v.model,
-        reg: v.reg,
-        id: v._id,
-        tenure: tenure,
-      };
-      console.log(tenureVehicle);
-      return tenureList.push(tenureVehicle);
-    });
+  const [leaderboardCategory, setLeaderboardCategory] = useState("vehicle");
+  // const getTenureList = function () {
+  //   const tenureList = [];
+  //   props.garage.forEach((v) => {
+  //     const tenure = getTenure(v);
+  //     const tenureVehicle = {
+  //       manufacturer: v.manufacturer,
+  //       model: v.model,
+  //       reg: v.reg,
+  //       id: v._id,
+  //       tenure: tenure,
+  //     };
+  //     return tenureList.push(tenureVehicle);
+  //   });
 
-    return tenureList;
+  //   return tenureList;
+  // };
+
+  const getAverageMPG = function () {
+    return;
   };
 
   return (
     <>
       <Link className="Leaderboard grid-item">
-        <p className="GridItemText">Leaderboards</p>
+        <div className="leaderboard-header">
+          <p className="GridItemText">Leaderboards</p>
+          <label>Select Category</label>
+          <select
+            onChange={(e) => {
+              setLeaderboardCategory(e.target.value);
+            }}
+          >
+            <option value="vehicle">Vehicles</option>
+            <option value="expense">Expenses</option>
+          </select>
+        </div>
         <div className="leaderboard-flex">
-          <LeaderboardItem heading="Tenure">
-            <Tenure garage={props.garage} tenureList={getTenureList()}></Tenure>
-          </LeaderboardItem>
-          <LeaderboardItem heading="Overall Cost">
-            <OverallCost></OverallCost>
-          </LeaderboardItem>
-          <LeaderboardItem heading="Mileage Driven"></LeaderboardItem>
-          <LeaderboardItem heading="Average MPG"></LeaderboardItem>
-          <LeaderboardItem heading="Cost Per Mile"></LeaderboardItem>
+          {leaderboardCategory === "vehicle" && (
+            <>
+              <VehicleLeaderboardList garage={props.garage} expenses={props.expenses}></VehicleLeaderboardList>
+            </>
+          )}
+          {leaderboardCategory === "expense" && (
+            <>
+              <ExpenseLeaderboardList></ExpenseLeaderboardList>
+            </>
+          )}
         </div>
       </Link>
     </>

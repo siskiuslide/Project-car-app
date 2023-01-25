@@ -1,7 +1,5 @@
-import React, { useState } from "react";
-import { useEffect } from "react";
-import { getTenure } from "../../Functions";
-import LeaderboardRow from "./LeaderboardRow";
+import React from "react";
+import LeaderboardRow from "../LeaderboardRow";
 
 const Tenure = (props) => {
   return (
@@ -22,7 +20,7 @@ const Tenure = (props) => {
               <p className="uppercase" style={{ width: "25%" }}>
                 {v.reg}
               </p>
-              <p>{v.tenure} days</p>
+              <p style={{ width: "20%" }}>{v.tenure} days</p>
             </LeaderboardRow>
           );
         })}

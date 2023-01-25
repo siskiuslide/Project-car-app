@@ -3,6 +3,9 @@
   height: 50vh;
   margin-top: -2rem;
 }
+.Leaderboard:hover {
+  background: var(--darkBackground);
+}
 .leaderboard-flex {
   display: flex;
   flex-direction: row;
@@ -10,19 +13,31 @@
 .leaderboard-section {
   width: 20%;
 }
+.leaderboard-header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.leaderboard-header > label {
+  margin-left: auto;
+}
 
 .leaderboard-heading {
   color: white;
+  text-align: center;
 }
 .leaderboard-row {
-  background: var(--darkBackgroundHover);
+  background: var();
   display: flex;
   flex-direction: row;
   align-items: center;
   margin: 0.2rem;
   font-size: 0.75rem;
   width: auto;
+  background: rgb(47, 45, 45);
 }
 .leaderboard-row > * {
   padding-inline: 0.1rem;
+  text-align: center;
 }

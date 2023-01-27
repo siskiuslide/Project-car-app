@@ -1,7 +1,8 @@
 import React from "react";
-import { getExpenseCategoryTotals } from "../LeaderboardFunctions";
+import { getExpenseCategoryTotals, getMostExpensive } from "../LeaderboardFunctions";
 import LeaderboardItem from "../LeaderboardItem";
 import ExpenseCategoryTotals from "./ExpenseCategoryTotals";
+import MostExpensiveExpenses from "./MostExpensiveExpenses";
 
 const ExpenseLeaderboardList = (props) => {
   return (
@@ -9,7 +10,9 @@ const ExpenseLeaderboardList = (props) => {
       <LeaderboardItem heading="Expense Category Totals">
         <ExpenseCategoryTotals totals={getExpenseCategoryTotals(props.expenses)} />
       </LeaderboardItem>
-      <LeaderboardItem heading=""></LeaderboardItem>
+      <LeaderboardItem heading="Most Expensive Expenses">
+        <MostExpensiveExpenses expenses={getMostExpensive(props.expenses)}></MostExpensiveExpenses>
+      </LeaderboardItem>
       <LeaderboardItem heading=""></LeaderboardItem>
     </>
   );

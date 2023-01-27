@@ -23,26 +23,26 @@ const CarDetail = (props) => {
     const expenses = props.expenses.filter((e) => e.vehicleId === vehicleId);
     return expenses;
   };
-  const findNeighbouringVehicles = function (vehicleId) {
-    const index = garage.findIndex((v) => v._id === vehicleId);
-    const garageArrSize = garage.length - 1;
-    let nextSearchIndex;
-    let prevSearchIndex;
-    if (index == garageArrSize) {
-      nextSearchIndex = 0;
-      prevSearchIndex = index - 1;
-    } else if (index === 0) {
-      nextSearchIndex = index + 1;
-      prevSearchIndex = garageArrSize;
-    } else {
-      nextSearchIndex = index + 1;
-      prevSearchIndex = index - 1;
-    }
-    const nextVehicle = garage[nextSearchIndex];
-    const prevVehicle = garage[prevSearchIndex];
-    const stateUpdate = { prev: prevVehicle._id, next: nextVehicle._id };
-    return setNeighbouringVehicles(stateUpdate);
-  };
+  // const findNeighbouringVehicles = function (vehicleId) {
+  //   const index = garage.findIndex((v) => v._id === vehicleId);
+  //   const garageArrSize = garage.length - 1;
+  //   let nextSearchIndex;
+  //   let prevSearchIndex;
+  //   if (index == garageArrSize) {
+  //     nextSearchIndex = 0;
+  //     prevSearchIndex = index - 1;
+  //   } else if (index === 0) {
+  //     nextSearchIndex = index + 1;
+  //     prevSearchIndex = garageArrSize;
+  //   } else {
+  //     nextSearchIndex = index + 1;
+  //     prevSearchIndex = index - 1;
+  //   }
+  //   const nextVehicle = garage[nextSearchIndex];
+  //   const prevVehicle = garage[prevSearchIndex];
+  //   // const stateUpdate = { prev: prevVehicle._id, next: nextVehicle._id };
+  //   return setNeighbouringVehicles(stateUpdate);
+  // };
 
   useEffect(() => {
     const getGarage = async () => {
@@ -52,7 +52,8 @@ const CarDetail = (props) => {
       setGarage(data);
       return data;
     };
-    getGarage().then(findTargetVehicle(params.vehicleId)).then(findNeighbouringVehicles(params.vehicleId));
+    getGarage().then(findTargetVehicle(params.vehicleId));
+    // .then(findNeighbouringVehicles(params.vehicleId));
   }, []);
 
   if (!vehicle) {

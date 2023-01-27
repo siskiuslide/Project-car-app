@@ -6,7 +6,7 @@ import "./Expenses.css";
 
 const ExpenseListItem = (props) => {
   const [showModal, setShowModal] = useState(false);
-  const [reg, setReg] = useState(props.expenseVehicleFinder(props.e.vehicleId));
+  const [reg, setReg] = useState(props?.expenseVehicleFinder(props.e.vehicleId) ?? props?.vehicle.reg);
   const getExpenseDate = function (expenseDate) {
     const preformatDate = new Date(expenseDate);
     if (preformatDate != "Invalid Date") {
@@ -18,7 +18,7 @@ const ExpenseListItem = (props) => {
   };
 
   const findVehicle = function () {
-    return props.expenseVehicleFinder(props.e.vehicleId);
+    return props?.expenseVehicleFinder(props.e.vehicleId);
   };
 
   const showModalHandler = function () {
@@ -48,7 +48,7 @@ const ExpenseListItem = (props) => {
         </p>
         <div className="expenseOptions" style={{ marginLeft: "auto", width: "8%" }}>
           <p className="material-icons">edit</p>
-          <p className="material-icons" onClick={props.deleteExpenseHandler}>
+          <p className="material-icons" onClick={props?.deleteExpenseHandler}>
             delete
           </p>
           {props.e.category !== "purchase" && (

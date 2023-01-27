@@ -125,3 +125,10 @@ export const getExpenseCategoryTotals = function (expenses) {
   });
   return categoriesFiltered;
 };
+
+export const getMostExpensive = function (expenses) {
+  const sorted = expenses.sort((a, b) => {
+    return b.value - a.value;
+  });
+  return sorted;
+};

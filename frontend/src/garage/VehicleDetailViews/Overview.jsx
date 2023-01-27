@@ -20,6 +20,7 @@ import {
   getGrossProfit,
   getNetProfit,
   getCostPerDay,
+  getCostPerMile,
 } from "../../Functions";
 
 const Overview = function (props) {
@@ -239,6 +240,10 @@ ${props.vehicle?.units ?? "mi"}
           <div className="info-item">
             <div className="field">Cost Per Day</div>
             <div className="value">£{getCostPerDay(props.vehicle, props.expenses)}</div>
+          </div>
+          <div className="info-item">
+            <div className="field">Cost Per Mile</div>
+            <div className="value">£{getCostPerMile(props.vehicle, props.expenses)}</div>
           </div>
         </div>
       </div>

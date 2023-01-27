@@ -106,6 +106,9 @@ const Expenses = (props) => {
   };
 
   const getExpenseVehicle = function (vehicleId) {
+    if (props.vehicle) {
+      return props.vehicle;
+    }
     if (vehicleId === "na") {
       return "N/A";
     }

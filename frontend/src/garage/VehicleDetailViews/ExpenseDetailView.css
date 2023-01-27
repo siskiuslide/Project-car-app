@@ -1,0 +1,37 @@
+.expense-date,
+.vehicle-reg,
+.expense-category,
+.expense-value,
+.expense-credit-value,
+.expense-credited,
+.expense-not-credited .expense-outstanding {
+  width: 9%;
+}
+
+.expense-outstanding {
+  font-weight: bold;
+}
+
+.expense-description {
+  width: 20%;
+  background: none !important;
+}
+
+.expense-list-heading {
+  display: flex;
+  align-items: center;
+}
+
+.vehicle-reg {
+  width: 10%;
+}
+.expense-category.heading {
+  text-decoration: none;
+}
+
+.expense-outstanding.heading {
+  font-weight: unset;
+}
+.heading {
+  margin-inline: 0.75em;
+}

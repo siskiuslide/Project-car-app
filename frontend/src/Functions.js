@@ -131,3 +131,16 @@ export const getCostPerDay = function (vehicle, expenses) {
   const days = getTenure(vehicle);
   return ((totalExpenditure - credit) / days).toFixed(2);
 };
+
+export const getCostPerMile = function (vehicle, expenses) {
+  const vehicleExpenses = getVehicleExpenses(vehicle, expenses);
+  const credit = getCreditedExpenses(vehicle, expenses);
+  const mileage = getDrivenMileage(vehicle);
+  let totalExpenditure = vehicleExpenses - credit;
+  if (vehicle.sold) {
+    totalExpenditure -= vehicle.soldFor;
+  }
+  let costPerMile = totalExpenditure / mileage;
+
+  return costPerMile.toFixed(2);
+};

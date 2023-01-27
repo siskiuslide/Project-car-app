@@ -90,7 +90,7 @@ const Overview = function (props) {
   };
 
   const [expenses, setExpenses] = useState(getTotalExpenses(props.expenses));
-  const [creditValue, setCreditValue] = useState(getCreditedExpenses(props.expenses));
+  const [creditValue, setCreditValue] = useState(getCreditedExpenses(props.vehicle, props.expenses));
   const [showModal, setShowModal] = useState(false);
   return (
     <>

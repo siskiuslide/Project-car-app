@@ -53,7 +53,7 @@ const Leaderboard = function (props) {
           )}
           {leaderboardCategory === "expense" && (
             <>
-              <ExpenseLeaderboardList></ExpenseLeaderboardList>
+              <ExpenseLeaderboardList expenses={props.expenses}></ExpenseLeaderboardList>
             </>
           )}
         </div>

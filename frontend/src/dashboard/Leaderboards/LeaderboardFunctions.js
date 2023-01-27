@@ -1,4 +1,4 @@
-import { getTenure } from "../../Functions";
+import { getCostPerDay, getEstimatedMPG, getTenure } from "../../Functions";
 
 export const getTenureList = function (garage) {
   const tenureList = [];
@@ -51,4 +51,77 @@ export const getMileageDriven = function (garage) {
     mileageList.push(mileageObject);
   });
   return mileageList;
+};
+
+export const getAverageMPG = function (garage, expenses) {
+  const mpgList = [];
+  garage.forEach((v) => {
+    const vehicleExpenses = expenses.filter((i) => {
+      return i.vehicleId === v._id;
+    });
+    const mpg = getEstimatedMPG(vehicleExpenses);
+    if (!mpg) {
+      return;
+    }
+    const mpgObject = {
+      vehicleId: v._id,
+      manufacturer: v.manufacturer,
+      model: v.model,
+      reg: v.reg,
+      mpg,
+      units: v.units == "mi" ? "m" : "km",
+    };
+    return mpgList.push(mpgObject);
+  });
+  return mpgList;
+};
+
+export const getCostPerDayL = function (garage, expenses) {
+  const costList = [];
+  garage.forEach((v) => {
+    const costPerDay = getCostPerDay(v, expenses);
+    const tenure = getTenure(v);
+    const costObject = {
+      vehicleId: v._id,
+      manufacturer: v.manufacturer,
+      model: v.model,
+      reg: v.reg,
+      tenure,
+      costPerDay,
+      units: v.units == "mi" ? "m" : "km",
+    };
+    return costList.push(costObject);
+  });
+  return costList;
+};
+
+export const getExpenseCategoryTotals = function (expenses) {
+  const categories = [
+    "purchase",
+    "insurance",
+    "tax",
+    "fuel",
+    "servicing",
+    "parts",
+    "cleaning",
+    "modification",
+    "accessories",
+    "MOT",
+    "storage",
+    "garage work",
+    "toll",
+    "admin",
+    "other",
+  ];
+
+  const categoriesFiltered = [];
+  categories.forEach((category) => {
+    const filtered = expenses.filter((e) => e.category === category);
+    const total = filtered.reduce((current, next) => {
+      return (current += next.value);
+    }, 0);
+    const categoryObj = { category, total };
+    return categoriesFiltered.push(categoryObj);
+  });
+  return categoriesFiltered;
 };

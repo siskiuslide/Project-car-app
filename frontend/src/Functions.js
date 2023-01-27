@@ -53,7 +53,6 @@ export const getEstimatedMPG = function (expenses) {
   if (filtered.length < 1) {
     return;
   }
-
   const value = filtered.reduce((current, i) => {
     return (current += i.value);
   }, 0);
@@ -80,7 +79,30 @@ export const getTotalExpenses = function (expenses) {
   return vehicleExpenses;
 };
 
-export const getCreditedExpenses = function (expenses) {
+export const getVehicleExpenses = function (vehicle, expenses) {
+  const vehicleExpenses = expenses.filter((e) => {
+    return e.vehicleId === vehicle._id;
+  });
+  const total = vehicleExpenses.reduce((current, next) => {
+    return (current += next.value);
+  }, 0);
+  return total;
+};
+
+export const getCreditedExpenses = function (vehicle, expenses) {
+  if (vehicle) {
+    return expenses
+      .filter((e) => {
+        return e.vehicleId === vehicle._id;
+      })
+      .reduce((current, i) => {
+        if (!i.credited) {
+          return current;
+        }
+        return (current += i.creditValue);
+      }, 0);
+  }
+
   const credited = expenses.reduce((current, i) => {
     if (!i.credited) {
       return current;
@@ -100,11 +122,11 @@ export const getNetProfit = function (vehicle, expenses) {
 };
 
 export const getCostPerDay = function (vehicle, expenses) {
-  const credit = getCreditedExpenses(expenses);
-  const totalExpenses = getTotalExpenses(expenses);
-  let totalExpenditure = vehicle.boughtFor + totalExpenses;
+  const credit = getCreditedExpenses(vehicle, expenses);
+  const totalExpenses = getVehicleExpenses(vehicle, expenses);
+  let totalExpenditure = totalExpenses - credit;
   if (vehicle.soldFor) {
-    totalExpenditure = vehicle.boughtFor + totalExpenses - vehicle.soldFor;
+    totalExpenditure = totalExpenses - credit - vehicle.soldFor;
   }
   const days = getTenure(vehicle);
   return ((totalExpenditure - credit) / days).toFixed(2);

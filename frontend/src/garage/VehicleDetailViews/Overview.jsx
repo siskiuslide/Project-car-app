@@ -22,6 +22,7 @@ import {
   getCostPerDay,
   getCostPerMile,
 } from "../../Functions";
+import UpdateMileageModal from "./modals/UpdateMileageModal";
 
 const Overview = function (props) {
   const history = useHistory();
@@ -83,6 +84,24 @@ const Overview = function (props) {
       .catch((err) => console.log(err));
   };
 
+  const updateMileageHandler = function (currentMileage) {
+    const body = { vehicleId: props.vehicle._id, currentMileage };
+    const req = fetch("http://127.0.0.1:4000/garage", {
+      method: "put",
+      headers: { "content-type": "application/json" },
+      body: JSON.stringify(body),
+    })
+      .then((res) => {
+        setShowModal(false);
+        return res.json();
+      })
+      .then((data) => {
+        return setUpdatedMileage(data.data.currentMileage);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
   const showModalHandler = function () {
     setShowModal(true);
   };
@@ -93,15 +112,20 @@ const Overview = function (props) {
   const [expenses, setExpenses] = useState(getTotalExpenses(props.expenses));
   const [creditValue, setCreditValue] = useState(getCreditedExpenses(props.vehicle, props.expenses));
   const [showModal, setShowModal] = useState(false);
+  const [modalView, setModalView] = useState();
+  const [updatedMileage, setUpdatedMileage] = useState();
   return (
     <>
       {showModal && (
         <Modal show={showModal} onClose={closeModalHandler}>
-          {props.vehicle.sold === false && (
+          {props.vehicle.sold === false && modalView == "sell" && (
             <SellVehicleModal sellVehicle={sellVehicleHandler} heading="Sell Vehicle"></SellVehicleModal>
           )}
-          {props.vehicle.sold === true && (
+          {props.vehicle.sold === true && modalView == "reclaim" && (
             <ReclaimVehicleModal reclaimVehicle={reclaimVehicleHandler} heading="Reclaim Vehicle"></ReclaimVehicleModal>
+          )}
+          {modalView == "update-mileage" && (
+            <UpdateMileageModal heading="Update Mileage" updateMileage={updateMileageHandler}></UpdateMileageModal>
           )}
         </Modal>
       )}
@@ -169,9 +193,23 @@ const Overview = function (props) {
 
           <div className="view-button-flex">
             {!props.vehicle.sold ? (
-              <Button value="Sell" back={true} color="green" onClick={showModalHandler}></Button>
+              <Button
+                value="Sell"
+                back={true}
+                color="green"
+                onClick={() => {
+                  setModalView("sell");
+                  showModalHandler();
+                }}
+              ></Button>
             ) : (
-              <Button value="Re-claim" onClick={showModalHandler}></Button>
+              <Button
+                value="Re-claim"
+                onClick={() => {
+                  setModalView("reclaim");
+                  showModalHandler();
+                }}
+              ></Button>
             )}
             <Button value="Update"></Button>
             <Button value="Archive"></Button>
@@ -214,7 +252,18 @@ const Overview = function (props) {
           </div>
           <div className="info-item">
             <div className="field">Mileage (current)</div>
-            <div className="value">{`${props.vehicle?.currentMileage}  ${props.vehicle.units}`}</div>
+            <div className="value">
+              <span
+                className="material-icons"
+                onClick={() => {
+                  setModalView("update-mileage");
+                  setShowModal(true);
+                }}
+              >
+                edit
+              </span>
+              {updatedMileage ?? `${props.vehicle?.currentMileage}  ${props.vehicle.units}`}{" "}
+            </div>
           </div>
           <div className="info-item">
             <div className="field">Driven by you</div>

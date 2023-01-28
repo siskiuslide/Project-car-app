@@ -70,6 +70,7 @@ const Overview = function (props) {
       creditValue: soldFor,
       creditDate: soldDate,
       creditContext: "sale",
+      outstanding: purchaseExpense.value - soldFor,
     };
     const creditExpense = fetch(`http://127.0.0.1:4000/expenses/${purchaseExpense._id}/credit`, {
       method: "put",

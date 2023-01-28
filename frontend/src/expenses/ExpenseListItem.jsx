@@ -56,7 +56,7 @@ const ExpenseListItem = (props) => {
         </p>
         <p style={{ width: "8%" }}>{props.e.credited ? "£" + props.e.creditValue : " "}</p>
         <p style={{ width: "8%", fontSize: "1.2rem", color: `${outStandingColor}` }}>
-          {props.e.credited ? "£" + props.e.outstanding.toFixed(2) : ""}
+          {props.e.credited ? "£" + props.e.outstanding?.toFixed(2) : ""}
         </p>
         <div className="expenseOptions" style={{ marginLeft: "auto", width: "8%" }}>
           <p className="material-icons">edit</p>

@@ -125,6 +125,21 @@ const Expenses = (props) => {
     return total.toFixed(2);
   };
 
+  const getOutstandingTotal = function () {
+    const credit = getCreditTotal();
+    const total = getExpenseTotal();
+    return total - credit;
+  };
+
+  const getCreditTotal = function () {
+    const total = expenses.reduce((current, next) => {
+      if (!next.credited) {
+        return current;
+      } else return (current += next.creditValue);
+    }, 0);
+    return total;
+  };
+
   return (
     <div className="expenseContainer">
       {showForm === false ? (
@@ -166,15 +181,20 @@ const Expenses = (props) => {
       )}
       <div className="ExpenseList">
         <div className="expenseListItem headings" style={{ paddingBlock: "1em", borderBottom: " solid white 1px" }}>
-          <p style={{ width: "10%" }}>Date</p>
-          <p style={{ width: "10%" }}>Vehicle</p>
-          <p style={{ width: "10%" }}>Category</p>
-          <p style={{ width: "40%" }}>Description</p>
-          <p style={{ width: "15%", marginLeft: "auto", marginRight: "1em" }}>Value</p>
-          <p style={{ width: "8%", marginLeft: "auto", marginRight: "1em" }}>Options</p>
+          <p style={{ width: "8%" }}>Date</p>
+          <p style={{ width: "8%" }}>Vehicle</p>
+          <p style={{ width: "8%" }}>Category</p>
+          <p style={{ width: "22%" }}>Description</p>
+          <p style={{ width: "8%" }}>Value</p>
+          <p style={{ width: "5%" }}>Credited?</p>
+          <p style={{ width: "8%" }}>Credit Value</p>
+          <p style={{ width: "8%" }}>Outstanding</p>
+          <p style={{ width: "8%" }}>Options</p>
         </div>
         <div className="pre-expense-list">
-          <p className="expenses-sum">£{getExpenseTotal()}</p>
+          <p className="pre-total expenses-sum">£{getExpenseTotal()}</p>
+          <p className="pre-total credit-value">£{getCreditTotal()}</p>
+          <p className="pre-total outstanding">£{getOutstandingTotal()}</p>
           <div className="listOptions">
             {dateSortIcon ? (
               <p className="material-icons" onClick={dateSortHandler}>

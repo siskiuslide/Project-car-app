@@ -6,7 +6,7 @@ option {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  width: 60vw;
+  width: 1720px;
   margin-inline: auto;
 }
 .expenseContainer > Button {
@@ -28,27 +28,37 @@ option {
   flex-direction: row;
   align-items: center;
   transition: all 100ms 100ms;
+  justify-content: space-evenly;
+}
+.expenseListItem > p {
+  text-align: center;
 }
 .expenseListItem:not(.headings):hover {
   margin-block: 0.5em;
   background: var(--darkBackgroundHover);
 }
-.headings > * {
+.headings > p {
   font-size: 1.15em;
 }
 .pre-expense-list {
   display: flex;
-  justify-content: end;
   align-items: center;
 }
-.pre-expense-list > * {
+.pre-total {
+  text-decoration: underline white 2px;
+  text-underline-offset: 8px;
+  font-size: 1.25rem;
 }
 .expenses-sum {
   margin-left: auto;
-  width: 15%;
-  font-size: 1.25rem;
-  text-decoration: underline white 2px;
-  text-underline-offset: 8px;
+  width: 8%;
+  margin-right: 11%;
+}
+.credit-value {
+  width: 8%;
+}
+.outstanding {
+  width: 8%;
 }
 .listOptions {
   width: 8%;

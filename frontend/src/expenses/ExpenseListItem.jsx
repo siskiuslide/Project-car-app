@@ -1,4 +1,5 @@
 import React from "react";
+import { useEffect } from "react";
 import { useState } from "react";
 import Modal from "../Components/Modal";
 import CreditExpenseModal from "./CreditExpenseModal";
@@ -6,6 +7,7 @@ import "./Expenses.css";
 
 const ExpenseListItem = (props) => {
   const [showModal, setShowModal] = useState(false);
+  const [outStandingColor, setOutstandingColor] = useState("white");
   const [reg, setReg] = useState(props?.expenseVehicleFinder(props.e.vehicleId) ?? props?.vehicle.reg);
   const getExpenseDate = function (expenseDate) {
     const preformatDate = new Date(expenseDate);
@@ -28,6 +30,11 @@ const ExpenseListItem = (props) => {
     return setShowModal(false);
   };
 
+  useEffect(() => {
+    if (props.e.outstanding < 0) {
+      setOutstandingColor("green");
+    }
+  }, []);
   return (
     <>
       {showModal && (
@@ -36,15 +43,20 @@ const ExpenseListItem = (props) => {
         </Modal>
       )}
       <div className="expenseListItem" id={props.e._id}>
-        <p style={{ width: "10%" }}>{getExpenseDate(props.e.date)}</p>
-        <p style={{ width: "10%" }}>{reg}</p>
-        <p style={{ width: "10%" }} className={`expense-category category-${props.e.category} `}>
+        <p style={{ width: "8%" }}>{getExpenseDate(props.e.date)}</p>
+        <p style={{ width: "8%" }}>{reg}</p>
+        <p style={{ width: "8%" }} className={`expense-category category-${props.e.category} `}>
           {" "}
           {props.e.category}
         </p>
-        <p style={{ width: "40%" }}>{props.e.description}</p>
-        <p style={{ width: "15%", marginLeft: "auto", marginRight: "1em", fontSize: "1.25em" }}>
-          £ {parseFloat(props.e.value).toFixed(2)}
+        <p style={{ width: "24%", textAlign: "start" }}>{props.e.description}</p>
+        <p style={{ width: "8%", fontSize: "1.25em" }}>£{parseFloat(props.e.value).toFixed(2)}</p>
+        <p className="material-icons" style={{ width: "5%" }}>
+          {props.e.credited ? "done" : "close"}
+        </p>
+        <p style={{ width: "6%" }}>{props.e.credited ? "£" + props.e.creditValue : " "}</p>
+        <p style={{ width: "6%", fontSize: "1.2rem", color: `${outStandingColor}` }}>
+          {props.e.credited ? "£" + props.e.outstanding.toFixed(2) : ""}
         </p>
         <div className="expenseOptions" style={{ marginLeft: "auto", width: "8%" }}>
           <p className="material-icons">edit</p>

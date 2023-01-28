@@ -35,7 +35,7 @@ exports.sellVehicle = catchAsync(async function (req, res, next) {
 });
 
 exports.reclaimVehicle = catchAsync(async function (req, res, next) {
-  const reclaimed = await Vehicle.findOneAndUpdate({ id: req.body.vehicleId }, { ...req.body });
+  const reclaimed = await Vehicle.findOneAndUpdate({ _id: req.params.id }, { ...req.body });
   return res.status(200).json({ status: "success", data: reclaimed });
 });
 

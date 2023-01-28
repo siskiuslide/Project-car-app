@@ -13,6 +13,6 @@ router
 router.route("/:id").get(garageController.getSingleVehicle);
 
 router.route("/sale").put(garageController.sellVehicle);
-router.route("/reclaim").put(garageController.reclaimVehicle);
+router.route("/reclaim/:id").put(garageController.reclaimVehicle);
 
 module.exports = router;

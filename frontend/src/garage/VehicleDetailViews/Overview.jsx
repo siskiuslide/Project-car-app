@@ -56,12 +56,34 @@ const Overview = function (props) {
     })
       .then((res) => res.json())
       .then((data) => {
-        history.push("/");
-        window.location.reload(false);
         return setShowModal(false);
       })
       .catch((err) => console.log(err));
-    // return showModal ? setShowModal(false) : setShowModal(true);
+
+    ///credit the purchase expense
+    const purchaseExpense = props.expenses.find((e) => {
+      const expense = e.vehicleId === props.vehicle._id && e.category === "purchase";
+      return expense;
+    });
+    const creditBody = {
+      credited: true,
+      creditValue: soldFor,
+      creditDate: soldDate,
+      creditContext: "sale",
+    };
+    const creditExpense = fetch(`http://127.0.0.1:4000/expenses/${purchaseExpense._id}/credit`, {
+      method: "put",
+      body: JSON.stringify(creditBody),
+      headers: { "content-type": "application/json" },
+    })
+      .then((res) => {
+        res.json();
+      })
+      .then((data) => {
+        history.push("/");
+        return window.location.reload(false);
+      })
+      .catch((err) => console.log(err));
   };
 
   const reclaimVehicleHandler = function (buyBack, buyBackDate, buyBackPrice, buyBackMileage) {
@@ -69,7 +91,7 @@ const Overview = function (props) {
     if (buyBack === false) {
       body = { vehicleId: props.vehicle._id, sold: false, soldDate: null, soldFor: null };
     }
-    const req = fetch("http://127.0.0.1:4000/garage/reclaim", {
+    const req = fetch(`http://127.0.0.1:4000/garage/reclaim/${props.vehicle._id}`, {
       method: "put",
       headers: { "content-type": "application/json" },
       body: JSON.stringify(body),
@@ -78,7 +100,7 @@ const Overview = function (props) {
       .then((data) => {
         history.push("/");
         window.location.reload(false);
-
+        console.log(data);
         return setShowModal(false);
       })
       .catch((err) => console.log(err));

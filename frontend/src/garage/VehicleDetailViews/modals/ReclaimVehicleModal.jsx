@@ -7,7 +7,7 @@ const ReclaimVehicleModal = function (props) {
 
   const reclaimHandler = function () {
     if (buyBack === false) {
-      return props.reclaimVehicle(buyBack);
+      return props.reclaimVehicle(false);
     } else {
     }
   };

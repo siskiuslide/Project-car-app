@@ -184,9 +184,9 @@ const Expenses = (props) => {
           <p style={{ width: "8%" }}>Date</p>
           <p style={{ width: "8%" }}>Vehicle</p>
           <p style={{ width: "8%" }}>Category</p>
-          <p style={{ width: "22%" }}>Description</p>
+          <p style={{ width: "24%" }}>Description</p>
           <p style={{ width: "8%" }}>Value</p>
-          <p style={{ width: "5%" }}>Credited?</p>
+          <p style={{ width: "6%" }}>Credited?</p>
           <p style={{ width: "8%" }}>Credit Value</p>
           <p style={{ width: "8%" }}>Outstanding</p>
           <p style={{ width: "8%" }}>Options</p>

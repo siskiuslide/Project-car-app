@@ -51,11 +51,11 @@ const ExpenseListItem = (props) => {
         </p>
         <p style={{ width: "24%", textAlign: "start" }}>{props.e.description}</p>
         <p style={{ width: "8%", fontSize: "1.25em" }}>£{parseFloat(props.e.value).toFixed(2)}</p>
-        <p className="material-icons" style={{ width: "5%" }}>
+        <p className="material-icons" style={{ width: "6%" }}>
           {props.e.credited ? "done" : "close"}
         </p>
-        <p style={{ width: "6%" }}>{props.e.credited ? "£" + props.e.creditValue : " "}</p>
-        <p style={{ width: "6%", fontSize: "1.2rem", color: `${outStandingColor}` }}>
+        <p style={{ width: "8%" }}>{props.e.credited ? "£" + props.e.creditValue : " "}</p>
+        <p style={{ width: "8%", fontSize: "1.2rem", color: `${outStandingColor}` }}>
           {props.e.credited ? "£" + props.e.outstanding.toFixed(2) : ""}
         </p>
         <div className="expenseOptions" style={{ marginLeft: "auto", width: "8%" }}>

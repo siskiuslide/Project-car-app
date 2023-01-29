@@ -207,7 +207,7 @@ const Overview = function (props) {
 
               <div className="info-item">
                 <div className="field">Net Profit</div>
-                <div className="value">£{getNetProfit(props.vehicle, expenses)}</div>
+                <div className="value">£{getNetProfit(props.vehicle, expenses, props.expenses)}</div>
               </div>
             </>
           ) : (

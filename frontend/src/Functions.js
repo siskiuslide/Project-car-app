@@ -116,8 +116,11 @@ export const getGrossProfit = function (vehicle) {
   return (vehicle.soldFor - vehicle.boughtFor).toFixed(2);
 };
 
-export const getNetProfit = function (vehicle, expenses) {
-  const netProfit = vehicle.soldFor - (vehicle.boughtFor + expenses);
+export const getNetProfit = function (vehicle, totalExpenses, expenseList) {
+  console.log(totalExpenses);
+  const credit = getCreditedExpenses(vehicle, expenseList);
+  const netProfit = credit - (vehicle.boughtFor + totalExpenses);
+
   return netProfit.toFixed(2);
 };
 

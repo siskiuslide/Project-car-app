@@ -117,7 +117,6 @@ export const getGrossProfit = function (vehicle) {
 };
 
 export const getNetProfit = function (vehicle, totalExpenses, expenseList) {
-  console.log(totalExpenses);
   const credit = getCreditedExpenses(vehicle, expenseList);
   const netProfit = credit - (vehicle.boughtFor + totalExpenses);
 

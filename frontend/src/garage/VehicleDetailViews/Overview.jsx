@@ -23,11 +23,15 @@ import {
   getCostPerMile,
 } from "../../Functions";
 import UpdateMileageModal from "./modals/UpdateMileageModal";
+import ServiceVehicleModal from "./modals/ServiceVehicleModal";
 
 const Overview = function (props) {
   const history = useHistory();
 
   const formatDate = function (timestamp) {
+    if (!timestamp) {
+      return "";
+    }
     const preformat = new Date(timestamp);
     const date = preformat.getDate();
     const month = preformat.getMonth() + 1;
@@ -125,6 +129,10 @@ const Overview = function (props) {
         console.log(err);
       });
   };
+
+  const serviceVehicleHandler = function () {
+    return console.log("serviced vehicle");
+  };
   const showModalHandler = function () {
     setShowModal(true);
   };
@@ -150,6 +158,9 @@ const Overview = function (props) {
           {modalView == "update-mileage" && (
             <UpdateMileageModal heading="Update Mileage" updateMileage={updateMileageHandler}></UpdateMileageModal>
           )}
+          {modalView == "service" && (
+            <ServiceVehicleModal serviceVehicle={serviceVehicleHandler} currentMileage={props.vehicle.currentMileage} />
+          )}
         </Modal>
       )}
       <div className="view-heading">Overview</div>
@@ -170,7 +181,7 @@ const Overview = function (props) {
           </div>
           <div className="info-item">
             <div className="field">Sold Date</div>
-            <div className="value">{formatDate(props.vehicle?.soldDate)}</div>
+            <div className="value">{formatDate(props.vehicle.soldDate) ?? ""}</div>
           </div>
           <div className="info-item">
             <div className="field">Purchase Price</div>
@@ -316,6 +327,46 @@ ${props.vehicle?.units ?? "mi"}
           <div className="info-item">
             <div className="field">Cost Per Mile</div>
             <div className="value">£{getCostPerMile(props.vehicle, props.expenses)}</div>
+          </div>
+        </div>
+      </div>
+      <div className="view-flex-horiz overview">
+        <div className="detail-info-section">
+          <h2 className="detail-section-header">Maintenance</h2>
+          <p style={{ color: "darkgray", fontSize: "0.75rem", marginTop: "-0.75rem" }}>
+            Intervals -{" "}
+            <span className="service-interval">
+              {props.vehicle?.serviceIntervalMileage}
+              {props.vehicle?.units}
+            </span>{" "}
+            / <span className="service-interval">{props.vehicle?.serviceIntervalTime} year</span>
+          </p>
+
+          <div className="info-item">
+            <div className="field">Last Service Date</div>
+            <div className="value">{formatDate(props.vehicle?.lastServiceDate)}</div>
+          </div>
+          <div className="info-item">
+            <div className="field">Last Service Mileage</div>
+            <div className="value">{props.vehicle?.lastServiceMileage}</div>
+          </div>
+          <div className="info-item">
+            <div className="field">Last Service Type</div>
+            <div className="value capitalize">{props.vehicle?.lastServiceType}</div>
+          </div>
+          <div className="info-item">
+            <div className="field">Last Service Cost</div>
+            <div className="value">tbc</div>
+          </div>
+          <div className="buttonarea">
+            <Button value="Edit"></Button>
+            <Button
+              value="Service"
+              onClick={() => {
+                setModalView("service");
+                showModalHandler();
+              }}
+            ></Button>
           </div>
         </div>
       </div>

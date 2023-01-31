@@ -19,9 +19,11 @@ mongoose.connect(DB).then((con) => {
 const garageRoute = require("./routes/garage");
 const expenseRoute = require("./routes/expenses");
 const todoRoute = require("./routes/todo");
+const serviceRoute = require("./routes/servicing");
 
 app.use("/garage", garageRoute);
 app.use("/expenses", expenseRoute);
 app.use("/todo", todoRoute);
+app.use("/service", serviceRoute);
 
 module.exports = app;

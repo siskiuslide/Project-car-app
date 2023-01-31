@@ -5,6 +5,7 @@ const schema = new mongoose.Schema({
   expenseId: { type: String },
   serviceType: { type: String, Enum: ["basic", "minor", "major", "full service"] },
   serviceDate: { type: Date },
+  serviceDescription: { type: String },
   mileageAtService: { type: Number },
   serviceEnvironment: { type: String, Enum: ["home", "garage", "dealer"] },
 });

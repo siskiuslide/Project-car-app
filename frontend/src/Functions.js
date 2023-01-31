@@ -143,6 +143,9 @@ export const getCostPerMile = function (vehicle, expenses) {
 };
 
 export const getNextServiceDate = function (vehicle) {
+  if (!vehicle.lastServiceDate) {
+    return null;
+  }
   const monthInterval = vehicle.serviceIntervalTimeMonths;
   const lastServiceDate = new Date(vehicle.lastServiceDate);
   const months = lastServiceDate.getMonth();
@@ -152,6 +155,9 @@ export const getNextServiceDate = function (vehicle) {
 };
 
 export const getNextServiceMileage = function (vehicle) {
+  if(!vehicle.lastServiceMileage) {
+    return null;
+  }
   return vehicle.lastServiceMileage + vehicle.serviceIntervalMileage;
 };
 
@@ -162,6 +168,9 @@ export const getMileageUntilService = function (vehicle) {
 };
 
 export const getEstimatedServiceDate = function (vehicle) {
+  if (!vehicle.lastServiceMileage) {
+    return null;
+  }
   const weeklyMileage = getEstimatedUsage(vehicle);
   const mileageUntilNext = getMileageUntilService(vehicle);
   const weeks = mileageUntilNext / weeklyMileage;

@@ -30,7 +30,7 @@ const ServiceVehicleModal = (props) => {
         </select>
       </form>
       <div className="buttonarea">
-        <Button value="Submit"></Button>
+        <Button value="Submit" onClick={props.serviceVehicleHandler}></Button>
       </div>
     </>
   );

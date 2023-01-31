@@ -3,6 +3,7 @@ const mongoose = require("mongoose");
 const schema = new mongoose.Schema(
   {
     type: { type: String, enum: ["car", "motorcycle", "van"] },
+    SORN: { type: Boolean, default: false },
     manufacturer: { type: String, required: true },
     model: { type: String, required: true },
     variant: { type: String },

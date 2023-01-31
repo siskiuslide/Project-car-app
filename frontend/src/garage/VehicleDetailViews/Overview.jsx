@@ -32,8 +32,8 @@ const Overview = function (props) {
   const history = useHistory();
 
   const formatDate = function (timestamp) {
-    if (!timestamp) {
-      return "";
+    if (timestamp === null) {
+      return "N/A";
     }
     const preformat = new Date(timestamp);
     const date = preformat.getDate();
@@ -130,6 +130,8 @@ const Overview = function (props) {
   };
 
   const serviceVehicleHandler = function () {
+    //create service record and send to /service/:id
+    //update /vehicle with last service record
     return console.log("serviced vehicle");
   };
   const showModalHandler = function () {

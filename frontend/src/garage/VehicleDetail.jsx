@@ -80,6 +80,19 @@ const CarDetail = (props) => {
           </Link>
         </div>
       </div>
+      <div className="header-flex vehicle-status-header">
+        <p>Vehicle Status:</p>
+        {vehicle.sold && (
+          <p className="sold-vehicle">
+            <span className="material-icons" style={{ marginInline: "0.2rem" }}>
+              sell
+            </span>
+            Sold
+          </p>
+        )}
+        {vehicle.SORN && <p className="SORN-vehicle">SORN</p>}
+        <p></p>
+      </div>
       <div className="vehicle-detail-main">
         <div className="vehicle-view-list">
           <div

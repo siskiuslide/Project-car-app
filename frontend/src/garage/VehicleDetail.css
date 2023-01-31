@@ -14,7 +14,23 @@
 .header-buttons {
   margin-left: auto;
 }
+.vehicle-status-header {
+  font-size: 1.15rem;
+}
+.vehicle-status-header > p {
+  padding: 0.25rem 1rem;
+  align-items: center;
+  display: flex;
+}
 
+.sold-vehicle {
+  border: 1px solid green;
+  color: green;
+}
+.SORN-vehicle {
+  border: 1px solid red;
+  color: red;
+}
 .vehicle-detail-main {
   width: 95%;
   color: white;

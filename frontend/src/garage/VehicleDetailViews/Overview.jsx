@@ -21,6 +21,9 @@ import {
   getNetProfit,
   getCostPerDay,
   getCostPerMile,
+  getNextServiceDate,
+  getNextServiceMileage,
+  getEstimatedServiceDate,
 } from "../../Functions";
 import UpdateMileageModal from "./modals/UpdateMileageModal";
 import ServiceVehicleModal from "./modals/ServiceVehicleModal";
@@ -36,10 +39,6 @@ const Overview = function (props) {
     const date = preformat.getDate();
     const month = preformat.getMonth() + 1;
     const year = preformat.getFullYear();
-
-    // if (date.toString().length() < 2) {
-    //   date.toString().concat("0");
-    // }
 
     return `${date}/${month}/${year}`;
   };
@@ -339,7 +338,7 @@ ${props.vehicle?.units ?? "mi"}
               {props.vehicle?.serviceIntervalMileage}
               {props.vehicle?.units}
             </span>{" "}
-            / <span className="service-interval">{props.vehicle?.serviceIntervalTime} year</span>
+            / <span className="service-interval">{props.vehicle?.serviceIntervalTimeMonths}mo</span>
           </p>
 
           <div className="info-item">
@@ -357,6 +356,18 @@ ${props.vehicle?.units ?? "mi"}
           <div className="info-item">
             <div className="field">Last Service Cost</div>
             <div className="value">tbc</div>
+          </div>
+          <div className="info-item">
+            <div className="field">Next Service Due</div>
+            <div className="value">{formatDate(getNextServiceDate(props.vehicle))}</div>
+          </div>
+          <div className="info-item">
+            <div className="field">Next Service Mileage</div>
+            <div className="value">{getNextServiceMileage(props.vehicle)}</div>
+          </div>
+          <div className="info-item">
+            <div className="field">Estimated Service Date</div>
+            <div className="value">{formatDate(getEstimatedServiceDate(props.vehicle))}</div>
           </div>
           <div className="buttonarea">
             <Button value="Edit"></Button>

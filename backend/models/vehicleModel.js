@@ -23,7 +23,7 @@ const schema = new mongoose.Schema(
     estimatedMileage: { type: Number },
     units: { type: String, Enum: ["mi", "km"] },
     serviceIntervalMileage: { type: Number },
-    serviceIntervalTime: { type: Number },
+    serviceIntervalTimeMonths: { type: Number },
     lastServiceMileage: { type: Number },
     lastServiceDate: { type: Date },
     lastServiceType: { type: String, Enum: ["basic", "minor", "major", "full service"] },

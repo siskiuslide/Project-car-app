@@ -141,3 +141,33 @@ export const getCostPerMile = function (vehicle, expenses) {
 
   return costPerMile.toFixed(2);
 };
+
+export const getNextServiceDate = function (vehicle) {
+  const monthInterval = vehicle.serviceIntervalTimeMonths;
+  const lastServiceDate = new Date(vehicle.lastServiceDate);
+  const months = lastServiceDate.getMonth();
+
+  const nextServiceDate = lastServiceDate.setMonth(months + monthInterval);
+  return nextServiceDate;
+};
+
+export const getNextServiceMileage = function (vehicle) {
+  return vehicle.lastServiceMileage + vehicle.serviceIntervalMileage;
+};
+
+export const getMileageUntilService = function (vehicle) {
+  const nextService = getNextServiceMileage(vehicle);
+  const currentMileage = vehicle.currentMileage;
+  return nextService - currentMileage;
+};
+
+export const getEstimatedServiceDate = function (vehicle) {
+  const weeklyMileage = getEstimatedUsage(vehicle);
+  const mileageUntilNext = getMileageUntilService(vehicle);
+  const weeks = mileageUntilNext / weeklyMileage;
+  const days = weeks * 7;
+  const now = new Date(Date.now());
+  const currentDate = now.getDate();
+  const estimated = now.setDate(currentDate + days);
+  return estimated;
+};

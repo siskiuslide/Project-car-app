@@ -27,6 +27,7 @@ import {
 } from "../../Functions";
 import UpdateMileageModal from "./modals/UpdateMileageModal";
 import ServiceVehicleModal from "./modals/ServiceVehicleModal";
+import ServiceHistoryPlot from "./ServiceHistoryPlot";
 
 const Overview = function (props) {
   const history = useHistory();
@@ -129,11 +130,25 @@ const Overview = function (props) {
       });
   };
 
-  const serviceVehicleHandler = function () {
+  const serviceVehicleHandler = function (body) {
     //create service record and send to /service/:id
+    console.log(body);
+    const service = fetch("http://127.0.0.1:4000/service", {
+      method: "put",
+      headers: { "content-type": "application/json" },
+      body: JSON.stringify(body),
+    })
+      .then((res) => {
+        return res.json();
+      })
+      .then((data) => {
+        setServiceHistory(data.data);
+        return data;
+      });
     //update /vehicle with last service record
-    return console.log("serviced vehicle");
+    return setShowModal(false);
   };
+
   const showModalHandler = function () {
     setShowModal(true);
   };
@@ -146,6 +161,7 @@ const Overview = function (props) {
   const [showModal, setShowModal] = useState(false);
   const [modalView, setModalView] = useState();
   const [updatedMileage, setUpdatedMileage] = useState();
+  const [serviceHistory, setServiceHistory] = useState();
   return (
     <>
       {showModal && (
@@ -160,7 +176,11 @@ const Overview = function (props) {
             <UpdateMileageModal heading="Update Mileage" updateMileage={updateMileageHandler}></UpdateMileageModal>
           )}
           {modalView == "service" && (
-            <ServiceVehicleModal serviceVehicle={serviceVehicleHandler} currentMileage={props.vehicle.currentMileage} />
+            <ServiceVehicleModal
+              serviceVehicleHandler={serviceVehicleHandler}
+              currentMileage={props.vehicle.currentMileage}
+              vehicleId={props.vehicle._id}
+            />
           )}
         </Modal>
       )}
@@ -381,6 +401,7 @@ ${props.vehicle?.units ?? "mi"}
               }}
             ></Button>
           </div>
+          <ServiceHistoryPlot vehicle={props.vehicle} serviceHistory={props.serviceHistory} />
         </div>
       </div>
     </>

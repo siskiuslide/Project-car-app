@@ -23,6 +23,7 @@ const CarDetail = (props) => {
     const expenses = props.expenses.filter((e) => e.vehicleId === vehicleId);
     return expenses;
   };
+
   // const findNeighbouringVehicles = function (vehicleId) {
   //   const index = garage.findIndex((v) => v._id === vehicleId);
   //   const garageArrSize = garage.length - 1;
@@ -53,7 +54,7 @@ const CarDetail = (props) => {
       return data;
     };
     getGarage().then(findTargetVehicle(params.vehicleId));
-    // .then(findNeighbouringVehicles(params.vehicleId));
+    // getServiceHistory();
   }, []);
 
   if (!vehicle) {

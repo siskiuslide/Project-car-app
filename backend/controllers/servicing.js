@@ -8,7 +8,8 @@ exports.getVehicleServiceRecords = catchAsync(async function (req, res, next) {
 
 exports.addServiceRecord = catchAsync(async function (req, res, next) {
   const record = await Service.create({ ...req.body });
-  return res.status(200).json({ status: "success", data: record });
+  const records = await Service.find();
+  return res.status(200).json({ status: "success", data: records });
 });
 
 exports.deleteServiceRecord = catchAsync(async function (req, res, next) {});

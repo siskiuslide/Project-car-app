@@ -132,7 +132,6 @@ const Overview = function (props) {
 
   const serviceVehicleHandler = function (body) {
     //create service record and send to /service/:id
-    console.log(body);
     const service = fetch("http://127.0.0.1:4000/service", {
       method: "put",
       headers: { "content-type": "application/json" },
@@ -146,6 +145,7 @@ const Overview = function (props) {
         return data;
       });
     //update /vehicle with last service record
+    setShowServiceHistoryGraph(true);
     return setShowModal(false);
   };
 
@@ -162,6 +162,7 @@ const Overview = function (props) {
   const [modalView, setModalView] = useState();
   const [updatedMileage, setUpdatedMileage] = useState();
   const [serviceHistory, setServiceHistory] = useState();
+  const [showServiceHistoryGraph, setShowServiceHistoryGraph] = useState(true);
   return (
     <>
       {showModal && (
@@ -396,13 +397,18 @@ ${props.vehicle?.units ?? "mi"}
             <Button
               value="Service"
               onClick={() => {
+                setShowServiceHistoryGraph(false);
                 setModalView("service");
                 showModalHandler();
               }}
             ></Button>
           </div>
-          <ServiceHistoryPlot vehicle={props.vehicle} serviceHistory={props.serviceHistory} />
         </div>
+        <ServiceHistoryPlot
+          vehicle={props.vehicle}
+          serviceHistory={props.serviceHistory}
+          showGraph={showServiceHistoryGraph}
+        />
       </div>
     </>
   );

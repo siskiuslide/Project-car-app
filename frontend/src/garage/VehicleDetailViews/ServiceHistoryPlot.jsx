@@ -55,25 +55,35 @@ const ServiceHistoryPlot = (props) => {
     return context === "service" ? mileagesService : mileagesOther;
   };
 
+  const getServiceText = function () {
+    const text = [];
+    const yaxisMileages = getYAxis("service", serviceHistory);
+    yaxisMileages.forEach((r) => {
+      const record = serviceHistory.find((i) => i.mileageAtService === r);
+      const recordText = `${record.serviceType} @ ${record.serviceDescription}`;
+      text.push(recordText);
+    });
+    return text;
+  };
   const data = [
     {
       x: getYearsXAxis("service", serviceHistory),
       y: getYAxis("service", serviceHistory),
       type: "scatter",
       mode: "lines + markers",
-      marker: { color: "rgb(51, 153, 194)" },
+      marker: { color: "rgb(51, 153, 194)", size: 10 },
       name: "Engine Services",
+      text: getServiceText(),
     },
     {
       type: "scatter",
       mode: "markers",
       marker: {
-        size: 100,
+        size: 10,
       },
       x: getYearsXAxis("other", serviceHistory),
       y: getYAxis("other", serviceHistory),
       name: "Other Service Items",
-      marker: { color: "limegreen" },
     },
   ];
 
@@ -81,13 +91,14 @@ const ServiceHistoryPlot = (props) => {
     plot_bgcolor: "rgba(58, 57, 57, 0.34)",
     paper_bgcolor: "transparent",
     font: { size: 12, color: "white" },
-    width: 1050,
-    height: 600,
+    width: 950,
+    height: 450,
     title: "Service History",
     xaxis: { title: "Time" },
     yaxis: { title: "Mileage" },
   };
 
-  return <Plot data={data} layout={layout}></Plot>;
+  return props.showGraph && <Plot data={data} layout={layout}></Plot>;
 };
+
 export default ServiceHistoryPlot;

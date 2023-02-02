@@ -17,6 +17,7 @@
   transform: translate(-50%, -50%);
   color: white;
   border-radius: 2px;
+  z-index: 10000;
 }
 .show-modal {
   display: block;

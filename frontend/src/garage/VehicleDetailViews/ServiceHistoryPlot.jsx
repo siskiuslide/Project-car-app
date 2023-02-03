@@ -74,6 +74,7 @@ const ServiceHistoryPlot = (props) => {
       marker: { color: "rgb(51, 153, 194)", size: 10 },
       name: "Engine Services",
       text: getServiceText(),
+      hovertemplate: "<i>Date</i>: %{x}" + "<br><i>Mileage</i>: %{y}" + "<extra></extra>",
     },
     {
       type: "scatter",
@@ -96,6 +97,7 @@ const ServiceHistoryPlot = (props) => {
     title: "Service History",
     xaxis: { title: "Time" },
     yaxis: { title: "Mileage" },
+    legend: { orientation: "h" },
   };
 
   return props.showGraph && <Plot data={data} layout={layout}></Plot>;

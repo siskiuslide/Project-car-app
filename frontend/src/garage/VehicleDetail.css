@@ -1,8 +1,26 @@
+.headers-status-organiser {
+  display: flex;
+}
 .header-flex {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-left: 3rem;
+}
+.header-flex-item {
   display: flex;
   flex-direction: row;
   align-items: center;
-  margin-inline: 3rem;
+  width: 100%;
+}
+
+.vehicle-status {
+  display: flex;
+  align-items: center;
+  font-size: 1.1rem;
+}
+.vehicle-status > * {
+  padding-inline: 0.25rem;
 }
 
 .vehicle-detail-heading {
@@ -10,17 +28,6 @@
   color: white;
   margin-right: 1rem;
   text-transform: capitalize;
-}
-.header-buttons {
-  margin-left: auto;
-}
-.vehicle-status-header {
-  font-size: 1.15rem;
-}
-.vehicle-status-header > p {
-  padding: 0.25rem 1rem;
-  align-items: center;
-  display: flex;
 }
 
 .sold-vehicle {

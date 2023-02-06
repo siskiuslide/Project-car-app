@@ -67,41 +67,36 @@ const CarDetail = (props) => {
   }
   return (
     <>
-      <div className="header-flex">
-        <h1 className="vehicle-detail-heading">{vehicle?.manufacturer + " " + vehicle?.model}</h1>
-        <p className="Reg" style={{ width: "auto", fontSize: "1.5rem" }}>
-          {vehicle?.reg.toUpperCase()}
-        </p>
-        <div className="header-buttons">
-          {/* <Link to={`/garage/${neighbouringVehicles.prev._id}`}> */}
-          <Link to="/garage">
-            <Button className="button-to-vehicle" value="Previous Vehicle"></Button>
-          </Link>
-          <Link to={`/garage/${neighbouringVehicles?.next}`}>
-            <Button className="button-to-vehicle" value="Next Vehicle"></Button>
-          </Link>
+      <div className="headers-status-organiser">
+        <div className="header-flex">
+          <div className="header-flex-item">
+            <h1 className="vehicle-detail-heading">{vehicle?.manufacturer + " " + vehicle?.model}</h1>
+            <p className="Reg" style={{ width: "auto", fontSize: "1.5rem" }}>
+              {vehicle?.reg.toUpperCase()}
+            </p>
+          </div>
+          <div className="header-flex-item vehicle-status">
+            <p>Vehicle Status:</p>
+            {vehicle.sold && (
+              <p className="sold-vehicle">
+                <span className="material-icons" style={{ marginInline: "0.2rem", fontSize: "1rem" }}>
+                  sell
+                </span>
+                Sold
+              </p>
+            )}
+            {vehicle.SORN && <p className="SORN-vehicle">SORN</p>}
+            {!vehicle.SORN && !vehicle.sold && (
+              <p>
+                On The Road{" "}
+                <span className="material-icons" style={{ color: "green", fontSize: "1rem" }}>
+                  {" "}
+                  done
+                </span>
+              </p>
+            )}
+          </div>
         </div>
-      </div>
-      <div className="header-flex vehicle-status-header">
-        <p>Vehicle Status:</p>
-        {vehicle.sold && (
-          <p className="sold-vehicle">
-            <span className="material-icons" style={{ marginInline: "0.2rem" }}>
-              sell
-            </span>
-            Sold
-          </p>
-        )}
-        {vehicle.SORN && <p className="SORN-vehicle">SORN</p>}
-        {!vehicle.SORN && !vehicle.sold && (
-          <p>
-            On The Road{" "}
-            <span className="material-icons" style={{ color: "green", paddingInline: "0.25rem" }}>
-              {" "}
-              done
-            </span>
-          </p>
-        )}
         {!vehicle.sold && <EssentialDates></EssentialDates>}
       </div>
       <div className="vehicle-detail-main">

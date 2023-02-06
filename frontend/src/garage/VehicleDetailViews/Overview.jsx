@@ -24,6 +24,7 @@ import {
   getNextServiceDate,
   getNextServiceMileage,
   getEstimatedServiceDate,
+  getCostPerMileFuel,
 } from "../../Functions";
 import UpdateMileageModal from "./modals/UpdateMileageModal";
 import ServiceVehicleModal from "./modals/ServiceVehicleModal";
@@ -347,8 +348,12 @@ ${props.vehicle?.units ?? "mi"}
             <div className="value">£{getCostPerDay(props.vehicle, props.expenses)}</div>
           </div>
           <div className="info-item">
-            <div className="field">Cost Per Mile</div>
+            <div className="field">Cost Per Mile (total)</div>
             <div className="value">£{getCostPerMile(props.vehicle, props.expenses)}</div>
+          </div>
+          <div className="info-item">
+            <div className="field">Cost Per Mile (fuel)</div>
+            <div className="value">£{getCostPerMileFuel(props.vehicle, props.expenses)}</div>
           </div>
         </div>
       </div>

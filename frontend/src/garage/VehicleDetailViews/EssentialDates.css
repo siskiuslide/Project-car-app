@@ -1,18 +1,29 @@
 .essential-dates {
   display: flex;
+  flex-direction: row;
   justify-content: center;
   align-items: center;
 }
 
 .essential-dates > * {
   width: 250px;
-  height: 105px;
-  margin: 25px;
+  height: auto;
+  margin-inline: 25px;
+  margin-block: 10px;
   background-color: var(--darkBackgroundHover);
   padding-inline: 10px;
   text-align: center;
+  border-radius: 5px;
 }
 
 .due-date {
   padding-inline: 10px;
+}
+
+.remaining-days {
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+.remaining-days::after {
+  content: " days";
 }

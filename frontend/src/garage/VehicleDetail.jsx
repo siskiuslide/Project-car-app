@@ -6,6 +6,7 @@ import { Link, useParams } from "react-router-dom";
 import VehicleDetailOverview from "./VehicleDetailViews/VehicleDetailOverview";
 import VehicleViewContainer from "./VehicleDetailViews/VehicleViewContainer";
 import Button from "../Components/Button";
+import EssentialDates from "./VehicleDetailViews/EssentialDates";
 
 const CarDetail = (props) => {
   const [garage, setGarage] = useState(props?.garage);
@@ -92,7 +93,16 @@ const CarDetail = (props) => {
           </p>
         )}
         {vehicle.SORN && <p className="SORN-vehicle">SORN</p>}
-        <p></p>
+        {!vehicle.SORN && !vehicle.sold && (
+          <p>
+            On The Road{" "}
+            <span className="material-icons" style={{ color: "green", paddingInline: "0.25rem" }}>
+              {" "}
+              done
+            </span>
+          </p>
+        )}
+        {!vehicle.sold && <EssentialDates></EssentialDates>}
       </div>
       <div className="vehicle-detail-main">
         <div className="vehicle-view-list">

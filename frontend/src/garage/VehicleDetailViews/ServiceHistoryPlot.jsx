@@ -3,7 +3,7 @@ import Plot from "react-plotly.js";
 import { useState, useEffect } from "react";
 
 const ServiceHistoryPlot = (props) => {
-  const [serviceHistory, setServiceHistory] = useState();
+  const [serviceHistory, setServiceHistory] = useState(null);
   const [currentYear, setCurrentYear] = useState(new Date(Date.now()).getFullYear());
 
   const getServiceHistory = async function () {
@@ -17,7 +17,9 @@ const ServiceHistoryPlot = (props) => {
   };
 
   useEffect(() => {
-    getServiceHistory().then((data) => setServiceHistory(data));
+    getServiceHistory().then((data) => {
+      setServiceHistory(data);
+    });
   }, []);
 
   const getYearsXAxis = function (context, serviceHistory) {
@@ -100,7 +102,7 @@ const ServiceHistoryPlot = (props) => {
     legend: { orientation: "h" },
   };
 
-  return props.showGraph && <Plot data={data} layout={layout}></Plot>;
+  return props.showGraph && !props.vehicle.sold && <Plot data={data} layout={layout}></Plot>;
 };
 
 export default ServiceHistoryPlot;

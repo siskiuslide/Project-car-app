@@ -1,0 +1,18 @@
+.essential-dates {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.essential-dates > * {
+  width: 250px;
+  height: 105px;
+  margin: 25px;
+  background-color: var(--darkBackgroundHover);
+  padding-inline: 10px;
+  text-align: center;
+}
+
+.due-date {
+  padding-inline: 10px;
+}

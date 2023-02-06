@@ -33,8 +33,8 @@ const Overview = function (props) {
   const history = useHistory();
 
   const formatDate = function (timestamp) {
-    if (timestamp === null) {
-      return "N/A";
+    if (timestamp === null || timestamp === undefined) {
+      return null;
     }
     const preformat = new Date(timestamp);
     const date = preformat.getDate();
@@ -203,7 +203,7 @@ const Overview = function (props) {
           </div>
           <div className="info-item">
             <div className="field">Sold Date</div>
-            <div className="value">{formatDate(props.vehicle.soldDate) ?? ""}</div>
+            <div className="value">{formatDate(props.vehicle?.soldDate) ?? ""}</div>
           </div>
           <div className="info-item">
             <div className="field">Purchase Price</div>

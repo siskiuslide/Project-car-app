@@ -144,7 +144,7 @@ export const getCostPerMile = function (vehicle, expenses) {
 
 export const getCostPerMileFuel = function (vehicle, expenses) {
   const fuelExpenses = expenses.reduce((current, next) => {
-    if (next.category === "fuel") {
+    if (next.category === "fuel" && next.tripSinceLastFill) {
       return (current += next.value);
     } else return current;
   }, 0);

@@ -97,7 +97,7 @@ const CarDetail = (props) => {
             )}
           </div>
         </div>
-        {!vehicle.sold && <EssentialDates></EssentialDates>}
+        {!vehicle.sold && <EssentialDates vehicle={vehicle}></EssentialDates>}
       </div>
       <div className="vehicle-detail-main">
         <div className="vehicle-view-list">

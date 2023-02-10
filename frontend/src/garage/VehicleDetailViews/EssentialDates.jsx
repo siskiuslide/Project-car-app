@@ -1,7 +1,20 @@
-import React from "react";
+import React, { useState } from "react";
+import Modal from "../../Components/Modal";
+import DueDate from "./DueDate";
 import "./EssentialDates.css";
+import MOTModal from "./modals/EssentialDates/MOTModal";
 
 const EssentialDates = (props) => {
+  const [showModal, setShowModal] = useState(false);
+  const [modalContext, setModalContext] = useState(false);
+
+  const showModalHandler = function () {
+    return setShowModal(true);
+  };
+  const closeModalHandler = function () {
+    setShowModal(false);
+  };
+
   const getRemainingDays = function (dueDate) {
     const due = new Date(dueDate);
     const today = new Date(Date.now());
@@ -24,34 +37,76 @@ const EssentialDates = (props) => {
     }
   };
 
-  dueDateStyling("03-22-2023");
+  const getFullDate = function (dueDate) {
+    const due = new Date(dueDate);
+    const date = due.getDate();
+    const month = due.toLocaleString("default", { month: "long" });
+    const year = due.getFullYear();
+    return `${date} ${month} ${year}`;
+  };
+
+  const setMotDate = function (date) {
+    const body = { vehicleId: props.vehicle._id, MOTDue: date };
+    const req = fetch("http://127.0.0.1:4000/garage", {
+      method: "put",
+      body: JSON.stringify(body),
+      headers: { "content-type": "application/json" },
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+        return closeModalHandler();
+      })
+      .catch((err) => console.log(err));
+  };
+
   return (
-    <div className="essential-dates">
-      <div className="MOT-date" style={dueDateStyling("11-23-2023")}>
-        <p>MOT</p>
-        <p className="remaining-days">{getRemainingDays("11-23-2023")}</p>
-        {getRemainingDays("02-05-2022") < 0 ?? <p>Expired!</p>}
-        <p className="due-date">
-          <span>Due: </span>23rd November 2023
-        </p>
+    <>
+      {showModal && (
+        <Modal show={showModal} onClose={closeModalHandler}>
+          {modalContext === "MOT" && <MOTModal setMotDate={setMotDate}></MOTModal>}
+          {modalContext === "Tax" && <></>}
+          {modalContext === "Insurance" && <></>}
+        </Modal>
+      )}
+      <div className="essential-dates">
+        <DueDate
+          title={"MOT"}
+          getRemainingDays={getRemainingDays}
+          dueDateStyling={dueDateStyling}
+          getFullDate={getFullDate}
+          dueDate={props.vehicle?.MOTDue}
+          onClick={() => {
+            showModalHandler();
+            setModalContext("MOT");
+          }}
+        ></DueDate>
+        <DueDate
+          title={"Tax"}
+          getRemainingDays={getRemainingDays}
+          dueDateStyling={dueDateStyling}
+          getFullDate={getFullDate}
+          dueDate={props.vehicle?.TaxDue}
+          onClick={() => {
+            showModalHandler();
+            setModalContext("Tax");
+          }}
+          closeModalHandler={closeModalHandler}
+        ></DueDate>
+        <DueDate
+          title={"Insurance"}
+          getRemainingDays={getRemainingDays}
+          dueDateStyling={dueDateStyling}
+          getFullDate={getFullDate}
+          dueDate={props.vehicle?.InsuranceDue}
+          onClick={() => {
+            showModalHandler();
+            setModalContext("Insurance");
+          }}
+          closeModalHandler={closeModalHandler}
+        ></DueDate>
       </div>
-      <div className="TAX-date" style={dueDateStyling("01-10-2024")}>
-        <p>Tax</p>
-        <p className="remaining-days">{getRemainingDays("01-10-2024")}</p>
-
-        <p className="due-date">
-          <span>Due: </span> 10th January 2024
-        </p>
-      </div>
-      <div className="insurance-date" style={dueDateStyling("08-04-2023")}>
-        <p>Insurance</p>
-        <p className="remaining-days">{getRemainingDays("08-04-2023")}</p>
-
-        <p className="due-date">
-          <span>Due: </span>4th August 2023
-        </p>
-      </div>
-    </div>
+    </>
   );
 };
 

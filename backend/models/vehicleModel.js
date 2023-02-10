@@ -32,6 +32,9 @@ const schema = new mongoose.Schema(
     soldFor: { type: Number },
     soldDate: { type: Date },
     tenure: { type: Number },
+    MOTDue: { type: Date },
+    TaxDue: { type: Date },
+    InsuranceDue: { type: Date },
   },
   { timestamps: true }
 );

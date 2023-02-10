@@ -196,3 +196,12 @@ export const getEstimatedServiceDate = function (vehicle) {
   const estimated = now.setDate(currentDate + days);
   return estimated;
 };
+
+export const getAverageTrip = function (expenses) {
+  const filtered = expenses.filter((el) => el.tripSinceLastFill);
+  const total = filtered.reduce((current, next) => {
+    return current + next.tripSinceLastFill;
+  }, 0);
+  const average = total / filtered.length;
+  return average.toFixed(1);
+};

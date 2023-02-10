@@ -25,6 +25,7 @@ import {
   getNextServiceMileage,
   getEstimatedServiceDate,
   getCostPerMileFuel,
+  getAverageTrip,
 } from "../../Functions";
 import UpdateMileageModal from "./modals/UpdateMileageModal";
 import ServiceVehicleModal from "./modals/ServiceVehicleModal";
@@ -299,6 +300,10 @@ const Overview = function (props) {
           <div className="info-item">
             <div className="field">Estimated MPG</div>
             <div className="value">{getEstimatedMPG(props.expenses)}</div>
+          </div>
+          <div className="info-item">
+            <div className="field">Average Trip Reading</div>
+            <div className="value">{getAverageTrip(props.expenses)}</div>
           </div>
         </div>
         <div className="detail-info-section">

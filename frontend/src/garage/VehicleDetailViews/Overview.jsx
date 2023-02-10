@@ -26,6 +26,7 @@ import {
   getEstimatedServiceDate,
   getCostPerMileFuel,
   getAverageTrip,
+  dailyMileage,
 } from "../../Functions";
 import UpdateMileageModal from "./modals/UpdateMileageModal";
 import ServiceVehicleModal from "./modals/ServiceVehicleModal";
@@ -347,6 +348,10 @@ ${props.vehicle?.units ?? "mi"}
           <div className="info-item">
             <div className="field">Estimated Usage/Week</div>
             <div className="value">{getEstimatedUsage(props.vehicle).toFixed(0) + " " + props.vehicle.units}</div>
+          </div>
+          <div className="info-item">
+            <div className="field">Mileage per Day</div>
+            <div className="value">{dailyMileage(props.vehicle).toFixed(0) + " " + props.vehicle.units}</div>
           </div>
           <div className="info-item">
             <div className="field">Cost Per Day</div>

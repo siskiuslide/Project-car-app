@@ -47,6 +47,12 @@ export const getEstimatedUsage = function (vehicle) {
   const perWeek = drivenMileage / weeks;
   return perWeek;
 };
+export const dailyMileage = function (vehicle) {
+  const drivenMileage = getDrivenMileage(vehicle);
+  const days = getTenure(vehicle);
+  const perDay = drivenMileage / days;
+  return perDay;
+};
 export const getEstimatedMPG = function (expenses) {
   const clone = structuredClone(expenses);
   const filtered = clone.filter((i) => i.category === "fuel" && i.tripSinceLastFill);
@@ -154,7 +160,6 @@ export const getCostPerMileFuel = function (vehicle, expenses) {
       return (current += next.tripSinceLastFill);
     } else return current;
   }, 0);
-  console.log(fuelExpenses, mileageBetweenFillups);
   return (fuelExpenses / mileageBetweenFillups).toFixed(2);
 };
 

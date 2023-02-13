@@ -23,7 +23,7 @@ const MOTModal = (props) => {
         <Button
           value="Submit"
           onClick={() => {
-            props.setMotDate(motDueDate);
+            props.setDueDate(motDueDate, "MOT");
           }}
         ></Button>
       </div>

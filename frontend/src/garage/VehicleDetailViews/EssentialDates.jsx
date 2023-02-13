@@ -3,6 +3,8 @@ import Modal from "../../Components/Modal";
 import DueDate from "./DueDate";
 import "./EssentialDates.css";
 import MOTModal from "./modals/EssentialDates/MOTModal";
+import TaxModal from "./modals/EssentialDates/TaxModal";
+import InsuranceModal from "./modals/EssentialDates/InsuranceModal";
 
 const EssentialDates = (props) => {
   const [showModal, setShowModal] = useState(false);
@@ -45,8 +47,17 @@ const EssentialDates = (props) => {
     return `${date} ${month} ${year}`;
   };
 
-  const setMotDate = function (date) {
-    const body = { vehicleId: props.vehicle._id, MOTDue: date };
+  const setDueDate = function (date, context) {
+    const body = { vehicleId: props.vehicle._id };
+    if (context === "MOT") {
+      body.MOTDue = date;
+    }
+    if (context === "Tax") {
+      body.TaxDue = date;
+    }
+    if (context === "Insurance") {
+      body.InsuranceDue = date;
+    }
     const req = fetch("http://127.0.0.1:4000/garage", {
       method: "put",
       body: JSON.stringify(body),
@@ -64,47 +75,53 @@ const EssentialDates = (props) => {
     <>
       {showModal && (
         <Modal show={showModal} onClose={closeModalHandler}>
-          {modalContext === "MOT" && <MOTModal setMotDate={setMotDate}></MOTModal>}
-          {modalContext === "Tax" && <></>}
-          {modalContext === "Insurance" && <></>}
+          {modalContext === "MOT" && <MOTModal setDueDate={setDueDate}></MOTModal>}
+          {modalContext === "Tax" && <TaxModal setDueDate={setDueDate}></TaxModal>}
+          {modalContext === "Insurance" && <InsuranceModal setDueDate={setDueDate}></InsuranceModal>}
         </Modal>
       )}
       <div className="essential-dates">
-        <DueDate
-          title={"MOT"}
-          getRemainingDays={getRemainingDays}
-          dueDateStyling={dueDateStyling}
-          getFullDate={getFullDate}
-          dueDate={props.vehicle?.MOTDue}
-          onClick={() => {
-            showModalHandler();
-            setModalContext("MOT");
-          }}
-        ></DueDate>
-        <DueDate
-          title={"Tax"}
-          getRemainingDays={getRemainingDays}
-          dueDateStyling={dueDateStyling}
-          getFullDate={getFullDate}
-          dueDate={props.vehicle?.TaxDue}
-          onClick={() => {
-            showModalHandler();
-            setModalContext("Tax");
-          }}
-          closeModalHandler={closeModalHandler}
-        ></DueDate>
-        <DueDate
-          title={"Insurance"}
-          getRemainingDays={getRemainingDays}
-          dueDateStyling={dueDateStyling}
-          getFullDate={getFullDate}
-          dueDate={props.vehicle?.InsuranceDue}
-          onClick={() => {
-            showModalHandler();
-            setModalContext("Insurance");
-          }}
-          closeModalHandler={closeModalHandler}
-        ></DueDate>
+        {props.vehicle.MOTDue && (
+          <DueDate
+            title={"MOT"}
+            getRemainingDays={getRemainingDays}
+            dueDateStyling={dueDateStyling}
+            getFullDate={getFullDate}
+            dueDate={props.vehicle?.MOTDue}
+            onClick={() => {
+              showModalHandler();
+              setModalContext("MOT");
+            }}
+          ></DueDate>
+        )}
+        {props.vehicle.TaxDue && (
+          <DueDate
+            title={"Tax"}
+            getRemainingDays={getRemainingDays}
+            dueDateStyling={dueDateStyling}
+            getFullDate={getFullDate}
+            dueDate={props.vehicle?.TaxDue}
+            onClick={() => {
+              showModalHandler();
+              setModalContext("Tax");
+            }}
+            closeModalHandler={closeModalHandler}
+          ></DueDate>
+        )}
+        {props.vehicle.InsuranceDue && (
+          <DueDate
+            title={"Insurance"}
+            getRemainingDays={getRemainingDays}
+            dueDateStyling={dueDateStyling}
+            getFullDate={getFullDate}
+            dueDate={props.vehicle?.InsuranceDue}
+            onClick={() => {
+              showModalHandler();
+              setModalContext("Insurance");
+            }}
+            closeModalHandler={closeModalHandler}
+          ></DueDate>
+        )}
       </div>
     </>
   );

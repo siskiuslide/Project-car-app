@@ -1,4 +1,4 @@
-import { getCostPerDay, getEstimatedMPG, getTenure } from "../../Functions";
+import { getCostPerDay, getEstimatedMPG, getTenure, convertKMtoMi } from "../../Functions";
 
 export const getTenureList = function (garage) {
   const tenureList = [];
@@ -39,7 +39,10 @@ export const getMileageDriven = function (garage) {
     if (!v.currentMileage) {
       return;
     }
-    const mileageDriven = v?.currentMileage - v?.buyMileage;
+    let mileageDriven = v?.currentMileage - v?.buyMileage;
+    if (v.units === "km") {
+      mileageDriven = convertKMtoMi(v?.currentMileage - v?.buyMileage).toFixed();
+    }
     const mileageObject = {
       vehicleId: v._id,
       manufacturer: v.manufacturer,
@@ -59,7 +62,10 @@ export const getAverageMPG = function (garage, expenses) {
     const vehicleExpenses = expenses.filter((i) => {
       return i.vehicleId === v._id;
     });
-    const mpg = getEstimatedMPG(vehicleExpenses);
+    let mpg = getEstimatedMPG(vehicleExpenses);
+    if (v.units === "km") {
+      mpg = convertKMtoMi(getEstimatedMPG(vehicleExpenses)).toFixed(2);
+    }
     if (!mpg) {
       return;
     }
@@ -69,7 +75,6 @@ export const getAverageMPG = function (garage, expenses) {
       model: v.model,
       reg: v.reg,
       mpg,
-      units: v.units == "mi" ? "m" : "km",
     };
     return mpgList.push(mpgObject);
   });

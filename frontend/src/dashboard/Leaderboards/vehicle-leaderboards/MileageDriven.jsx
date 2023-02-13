@@ -20,9 +20,7 @@ const MileageDriven = (props) => {
               <p className="uppercase" style={{ width: "25%" }}>
                 {v.reg}
               </p>
-              <p style={{ width: "20%" }}>
-                {v.mileageDriven} {v.units}
-              </p>
+              <p style={{ width: "20%" }}>{v.mileageDriven} mi</p>
             </LeaderboardRow>
           );
         })}

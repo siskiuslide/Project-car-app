@@ -1,3 +1,8 @@
+export const convertKMtoMi = function (km) {
+  const mileage = (km / 100) * 62.13;
+  return mileage;
+};
+
 export const getTenure = function (vehicle) {
   if (!vehicle.purchaseDate) {
     return "N/A";

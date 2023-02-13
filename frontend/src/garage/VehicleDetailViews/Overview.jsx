@@ -218,7 +218,7 @@ const Overview = function (props) {
           </div>
           <div className="info-item">
             <div className="field">Total Cost</div>
-            <div className="value">£{props.vehicle?.boughtFor + expenses}</div>
+            <div className="value">£{(props.vehicle?.boughtFor + expenses).toFixed(2)}</div>
           </div>
           <div className="info-item">
             <div className="field">Credited</div>
@@ -226,7 +226,7 @@ const Overview = function (props) {
           </div>
           <div className="info-item">
             <div className="field">Overall Cost</div>
-            <div className="value">£{props.vehicle?.boughtFor + expenses - creditValue}</div>
+            <div className="value">£{(props.vehicle?.boughtFor + expenses - creditValue).toFixed(2)}</div>
           </div>
 
           {props.vehicle.sold === true ? (

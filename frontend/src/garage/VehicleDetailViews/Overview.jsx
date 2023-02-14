@@ -28,6 +28,7 @@ import {
   getAverageTrip,
   dailyMileage,
   getTotalFuelCosts,
+  getRunningCostPerDay,
 } from "../../Functions";
 import UpdateMileageModal from "./modals/UpdateMileageModal";
 import ServiceVehicleModal from "./modals/ServiceVehicleModal";
@@ -357,6 +358,10 @@ ${props.vehicle?.units ?? "mi"}
           <div className="info-item">
             <div className="field">Cost Per Day</div>
             <div className="value">£{getCostPerDay(props.vehicle, props.expenses)}</div>
+          </div>
+          <div className="info-item">
+            <div className="field">Running Cost Per Day</div>
+            <div className="value">£{getRunningCostPerDay(props.vehicle, props.expenses)}</div>
           </div>
           <div className="info-item">
             <div className="field">Cost Per Mile (total)</div>

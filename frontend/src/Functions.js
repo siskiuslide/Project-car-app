@@ -150,6 +150,19 @@ export const getCostPerDay = function (vehicle, expenses) {
   return (totalExpenditure / days).toFixed(2);
 };
 
+export const getRunningCostPerDay = function (vehicle, expenses) {
+  const runningCosts = expenses
+    .filter((e) => {
+      return e.category !== "purchase";
+    })
+    .reduce((current, next) => {
+      return (current += next.value);
+    }, 0);
+  const tenure = getTenure(vehicle);
+  console.log(runningCosts / tenure);
+  return (runningCosts / tenure).toFixed(2);
+};
+
 export const getCostPerMile = function (vehicle, expenses) {
   const vehicleExpenses = getVehicleExpenses(vehicle, expenses);
   const credit = getCreditedExpenses(vehicle, expenses);

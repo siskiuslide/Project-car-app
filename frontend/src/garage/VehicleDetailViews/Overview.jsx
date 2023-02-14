@@ -27,6 +27,7 @@ import {
   getCostPerMileFuel,
   getAverageTrip,
   dailyMileage,
+  getTotalFuelCosts,
 } from "../../Functions";
 import UpdateMileageModal from "./modals/UpdateMileageModal";
 import ServiceVehicleModal from "./modals/ServiceVehicleModal";
@@ -274,7 +275,7 @@ const Overview = function (props) {
             <Button value="Archive"></Button>
           </div>
         </div>
-        <div className="detail-info-section">
+        <div className="detail-info-section  ">
           <h2 className="detail-section-header">Vehicle Details</h2>
           <div className="info-item">
             <div className="field">Vehicle Type</div>
@@ -307,7 +308,7 @@ const Overview = function (props) {
             <div className="value">{getAverageTrip(props.expenses)}</div>
           </div>
         </div>
-        <div className="detail-info-section">
+        <div className="detail-info-section usage-details">
           <h2 className="detail-section-header">Usage</h2>
           <div className="info-item">
             <div className="field">Mileage (when bought)</div>
@@ -364,6 +365,10 @@ ${props.vehicle?.units ?? "mi"}
           <div className="info-item">
             <div className="field">Cost Per Mile (fuel)</div>
             <div className="value">£{getCostPerMileFuel(props.vehicle, props.expenses)}</div>
+          </div>
+          <div className="info-item">
+            <div className="field">Total Fuel Cost</div>
+            <div className="value">£{getTotalFuelCosts(props.expenses)}</div>
           </div>
         </div>
       </div>

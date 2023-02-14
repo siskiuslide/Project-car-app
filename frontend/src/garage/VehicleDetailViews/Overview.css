@@ -24,3 +24,12 @@
   align-items: center;
   justify-content: space-evenly;
 }
+.usage-details > * {
+  margin-block: 0.75rem;
+}
+.usage-details > .info-item > .field {
+  font-size: 1rem;
+}
+.usage-details > .info-item > .value {
+  font-size: 1rem;
+}

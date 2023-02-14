@@ -81,6 +81,14 @@ export const getEstimatedMPG = function (expenses) {
   return mpg;
 };
 
+export const getTotalFuelCosts = function (expenses) {
+  const filtered = expenses.filter((e) => e.category === "fuel");
+  const total = filtered.reduce((current, next) => {
+    return (current += next.value);
+  }, 0);
+  return total.toFixed(2);
+};
+
 export const getTotalExpenses = function (expenses) {
   const vehicleExpenses = expenses
     .filter((e) => e.category !== "purchase")

@@ -151,16 +151,15 @@ export const getCostPerDay = function (vehicle, expenses) {
 };
 
 export const getRunningCostPerDay = function (vehicle, expenses) {
-  const runningCosts = expenses
-    .filter((e) => {
-      return e.category !== "purchase";
-    })
-    .reduce((current, next) => {
-      return (current += next.value);
-    }, 0);
+  const runningCostsList = expenses.filter((e) => {
+    return e.category !== "purchase";
+  });
+  const runningCosts = runningCostsList.reduce((current, next) => {
+    return (current += next.value);
+  }, 0);
   const tenure = getTenure(vehicle);
-  console.log(runningCosts / tenure);
-  return (runningCosts / tenure).toFixed(2);
+  const credit = getCreditedExpenses(vehicle, runningCostsList);
+  return ((runningCosts - credit) / tenure).toFixed(2);
 };
 
 export const getCostPerMile = function (vehicle, expenses) {

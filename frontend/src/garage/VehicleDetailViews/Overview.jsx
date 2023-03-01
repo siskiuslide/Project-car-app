@@ -24,7 +24,7 @@ import {
   getNextServiceDate,
   getNextServiceMileage,
   getEstimatedServiceDate,
-  getCostPerMileFuel,
+  getPencePerMileFuel,
   getAverageTrip,
   dailyMileage,
   getTotalFuelCosts,
@@ -369,7 +369,7 @@ ${props.vehicle?.units ?? "mi"}
           </div>
           <div className="info-item">
             <div className="field">Cost Per Mile (fuel)</div>
-            <div className="value">£{getCostPerMileFuel(props.vehicle, props.expenses)}</div>
+            <div className="value">{getPencePerMileFuel(props.vehicle, props.expenses)}p</div>
           </div>
           <div className="info-item">
             <div className="field">Total Fuel Cost</div>

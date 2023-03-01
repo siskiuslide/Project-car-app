@@ -173,7 +173,7 @@ export const getCostPerMile = function (vehicle, expenses) {
   return costPerMile.toFixed(2);
 };
 
-export const getCostPerMileFuel = function (vehicle, expenses) {
+export const getPencePerMileFuel = function (vehicle, expenses) {
   const fuelExpenses = expenses.reduce((current, next) => {
     if (next.category === "fuel" && next.tripSinceLastFill) {
       return (current += next.value);
@@ -185,7 +185,7 @@ export const getCostPerMileFuel = function (vehicle, expenses) {
       return (current += next.tripSinceLastFill);
     } else return current;
   }, 0);
-  return (fuelExpenses / mileageBetweenFillups).toFixed(2);
+  return ((fuelExpenses / mileageBetweenFillups) * 100).toFixed(2);
 };
 
 export const getNextServiceDate = function (vehicle) {

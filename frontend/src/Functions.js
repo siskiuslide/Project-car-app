@@ -170,7 +170,7 @@ export const getCostPerMile = function (vehicle, expenses) {
 
   let costPerMile = totalExpenditure / mileage;
 
-  return costPerMile.toFixed(2);
+  return (costPerMile * 100).toFixed(2);
 };
 
 export const getPencePerMileFuel = function (vehicle, expenses) {

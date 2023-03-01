@@ -365,7 +365,7 @@ ${props.vehicle?.units ?? "mi"}
           </div>
           <div className="info-item">
             <div className="field">Cost Per Mile (total)</div>
-            <div className="value">£{getCostPerMile(props.vehicle, props.expenses)}</div>
+            <div className="value">{getCostPerMile(props.vehicle, props.expenses)}p</div>
           </div>
           <div className="info-item">
             <div className="field">Cost Per Mile (fuel)</div>

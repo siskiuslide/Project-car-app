@@ -162,10 +162,11 @@ export const getRunningCostPerDay = function (vehicle, expenses) {
   return ((runningCosts - credit) / tenure).toFixed(2);
 };
 
-export const getCostPerMile = function (vehicle, expenses) {
+export const getCostPerUnit = function (vehicle, expenses) {
   const vehicleExpenses = getVehicleExpenses(vehicle, expenses);
   const credit = getCreditedExpenses(vehicle, expenses);
-  const mileage = getDrivenMileage(vehicle);
+  let mileage = getDrivenMileage(vehicle);
+
   let totalExpenditure = vehicleExpenses - credit;
 
   let costPerMile = totalExpenditure / mileage;
@@ -173,7 +174,7 @@ export const getCostPerMile = function (vehicle, expenses) {
   return (costPerMile * 100).toFixed(2);
 };
 
-export const getPencePerMileFuel = function (vehicle, expenses) {
+export const getPencePerUnitFuel = function (vehicle, expenses) {
   const fuelExpenses = expenses.reduce((current, next) => {
     if (next.category === "fuel" && next.tripSinceLastFill) {
       return (current += next.value);

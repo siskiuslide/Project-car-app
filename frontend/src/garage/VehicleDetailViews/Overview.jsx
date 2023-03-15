@@ -20,15 +20,16 @@ import {
   getGrossProfit,
   getNetProfit,
   getCostPerDay,
-  getCostPerMile,
+  getCostPerUnit,
   getNextServiceDate,
   getNextServiceMileage,
   getEstimatedServiceDate,
-  getPencePerMileFuel,
+  getPencePerUnitFuel,
   getAverageTrip,
   dailyMileage,
   getTotalFuelCosts,
   getRunningCostPerDay,
+  convertKMtoMi,
 } from "../../Functions";
 import UpdateMileageModal from "./modals/UpdateMileageModal";
 import ServiceVehicleModal from "./modals/ServiceVehicleModal";
@@ -330,6 +331,12 @@ const Overview = function (props) {
               {updatedMileage ?? `${props.vehicle?.currentMileage}  ${props.vehicle.units}`}{" "}
             </div>
           </div>
+          {props.vehicle?.units == "km" && (
+            <div className="info-item">
+              <div className="field">in Miles</div>
+              <div className="value">{convertKMtoMi(props.vehicle.currentMileage).toFixed()} mi</div>
+            </div>
+          )}
           <div className="info-item">
             <div className="field">Driven by you</div>
             <div className="value">
@@ -339,6 +346,7 @@ ${props.vehicle?.units ?? "mi"}
 `}
             </div>
           </div>
+
           <div className="info-item">
             <div className="field">Tenure</div>
             <div className="value">{getTenure(props.vehicle)} days</div>
@@ -364,12 +372,12 @@ ${props.vehicle?.units ?? "mi"}
             <div className="value">£{getRunningCostPerDay(props.vehicle, props.expenses)}</div>
           </div>
           <div className="info-item">
-            <div className="field">Cost Per Mile (total)</div>
-            <div className="value">{getCostPerMile(props.vehicle, props.expenses)}p</div>
+            <div className="field">Cost Per {props.vehicle?.units} (total)</div>
+            <div className="value">{getCostPerUnit(props.vehicle, props.expenses)}p</div>
           </div>
           <div className="info-item">
-            <div className="field">Cost Per Mile (fuel)</div>
-            <div className="value">{getPencePerMileFuel(props.vehicle, props.expenses)}p</div>
+            <div className="field">Cost Per {props.vehicle?.units} (fuel)</div>
+            <div className="value">{getPencePerUnitFuel(props.vehicle, props.expenses)}p</div>
           </div>
           <div className="info-item">
             <div className="field">Total Fuel Cost</div>

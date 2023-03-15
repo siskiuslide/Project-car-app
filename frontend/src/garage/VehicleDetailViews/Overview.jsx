@@ -302,12 +302,12 @@ const Overview = function (props) {
             <div className="value">{props.vehicle?.cc}cc</div>
           </div>
           <div className="info-item">
-            <div className="field">Estimated MPG</div>
+            <div className="field">Estimated {props.vehicle?.units == "km" ? "KM" : "M"}PG</div>
             <div className="value">{getEstimatedMPG(props.expenses)}</div>
           </div>
           <div className="info-item">
             <div className="field">Average Trip Reading</div>
-            <div className="value">{getAverageTrip(props.expenses)}</div>
+            <div className="value">{getAverageTrip(props.expenses) + props.vehicle?.units}</div>
           </div>
         </div>
         <div className="detail-info-section usage-details">

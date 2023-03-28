@@ -7,9 +7,9 @@ export const getTenure = function (vehicle) {
   if (!vehicle.purchaseDate) {
     return "N/A";
   }
-  let date1 = new Date(vehicle.sellDate);
+  let date1 = new Date(vehicle.soldDate);
   let date2 = new Date(vehicle.purchaseDate);
-  if (!vehicle.sellDate) {
+  if (!vehicle.soldDate) {
     date1 = Date.now();
   }
   const difference = parseInt(date1 - date2);

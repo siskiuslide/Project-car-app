@@ -51,8 +51,8 @@ const TotalMileage = (props) => {
       </p>
       <div className="moreInfoList">
         <div className="moreInfoFlex">
-          <p>Total Fuel Cost:</p>
-          <p>£{getTotalFuelCost()}</p>
+          <p></p>
+          <p></p>
         </div>
       </div>
     </div>
